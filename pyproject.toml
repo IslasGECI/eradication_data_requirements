@@ -10,5 +10,8 @@ description-file = "README.md"
 home-page = "https://github.com/IslasGECI/eradication_data_requirements"
 module = "eradication_data_requirements"
 requires = [
+    "geci_plots @ git+https://github.com/IslasGECI/geci_plots.git@v0.4.2",
+    "numpy",
+    "pandas",
 ]
 requires-python=">=3.9"

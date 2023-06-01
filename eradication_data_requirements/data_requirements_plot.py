@@ -7,6 +7,10 @@ def fit_ramsey_plot(data):
     return np.polyfit(data["Captures"], data["CPUE"], 1)
 
 
+def xxfit_ramsey_plot(data):
+    return np.polyfit(data["Cumulative_captures"], data["CPUE"], 1)
+
+
 def data_requirements_plot(input_path, output_path):
     data = pd.read_csv(input_path)
     theta = fit_ramsey_plot(data.drop([0]))

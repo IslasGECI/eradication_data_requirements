@@ -14,10 +14,10 @@ def xxfit_ramsey_plot(data):
 def data_requirements_plot(input_path, output_path):
     data = pd.read_csv(input_path)
     theta = fit_ramsey_plot(data.drop([0]))
-    y_line = theta[1] + theta[0] * data["Captures"]
+    y_line = theta[1] + theta[0] * data["Cumulative_capture"]
     fig, ax = geci_plot()
-    plt.scatter(data["Captures"], data["CPUE"], marker="o")
-    plt.plot(data["Captures"], y_line, "r")
+    plt.scatter(data["Cumulative_capture"], data["CPUE"], marker="o")
+    plt.plot(data["Cumulative_capture"], y_line, "r")
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel("CPUE (captures/night traps)", size=15)
     plt.savefig(output_path, dpi=300, transparent=True)

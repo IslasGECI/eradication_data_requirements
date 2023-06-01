@@ -24,6 +24,6 @@ def test_fit_ramsey_plot():
     data = pd.DataFrame(
         {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
     )
-    obtained_parameters = dt.fit_ramsey_plot(data)
+    obtained_parameters = dt.xxfit_ramsey_plot(data)
     expected_parameters = np.array([-0.5, 20.0])
     np.testing.assert_array_almost_equal(obtained_parameters, expected_parameters)

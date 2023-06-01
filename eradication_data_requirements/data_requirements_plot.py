@@ -4,7 +4,7 @@ from geci_plots import plt, geci_plot
 
 
 def fit_ramsey_plot(data):
-    return np.polyfit(data["Captures"], data["CPUE"], 1)
+    return xxfit_ramsey_plot(data)
 
 
 def xxfit_ramsey_plot(data):

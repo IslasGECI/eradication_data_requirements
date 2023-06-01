@@ -74,19 +74,19 @@ tests:
 
 red: format
 	git restore $(module) \
-	pytest --verbose tests/test_data_requirements_plot.py \
-	|| (git add && git commit -m "🛑🧪 Fail tests")
+	&& (pytest --verbose tests/test_data_requirements_plot.py) \
+	|| (git add tests/*.py && git commit -m "🛑🧪 Fail tests")
 	chmod g+w -R .
 
 green: format
 	git restore tests/*.py \
 	pytest --verbose tests/test_data_requirements_plot.py \
-	(git add $(module)/*.py && git commit -m "✅ Pass tests") \
+	&& (git add $(module)/*.py && git commit -m "✅ Pass tests") \
 	|| git restore .
 	chmod g+w -R .
 
 refactor: format
 	pytest --verbose tests/test_data_requirements_plot.py \
-	(git add $(module)/*.py tests/*.py && git commit -m "♻️  Refactor") \
+	&& (git add $(module)/*.py tests/*.py && git commit -m "♻️  Refactor") \
 	|| git restore .
 	chmod g+w -R .

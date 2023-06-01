@@ -13,3 +13,5 @@ def test_data_requirements_plot():
     obtained_hash = hashlib.md5(file_content).hexdigest()
     expected_hash = "3ac61e336449f0f96c83cb2b11b86101"
     assert obtained_hash == expected_hash
+    if os.path.exists(output_path):
+        os.remove(output_path)

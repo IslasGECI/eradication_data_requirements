@@ -13,7 +13,7 @@ all: check coverage mutants
 		setup \
 		tests
 
-module = dummy_transformations
+module = eradication_data_requirements
 codecov_token = a48e7aa8-fdb9-477c-9027-18ca3d4d16ff
 
 define lint

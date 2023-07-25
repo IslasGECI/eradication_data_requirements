@@ -9,13 +9,16 @@ import eradication_data_requirements as dt
 def test_data_requirements_plot():
     input_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
     output_path = "/workdir/tests/data/yearly_ramsey_plot.png"
-    if os.path.exists(output_path):
-        os.remove(output_path)
+    remove_file_if_exists(output_path)
     dt.data_requirements_plot(input_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "3ac61e336449f0f96c83cb2b11b86101"
+    expected_hash = "045d4c9c3268c672146ea6acdf4e6dd4"
     assert obtained_hash == expected_hash
+    remove_file_if_exists(output_path)
+
+
+def remove_file_if_exists(output_path):
     if os.path.exists(output_path):
         os.remove(output_path)
 

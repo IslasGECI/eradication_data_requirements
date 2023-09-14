@@ -13,5 +13,6 @@ requires = [
     "geci-plots==0.4.*",
     "numpy",
     "pandas",
+    "typer[all]"
 ]
 requires-python=">=3.9"

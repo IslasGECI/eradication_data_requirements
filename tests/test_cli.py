@@ -10,7 +10,6 @@ import os
 input_path = "tests/data/esfuerzo_capturas_semanales_iso8601.csv"
 
 
-
 def test_write_effort_and_capture_with_probability():
     output_path = "tests/data/probability_time_series.csv"
     monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"

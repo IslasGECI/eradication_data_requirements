@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 
 app = typer.Typer()
 
+
 @app.command()
 def write_effort_and_captures_with_probability(
     input_path: str = typer.Option("", help="Input file path"),

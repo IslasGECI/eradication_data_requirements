@@ -13,7 +13,7 @@ def test_data_requirements_plot():
     dt.data_requirements_plot(input_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "045d4c9c3268c672146ea6acdf4e6dd4"
+    expected_hash = "889fe56ced1fb26ae3af8795b7204e51"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 

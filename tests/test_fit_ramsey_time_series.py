@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from gatos import (
+from eradication_data_requirements import (
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_sample_six_months_slope,

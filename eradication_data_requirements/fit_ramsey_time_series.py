@@ -2,7 +2,10 @@ import numpy as np
 import pandas as pd
 
 
-from eradication_data_requirements.remove_consecutive_non_captures import remove_consecutive_non_captures
+from eradication_data_requirements.remove_consecutive_non_captures import (
+    remove_consecutive_non_captures,
+)
+from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 
 
 def add_slopes_to_effort_capture_data(data):
@@ -40,6 +43,7 @@ def xxset_up_ramsey_time_series(data):
     cumulative_captures["CPUE"] = resized_data["Capturas"] / resized_data["Esfuerzo"]
     return cumulative_captures[["CPUE", "Cumulative_captures"]]
 
+
 def set_up_ramsey_time_series(data):
     resized_data = remove_consecutive_non_captures(data)
     resized_data = resized_data[resized_data.Esfuerzo != 0]
@@ -49,17 +53,8 @@ def set_up_ramsey_time_series(data):
     return cumulative_captures[["CPUE", "Cumulative_captures"]]
 
 
-def xxfit_ramsey_plotxx(data):
-    assert len(data["Cumulative_captures"].unique()) > 1, "It can not fit Ramsey plot"
-    fit = np.polynomial.polynomial.Polynomial.fit(data["Cumulative_captures"], data["CPUE"], deg=1)
-    intercept_and_slope = fit.convert().coef
-    idx = [1, 0]
-    slope_and_intercept = intercept_and_slope[idx]
-    return slope_and_intercept
-
-
 def sample_fit_ramsey_plot(datos):
-    fits = [xxfit_ramsey_plotxx(datos.drop(i)) for i in datos.index]
+    fits = [fit_ramsey_plot(datos.drop(i)) for i in datos.index]
     return fits
 
 
@@ -74,7 +69,7 @@ def calculate_sample_six_months_slope(ramsey_series):
 def calculate_six_months_slope(data):
     window_length = 6
     return [
-        xxfit_ramsey_plotxx(data.iloc[(i - window_length) : i])
+        fit_ramsey_plot(data.iloc[(i - window_length) : i])
         for i in range(window_length, len(data) + 1)
     ]
 

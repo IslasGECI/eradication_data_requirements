@@ -2,6 +2,7 @@ import os
 import hashlib
 import pandas as pd
 import numpy as np
+import pytest
 
 import eradication_data_requirements as dt
 
@@ -15,7 +16,7 @@ def test_data_requirements_plot():
     obtained_hash = hashlib.md5(file_content).hexdigest()
     expected_hash = "0f6baede0ee8e01974f01e2109e81535"
     assert obtained_hash == expected_hash
-    # remove_file_if_exists(output_path)
+    remove_file_if_exists(output_path)
 
 
 def remove_file_if_exists(output_path):
@@ -30,3 +31,9 @@ def test_fit_ramsey_plot():
     obtained_parameters = dt.fit_ramsey_plot(data)
     expected_parameters = np.array([-0.5, 20.0])
     np.testing.assert_array_almost_equal(obtained_parameters, expected_parameters)
+
+    data_error = pd.DataFrame(
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
+    )
+    with pytest.raises(AssertionError):
+        dt.fit_ramsey_plot(data_error)

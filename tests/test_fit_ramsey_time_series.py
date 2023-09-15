@@ -14,7 +14,13 @@ from eradication_data_requirements import (
 )
 
 
-data = pd.DataFrame({"Esfuerzo": [1, 2, 3, 4, 5, 6], "Capturas": [1, 1, 1, 1, 1, 1]})
+data = pd.DataFrame(
+    {
+        "Esfuerzo": [1, 2, 3, 4, 5, 6],
+        "Capturas": [1, 1, 1, 1, 1, 1],
+        "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
+    }
+)
 
 
 def test_add_probability_to_effort_capture_data():
@@ -37,9 +43,14 @@ def test_add_probability_to_effort_capture_data():
     assert obtained_length == expected_length
 
     data_with_zero_effort_row = pd.DataFrame(
-        {"Esfuerzo": [1, 2, 3, 4, 5, 6, 0, 3, 0], "Capturas": [1, 1, 1, 1, 1, 1, 0, 1, 0]}
+        {
+            "Esfuerzo": [1, 2, 3, 4, 5, 6, 0, 3, 0],
+            "Capturas": [1, 1, 1, 1, 1, 1, 0, 1, 0],
+            "Fecha": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+        }
     )
     obtained = add_probs_to_effort_capture_data(data_with_zero_effort_row)
+    assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
 
 
 time_series_for_ramsey = pd.DataFrame(
@@ -101,14 +112,24 @@ def test_get_status_slopes():
 
 def test_set_up_ramsey_time_series():
     expected = pd.DataFrame(
-        {"CPUE": [1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
+        {
+            "CPUE": [1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6],
+            "Cumulative_captures": [1, 2, 3, 4, 5, 6],
+            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
+        }
     )
     obtained = set_up_ramsey_time_series(data)
-    assert (obtained.columns == ["CPUE", "Cumulative_captures"]).all()
+    assert (obtained.columns == ["Fecha", "CPUE", "Cumulative_captures"]).all()
     assert (obtained.Cumulative_captures == expected.Cumulative_captures).all()
     assert (obtained.CPUE == expected.CPUE).all()
 
-    data_2 = pd.DataFrame({"Esfuerzo": [2, 2, 2, 2, 2, 2], "Capturas": [1, 2, 1, 1, 2, 1]})
+    data_2 = pd.DataFrame(
+        {
+            "Esfuerzo": [2, 2, 2, 2, 2, 2],
+            "Capturas": [1, 2, 1, 1, 2, 1],
+            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
+        }
+    )
     obtained = set_up_ramsey_time_series(data_2)
 
     expected = pd.DataFrame(
@@ -118,7 +139,13 @@ def test_set_up_ramsey_time_series():
         }
     )
     assert (obtained.Cumulative_captures == expected.Cumulative_captures).all()
-    singular_data = pd.DataFrame({"Esfuerzo": [2, 2, 2, 2, 2, 2], "Capturas": [1, 0, 0, 0, 2, 1]})
+    singular_data = pd.DataFrame(
+        {
+            "Esfuerzo": [2, 2, 2, 2, 2, 2],
+            "Capturas": [1, 0, 0, 0, 2, 1],
+            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
+        }
+    )
     obtained = set_up_ramsey_time_series(singular_data)
 
     expected = pd.DataFrame(

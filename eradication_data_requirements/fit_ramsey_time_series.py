@@ -48,9 +48,10 @@ def set_up_ramsey_time_series(data):
     resized_data = remove_consecutive_non_captures(data)
     resized_data = resized_data[resized_data.Esfuerzo != 0]
     cumulative_captures = pd.DataFrame()
+    cumulative_captures["Fecha"] = resized_data.Fecha
     cumulative_captures["Cumulative_captures"] = resized_data["Capturas"].cumsum()
     cumulative_captures["CPUE"] = resized_data["Capturas"] / resized_data["Esfuerzo"]
-    return cumulative_captures[["CPUE", "Cumulative_captures"]]
+    return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
 
 
 def sample_fit_ramsey_plot(datos):

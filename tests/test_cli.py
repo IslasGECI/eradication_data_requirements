@@ -1,6 +1,7 @@
 from eradication_data_requirements import (
     write_effort_and_captures_with_probability,
     write_effort_and_captures_with_slopes,
+    write_progress_probability_figure,
 )
 
 import numpy as np
@@ -8,6 +9,20 @@ import pandas as pd
 import os
 
 input_path = "tests/data/esfuerzo_capturas_semanales_iso8601.csv"
+
+
+def test_write_progress_probability_figure():
+    data_path = "tests/data/progress_probability_tests.csv"
+    figure_path = "tests/data/progress_probability_tests.png"
+
+    if os.path.exists(figure_path):
+        os.remove(figure_path)
+
+    write_progress_probability_figure(data_path, figure_path)
+
+    os.path.exists(figure_path)
+    os.remove(figure_path)
+
 
 
 def test_write_effort_and_capture_with_probability():

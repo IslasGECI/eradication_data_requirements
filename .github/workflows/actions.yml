@@ -37,11 +37,6 @@ jobs:
       run: docker push islasgeci/eradication_data_requirements:latest
     - name: Sube sha a Docker Hub
       run: docker push islasgeci/eradication_data_requirements:${GITHUB_SHA:0:4}
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@main
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:

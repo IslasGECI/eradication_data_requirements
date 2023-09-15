@@ -21,6 +21,8 @@ def test_add_probability_to_effort_capture_data():
     obtained = add_probs_to_effort_capture_data(data)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
+    contains_date_column = "Fecha" in obtained.columns
+    assert contains_date_column
 
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"

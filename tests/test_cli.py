@@ -1,24 +1,42 @@
 from eradication_data_requirements import (
+    app,
     write_effort_and_captures_with_probability,
     write_effort_and_captures_with_slopes,
-    write_progress_probability_figure,
 )
 
 import numpy as np
 import pandas as pd
 import os
+from typer.testing import CliRunner
+
 
 input_path = "tests/data/esfuerzo_capturas_semanales_iso8601.csv"
+runner = CliRunner()
 
 
 def test_write_progress_probability_figure():
+    result = runner.invoke(app, ["write-progress-probability-figure", "--help"])
+    assert " Input file path " in result.stdout
+    assert " Output file path " in result.stdout
+    assert "[default: " not in result.stdout
+
     data_path = "tests/data/progress_probability_tests.csv"
     figure_path = "tests/data/progress_probability_tests.png"
 
     if os.path.exists(figure_path):
         os.remove(figure_path)
 
-    write_progress_probability_figure(data_path, figure_path)
+    result = runner.invoke(
+        app,
+        [
+            "write-progress-probability-figure",
+            "--data-path",
+            data_path,
+            "--figure-path",
+            figure_path,
+        ],
+    )
+    assert result.exit_code == 0
 
     os.path.exists(figure_path)
     os.remove(figure_path)

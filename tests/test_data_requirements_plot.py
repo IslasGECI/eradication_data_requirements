@@ -35,7 +35,7 @@ def test_fit_ramsey_plot():
     data_error = pd.DataFrame(
         {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
     )
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError, match=r"^It can not fit Ramsey plot$"):
         dt.fit_ramsey_plot(data_error)
 
     data_without_error = pd.DataFrame(

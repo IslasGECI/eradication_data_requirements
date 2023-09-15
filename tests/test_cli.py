@@ -1,8 +1,4 @@
-from eradication_data_requirements import (
-    app,
-    write_effort_and_captures_with_probability,
-    write_effort_and_captures_with_slopes,
-)
+from eradication_data_requirements import app
 
 import numpy as np
 import pandas as pd
@@ -42,14 +38,34 @@ def test_write_progress_probability_figure():
     os.remove(figure_path)
 
 
+monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
+
+
 def test_write_effort_and_capture_with_probability():
     output_path = "tests/data/probability_time_series.csv"
-    monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
+
+    result = runner.invoke(app, ["write-effort-and-captures-with-probability", "--help"])
+    assert " Input file path " in result.stdout
+    assert " Output file path " in result.stdout
+    assert "[default: " not in result.stdout
+
     if os.path.exists(output_path):
         os.remove(output_path)
-    write_effort_and_captures_with_probability(monthly_path, output_path)
+
+    result = runner.invoke(
+        app,
+        [
+            "write-effort-and-captures-with-probability",
+            "--input-path",
+            monthly_path,
+            "--output-path",
+            output_path,
+        ],
+    )
+    assert result.exit_code == 0
     assert os.path.exists(output_path)
     obtained = pd.read_csv(output_path)
+    assert obtained.shape[1] == 4
 
     obtained_probability = obtained.prob
     expected_probability = pd.Series(
@@ -72,12 +88,28 @@ def test_write_effort_and_capture_with_probability():
 
 def test_write_effort_and_capture_with_slopes():
     output_path = "tests/data/slope_time_series.csv"
-    monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
+
+    result = runner.invoke(app, ["write-effort-and-captures-with-slopes", "--help"])
+    assert " Input file path " in result.stdout
+    assert " Output file path " in result.stdout
+    assert "[default: " not in result.stdout
+
     if os.path.exists(output_path):
         os.remove(output_path)
-    write_effort_and_captures_with_slopes(monthly_path, output_path)
+    result = runner.invoke(
+        app,
+        [
+            "write-effort-and-captures-with-slopes",
+            "--input-path",
+            monthly_path,
+            "--output-path",
+            output_path,
+        ],
+    )
+    assert result.exit_code == 0
     assert os.path.exists(output_path)
     obtained = pd.read_csv(output_path)
+    assert obtained.shape[1] == 4
 
     obtained_slopes = obtained.slope
     expected_slopes = pd.Series(

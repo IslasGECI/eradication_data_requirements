@@ -3,12 +3,14 @@ import numpy as np
 import pytest
 
 from eradication_data_requirements import (
+    add_empty_column,
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_sample_six_months_slope,
     calculate_six_months_slope,
     extract_prob,
     extract_slopes,
+    paste_status,
     sample_fit_ramsey_plot,
     set_up_ramsey_time_series,
 )
@@ -29,6 +31,7 @@ def test_add_probability_to_effort_capture_data():
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
     assert contains_date_column
+    assert obtained.Fecha[0] == data.Fecha[0]
 
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
@@ -73,7 +76,7 @@ def test_extract_prob():
             np.array([0.5, 20.0]),
             np.array([0.5, 20.0]),
             np.array([0.5, 20.0]),
-            np.array([0.5, 20.0]),
+            np.array([0, 20.0]),
         ]
     ]
     expected = [1 / 6]
@@ -205,3 +208,16 @@ def test_extract_slopes():
     expected_slopes = [1, 3, 5]
     obtained_slopes = extract_slopes(slopes_and_intercept)
     assert obtained_slopes == expected_slopes
+
+
+def test_paste_status():
+    length_one_dataframe = pd.DataFrame({"slope": [1 / 2]})
+    with pytest.raises(AssertionError, match=r"^Different dimensions$"):
+        paste_status(ramsey_time_series, length_one_dataframe, column_name="slope")
+
+
+def test_add_empty_column():
+    ramsey_time_series_copy = ramsey_time_series.copy()
+    column_name = "slope"
+    add_empty_column(ramsey_time_series_copy, column_name)
+    assert isinstance(ramsey_time_series_copy[column_name][0], type(np.nan))

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_progress_probability(data):
-    fig, ax = gp.geci_plot()
+    _, ax = gp.geci_plot()
 
     eradication = 0.80
     control = 0.50

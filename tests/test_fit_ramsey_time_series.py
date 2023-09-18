@@ -7,6 +7,7 @@ from eradication_data_requirements import (
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_resampled_six_months_slope,
+    xxcalculate_resampled_six_months_slope,
     calculate_six_months_slope,
     extract_prob,
     extract_slopes,
@@ -200,7 +201,7 @@ def test_calculate_six_months_slope():
 
 
 def test_calculate_sample_six_months_slope():
-    obtained_slopes = calculate_resampled_six_months_slope(time_series_for_ramsey)
+    obtained_slopes = xxcalculate_resampled_six_months_slope(data)
     expected_number_slopes = 1
     obtained_number_slopes = len(obtained_slopes)
     assert obtained_number_slopes == expected_number_slopes

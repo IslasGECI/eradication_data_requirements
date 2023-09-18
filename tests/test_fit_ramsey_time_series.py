@@ -72,7 +72,7 @@ def test_sample_fit_ramsey_plot():
 def test_resampled_fit_ramsey_plot():
     obtained = resample_fit_ramsey_plot(data)
 
-    assert obtained[0][0].shape() == (2, 0)
+    assert obtained[0].shape == (2,)
 
 
 def test_extract_prob():

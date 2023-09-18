@@ -1,9 +1,13 @@
 from bootstrapping_tools import resample_data
 
 
-def resample_valid_data(effort_and_capture_data, seed):
-    sample = resample_data(effort_and_capture_data, seed, blocks_length=2)
-    return validate_samples_to_fit([sample])
+def resample_valid_data(effort_and_capture_data, bootstrapping_number):
+    blocks_length = 2
+    sample = [
+        resample_data(effort_and_capture_data, seed, blocks_length)
+        for seed in range(bootstrapping_number)
+    ]
+    return validate_samples_to_fit(sample)
 
 
 def validate_samples_to_fit(samples):

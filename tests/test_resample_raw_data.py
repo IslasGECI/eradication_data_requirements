@@ -9,13 +9,13 @@ def test_resample_valid_data():
     seed = 42
     obtained = resample_valid_data(effort_and_capture_data[0:5], seed)
     expected_len = 6
-    obtained_len = obtained.shape[0]
+    obtained_len = len(obtained)
     assert obtained_len == expected_len
 
     seed = 3
     obtained = resample_valid_data(effort_and_capture_data[4:9], seed)
     expected_len = 0
-    obtained_len = obtained.shape[0]
+    obtained_len = len(obtained)
     assert obtained_len == expected_len
 
 

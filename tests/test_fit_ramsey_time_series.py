@@ -204,7 +204,7 @@ def test_calculate_six_months_slope():
 
 
 def test_calculate_sample_six_months_slope():
-    obtained_slopes = xxcalculate_resampled_six_months_slope(ramsey_time_series)
+    obtained_slopes = xxcalculate_resampled_six_months_slope(time_series_for_ramsey)
     expected_number_slopes = 1
     obtained_number_slopes = len(obtained_slopes)
     assert obtained_number_slopes == expected_number_slopes

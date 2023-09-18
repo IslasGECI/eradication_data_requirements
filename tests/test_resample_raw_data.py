@@ -12,6 +12,12 @@ def test_resample_valid_data():
     obtained_len = obtained.shape[0]
     assert obtained_len == expected_len
 
+    seed = 3
+    obtained = resample_valid_data(effort_and_capture_data[4:9], seed)
+    expected_len = 0
+    obtained_len = obtained.shape[0]
+    assert obtained_len == expected_len
+
 
 def test_validate_samples_to_fit():
     non_valid_data = pd.DataFrame({"Capturas": [14, 0, 0, 0, 0, 0]})

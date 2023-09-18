@@ -6,8 +6,8 @@ effort_and_capture_data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_ga
 
 
 def test_resample_valid_data():
-    obtained = resample_valid_data(effort_and_capture_data[:, 0:5])
-    print(obtained)
+    seed = 42
+    obtained = resample_valid_data(effort_and_capture_data[0:5], seed)
     expected_len = 6
     obtained_len = obtained.shape[0]
     assert obtained_len == expected_len

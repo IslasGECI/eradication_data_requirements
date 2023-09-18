@@ -15,9 +15,9 @@ def test_resample_valid_data():
     obtained_len_dataframe = obtained[0].shape[0]
     assert obtained_len_dataframe == expected_len_dataframe
 
-    bootstrapping_number = 3
+    bootstrapping_number = 4
     obtained = resample_valid_data(effort_and_capture_data[4:9], bootstrapping_number)
-    expected_len = 0
+    expected_len = 3
     obtained_len = len(obtained)
     assert obtained_len == expected_len
 

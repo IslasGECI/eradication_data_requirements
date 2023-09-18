@@ -6,6 +6,7 @@ from eradication_data_requirements.remove_consecutive_non_captures import (
     remove_consecutive_non_captures,
 )
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
+from eradication_data_requirements.resample_raw_data import resample_valid_data
 
 
 def add_slopes_to_effort_capture_data(data):
@@ -59,16 +60,17 @@ def sample_fit_ramsey_plot(datos):
     return fits
 
 
-def resample_fit_ramsey_plot(datos):
-    ramsey_series = xxset_up_ramsey_time_series(datos)
-    fits = [fit_ramsey_plot(ramsey_series.drop(i)) for i in ramsey_series.index]
+def resample_fit_ramsey_plot(datos, bootstrapping_number):
+    resampled_data = resample_valid_data(datos, bootstrapping_number)
+    ramsey_series = [xxset_up_ramsey_time_series(sample) for sample in resampled_data]
+    fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
     return fits
 
 
 def xxcalculate_resampled_six_months_slope(ramsey_series):
     window_length = 6
     return [
-        resample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i])
+        sample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i])
         for i in range(window_length, len(ramsey_series) + 1)
     ]
 

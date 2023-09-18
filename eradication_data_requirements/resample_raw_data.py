@@ -14,7 +14,6 @@ def validate_samples_to_fit(samples):
     validated = [
         valid_sample
         for valid_sample in samples
-        if len(valid_sample.Capturas.unique()) > 1
-        and valid_sample.Capturas.sum() != valid_sample.Capturas[0]
+        if valid_sample.Capturas.sum() != valid_sample.Capturas[0]
     ]
     return validated

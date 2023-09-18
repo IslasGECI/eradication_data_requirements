@@ -16,7 +16,8 @@ def test_resample_valid_data():
 def test_validate_samples_to_fit():
     non_valid_data = pd.DataFrame({"Capturas": [14, 0, 0, 0, 0, 0]})
     valid_data = pd.DataFrame({"Capturas": [14, 1, 0, 8, 0, 3]})
-    sampled_data = [non_valid_data, valid_data]
+    non_valid_data_zeros = pd.DataFrame({"Capturas": [0, 0, 0, 0, 0, 0]})
+    sampled_data = [non_valid_data, valid_data, non_valid_data_zeros]
     obtained = validate_samples_to_fit(sampled_data)
     expected_len = 1
     obtained_len = len(obtained)

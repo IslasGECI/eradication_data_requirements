@@ -204,16 +204,16 @@ def test_calculate_six_months_slope():
 
 
 def test_calculate_sample_six_months_slope():
-    obtained_slopes = xxcalculate_resampled_six_months_slope(time_series_for_ramsey)
+    bootstrapping_number = 10
+    obtained_slopes = xxcalculate_resampled_six_months_slope(data, bootstrapping_number)
     expected_number_slopes = 1
     obtained_number_slopes = len(obtained_slopes)
     assert obtained_number_slopes == expected_number_slopes
-    expected_number_elements = 6
+
     obtained_number_elements = len(obtained_slopes[0])
-    assert obtained_number_elements == expected_number_elements
-    print(obtained_slopes)
-    np.testing.assert_array_almost_equal(obtained_slopes[0][1][0], -0.16283784)
-    np.testing.assert_array_almost_equal(obtained_slopes[0][4][0], -0.14864865)
+    assert obtained_number_elements == bootstrapping_number
+    np.testing.assert_array_almost_equal(obtained_slopes[0][1][0], -0.12095238)
+    np.testing.assert_array_almost_equal(obtained_slopes[0][4][0], -0.05)
 
 
 def test_extract_slopes():

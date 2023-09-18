@@ -28,7 +28,8 @@ data = pd.DataFrame(
 
 
 def test_add_probability_to_effort_capture_data():
-    obtained = add_probs_to_effort_capture_data(data)
+    bootstrapping_number = 10
+    obtained = add_probs_to_effort_capture_data(data, bootstrapping_number)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
@@ -38,13 +39,13 @@ def test_add_probability_to_effort_capture_data():
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = add_probs_to_effort_capture_data(effort_and_capture_data)
+    obtained = add_probs_to_effort_capture_data(effort_and_capture_data, bootstrapping_number)
     obtained_probs = obtained.prob.iloc[6:]
     is_positive = obtained_probs >= 0
     assert is_positive.all()
 
     obtained_length = obtained.shape[0]
-    expected_length = 10
+    expected_length = 13
     assert obtained_length == expected_length
 
     data_with_zero_effort_row = pd.DataFrame(
@@ -54,7 +55,7 @@ def test_add_probability_to_effort_capture_data():
             "Fecha": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = add_probs_to_effort_capture_data(data_with_zero_effort_row)
+    obtained = add_probs_to_effort_capture_data(data_with_zero_effort_row, bootstrapping_number)
     assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
 
 

@@ -17,12 +17,12 @@ def add_slopes_to_effort_capture_data(data):
     return ramsey_time_series
 
 
-def add_probs_to_effort_capture_data(data_copy):
-    ramsey_time_series = set_up_ramsey_time_series(data_copy)
-    samples = calculate_resampled_six_months_slope(ramsey_time_series)
+def add_probs_to_effort_capture_data(data_copy, bootstrapping_number):
+    resized_data = data_copy[data_copy.Esfuerzo != 0]
+    samples = xxcalculate_resampled_six_months_slope(resized_data, bootstrapping_number)
     probs_status = extract_prob(samples)
-    paste_status(ramsey_time_series, probs_status, "prob")
-    return ramsey_time_series
+    paste_status(resized_data, probs_status, "prob")
+    return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
 def paste_status(data_copy, probs_status, column_name):
@@ -47,7 +47,6 @@ def set_up_ramsey_time_series(data):
 
 def xxset_up_ramsey_time_series(data):
     resized_data = data
-    resized_data = resized_data[resized_data.Esfuerzo != 0]
     cumulative_captures = pd.DataFrame()
     cumulative_captures["Fecha"] = resized_data.Fecha
     cumulative_captures["Cumulative_captures"] = resized_data["Capturas"].cumsum()

@@ -24,10 +24,13 @@ def write_progress_probability_figure(
 @app.command()
 def write_effort_and_captures_with_probability(
     input_path: str = typer.Option("", help="Input file path"),
+    bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
     output_path: str = typer.Option("", help="Output file path"),
 ):
     effort_capture_data = pd.read_csv(input_path)
-    effort_captures_with_slopes = add_probs_to_effort_capture_data(effort_capture_data)
+    effort_captures_with_slopes = add_probs_to_effort_capture_data(
+        effort_capture_data, bootstrapping_number
+    )
     effort_captures_with_slopes.to_csv(output_path, index=False)
 
 

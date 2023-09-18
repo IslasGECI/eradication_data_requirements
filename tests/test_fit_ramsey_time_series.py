@@ -11,6 +11,7 @@ from eradication_data_requirements import (
     extract_prob,
     extract_slopes,
     paste_status,
+    resample_fit_ramsey_plot,
     sample_fit_ramsey_plot,
     set_up_ramsey_time_series,
 )
@@ -66,6 +67,12 @@ def test_sample_fit_ramsey_plot():
     expected_length = 6
     obtained_length = len(obtained)
     assert obtained_length == expected_length
+
+
+def test_resampled_fit_ramsey_plot():
+    obtained = resample_fit_ramsey_plot(data)
+
+    assert obtained[0][0].shape() == (2, 0)
 
 
 def test_extract_prob():

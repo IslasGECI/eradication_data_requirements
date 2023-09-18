@@ -6,14 +6,17 @@ effort_and_capture_data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_ga
 
 
 def test_resample_valid_data():
-    seed = 42
-    obtained = resample_valid_data(effort_and_capture_data[0:5], seed)
-    expected_len = 6
-    obtained_len = obtained[0].shape[0]
-    assert obtained_len == expected_len
+    bootstrapping_number = 5
+    obtained = resample_valid_data(effort_and_capture_data[0:5], bootstrapping_number)
+    obtained_len = len(obtained)
+    assert obtained_len == bootstrapping_number
 
-    seed = 3
-    obtained = resample_valid_data(effort_and_capture_data[4:9], seed)
+    expected_len_dataframe = 6
+    obtained_len_dataframe = obtained[0].shape[0]
+    assert obtained_len_dataframe == expected_len_dataframe
+
+    bootstrapping_number = 3
+    obtained = resample_valid_data(effort_and_capture_data[4:9], bootstrapping_number)
     expected_len = 0
     obtained_len = len(obtained)
     assert obtained_len == expected_len

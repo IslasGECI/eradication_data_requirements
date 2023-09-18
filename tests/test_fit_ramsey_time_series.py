@@ -208,6 +208,8 @@ def test_calculate_sample_six_months_slope():
     obtained_number_elements = len(obtained_slopes[0])
     assert obtained_number_elements == expected_number_elements
     print(obtained_slopes)
+    np.testing.assert_array_almost_equal(obtained_slopes[0][1][0], -0.16283784)
+    np.testing.assert_array_almost_equal(obtained_slopes[0][4][0], -0.14864865)
 
 
 def test_extract_slopes():

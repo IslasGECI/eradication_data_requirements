@@ -49,6 +49,12 @@ def sample_fit_ramsey_plot(datos):
     return fits
 
 
+def resample_fit_ramsey_plot(datos):
+    ramsey_series = set_up_ramsey_time_series(datos)
+    fits = [fit_ramsey_plot(ramsey_series.drop(i)) for i in ramsey_series.index]
+    return fits
+
+
 def calculate_resampled_six_months_slope(ramsey_series):
     window_length = 6
     return [

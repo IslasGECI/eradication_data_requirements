@@ -18,7 +18,7 @@ def add_slopes_to_effort_capture_data(data):
 
 def add_probs_to_effort_capture_data(data_copy):
     ramsey_time_series = set_up_ramsey_time_series(data_copy)
-    samples = calculate_sample_six_months_slope(ramsey_time_series)
+    samples = calculate_resampled_six_months_slope(ramsey_time_series)
     probs_status = extract_prob(samples)
     paste_status(ramsey_time_series, probs_status, "prob")
     return ramsey_time_series
@@ -49,7 +49,7 @@ def sample_fit_ramsey_plot(datos):
     return fits
 
 
-def calculate_sample_six_months_slope(ramsey_series):
+def calculate_resampled_six_months_slope(ramsey_series):
     window_length = 6
     return [
         sample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i])

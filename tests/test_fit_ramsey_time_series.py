@@ -71,7 +71,10 @@ def test_sample_fit_ramsey_plot():
 
 
 def test_resampled_fit_ramsey_plot():
-    obtained = resample_fit_ramsey_plot(data)
+    bootstrapping_number = 10
+    obtained = resample_fit_ramsey_plot(data, bootstrapping_number)
+    obtained_list_len = len(obtained)
+    assert obtained_list_len == bootstrapping_number
 
     assert obtained[0].shape == (2,)
 

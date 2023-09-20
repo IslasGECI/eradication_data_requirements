@@ -8,4 +8,7 @@ RUN pip install --upgrade pip && pip install \
     mypy \
     pylint \
     pytest \
-    pytest-cov
+    pytest-cov \
+    uvicorn
+
+RUN make install

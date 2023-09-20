@@ -8,3 +8,10 @@ services:
     command: bash
     volumes:
       - $PWD:/workdir
+  external_erd_api:
+    image: islasgeci/eradication_data_requirements:latest
+    entrypoint: ["uvicorn", "eradication_data_requirements.api:api", "--host", "0.0.0.0", "--port", "10000"]
+    volumes:
+      - $PWD:/workdir
+    ports:
+      - "1001:10000"

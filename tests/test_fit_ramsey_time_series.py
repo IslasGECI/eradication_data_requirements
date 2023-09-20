@@ -13,7 +13,7 @@ from eradication_data_requirements import (
     paste_status,
     resample_fit_ramsey_plot,
     sample_fit_ramsey_plot,
-    xxset_up_ramsey_time_series,
+    set_up_ramsey_time_series,
 )
 
 
@@ -132,7 +132,7 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = xxset_up_ramsey_time_series(data)
+    obtained = set_up_ramsey_time_series(data)
     assert (obtained.columns == ["Fecha", "CPUE", "Cumulative_captures"]).all()
     assert (obtained.Cumulative_captures == expected.Cumulative_captures).all()
     assert (obtained.CPUE == expected.CPUE).all()
@@ -144,7 +144,7 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = xxset_up_ramsey_time_series(data_2)
+    obtained = set_up_ramsey_time_series(data_2)
 
     expected = pd.DataFrame(
         {
@@ -160,7 +160,7 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = xxset_up_ramsey_time_series(singular_data)
+    obtained = set_up_ramsey_time_series(singular_data)
 
     expected = pd.DataFrame(
         {

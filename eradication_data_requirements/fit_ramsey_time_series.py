@@ -10,7 +10,7 @@ from eradication_data_requirements.resample_raw_data import resample_valid_data
 
 
 def add_slopes_to_effort_capture_data(data):
-    ramsey_time_series = xxset_up_ramsey_time_series(data)
+    ramsey_time_series = set_up_ramsey_time_series(data)
     slopes_and_intercept = calculate_six_months_slope(ramsey_time_series)
     slopes_status = extract_slopes(slopes_and_intercept)
     ramsey_time_series = paste_status(ramsey_time_series, slopes_status, "slope")
@@ -39,16 +39,6 @@ def add_empty_column(data_copy, column_name):
 
 
 def set_up_ramsey_time_series(data):
-    resized_data = remove_consecutive_non_captures(data)
-    resized_data = resized_data[resized_data.Esfuerzo != 0]
-    cumulative_captures = pd.DataFrame()
-    cumulative_captures["Fecha"] = resized_data.Fecha
-    cumulative_captures["Cumulative_captures"] = resized_data["Capturas"].cumsum()
-    cumulative_captures["CPUE"] = resized_data["Capturas"] / resized_data["Esfuerzo"]
-    return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
-
-
-def xxset_up_ramsey_time_series(data):
     resized_data = data
     cumulative_captures = pd.DataFrame()
     cumulative_captures["Fecha"] = resized_data.Fecha
@@ -64,7 +54,7 @@ def sample_fit_ramsey_plot(datos):
 
 def resample_fit_ramsey_plot(datos, bootstrapping_number):
     resampled_data = resample_valid_data(datos, bootstrapping_number)
-    ramsey_series = [xxset_up_ramsey_time_series(sample) for sample in resampled_data]
+    ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]
     fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
     return fits
 

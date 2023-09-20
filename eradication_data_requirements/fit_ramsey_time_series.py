@@ -32,7 +32,7 @@ def paste_status(data_copy, probs_status, column_name):
 
 
 def add_empty_column(data_copy, column_name):
-    data_copy[column_name] = np.nan
+    data_copy.loc[:, column_name] = np.nan
 
 
 def set_up_ramsey_time_series(data):

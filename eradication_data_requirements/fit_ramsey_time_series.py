@@ -19,7 +19,7 @@ def add_slopes_to_effort_capture_data(data):
 
 def add_probs_to_effort_capture_data(data_copy, bootstrapping_number):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
-    samples = xxcalculate_resampled_six_months_slope(resized_data, bootstrapping_number)
+    samples = calculate_resampled_six_months_slope(resized_data, bootstrapping_number)
     probs_status = extract_prob(samples)
     paste_status(resized_data, probs_status, "prob")
     return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
@@ -66,7 +66,7 @@ def resample_fit_ramsey_plot(datos, bootstrapping_number):
     return fits
 
 
-def xxcalculate_resampled_six_months_slope(ramsey_series, bootstrapping_number):
+def calculate_resampled_six_months_slope(ramsey_series, bootstrapping_number):
     window_length = 6
     return [
         resample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)

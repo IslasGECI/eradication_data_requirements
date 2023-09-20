@@ -11,7 +11,9 @@ home-page = "https://github.com/IslasGECI/eradication_data_requirements"
 module = "eradication_data_requirements"
 requires = [
     "bootstrapping-tools==3.*",
+    "fastapi",
     "geci-plots==0.4.*",
+    "httpx",
     "numpy",
     "pandas",
     "typer[all]"

@@ -24,3 +24,18 @@ def tests_api_write_effort_and_captures_with_probability():
     assert response.status_code == 200
 
     assert os.path.exists(output_path)
+    os.remove(output_path)
+
+
+def tests_api_write_progress_probability_figure():
+    input_path = "tests/data/progress_probability_tests.csv"
+    output_path = "tests/data/api_reggae_figure.png"
+
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
+    request = f"/write_probability_figure/?input_path={input_path}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+    assert os.path.exists(output_path)

@@ -10,6 +10,7 @@ description-file = "README.md"
 home-page = "https://github.com/IslasGECI/eradication_data_requirements"
 module = "eradication_data_requirements"
 requires = [
+    "bootstrapping-tools==3.*",
     "geci-plots==0.4.*",
     "numpy",
     "pandas",

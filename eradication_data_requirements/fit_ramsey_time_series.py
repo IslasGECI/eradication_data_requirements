@@ -39,11 +39,10 @@ def add_empty_column(data_copy, column_name):
 
 
 def set_up_ramsey_time_series(data):
-    resized_data = data
     cumulative_captures = pd.DataFrame()
-    cumulative_captures["Fecha"] = resized_data.Fecha
-    cumulative_captures["Cumulative_captures"] = resized_data["Capturas"].cumsum()
-    cumulative_captures["CPUE"] = resized_data["Capturas"] / resized_data["Esfuerzo"]
+    cumulative_captures["Fecha"] = data.Fecha
+    cumulative_captures["Cumulative_captures"] = data["Capturas"].cumsum()
+    cumulative_captures["CPUE"] = data["Capturas"] / data["Esfuerzo"]
     return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
 
 

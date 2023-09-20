@@ -145,7 +145,7 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = set_up_ramsey_time_series(data_2)
+    obtained = xxset_up_ramsey_time_series(data_2)
 
     expected = pd.DataFrame(
         {

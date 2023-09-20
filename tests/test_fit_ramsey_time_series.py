@@ -161,12 +161,12 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = set_up_ramsey_time_series(singular_data)
+    obtained = xxset_up_ramsey_time_series(singular_data)
 
     expected = pd.DataFrame(
         {
-            "CPUE": [1 / 2, 0, 2 / 2, 1 / 2],
-            "Cumulative_captures": [1, 1, 3, 4],
+            "CPUE": [1 / 2, 0, 0, 0, 2 / 2, 1 / 2],
+            "Cumulative_captures": [1, 1, 1, 1, 3, 4],
         }
     )
 

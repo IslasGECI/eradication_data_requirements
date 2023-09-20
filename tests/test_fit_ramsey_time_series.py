@@ -128,6 +128,7 @@ def test_set_up_ramsey_time_series():
     assert (obtained.columns == ["Fecha", "CPUE", "Cumulative_captures"]).all()
     assert (obtained.Cumulative_captures == expected.Cumulative_captures).all()
     assert (obtained.CPUE == expected.CPUE).all()
+    assert (obtained.Fecha == expected.Fecha).all()
 
     data_2 = pd.DataFrame(
         {

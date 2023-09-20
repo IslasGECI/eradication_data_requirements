@@ -46,6 +46,7 @@ def test_write_effort_and_capture_with_probability():
 
     result = runner.invoke(app, ["write-effort-and-captures-with-probability", "--help"])
     assert " Input file path " in result.stdout
+    assert " Bootstrapping number " in result.stdout
     assert " Output file path " in result.stdout
     assert "[default: " not in result.stdout
 

@@ -2,9 +2,6 @@ import numpy as np
 import pandas as pd
 
 
-from eradication_data_requirements.remove_consecutive_non_captures import (
-    remove_consecutive_non_captures,
-)
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 from eradication_data_requirements.resample_raw_data import resample_valid_data
 

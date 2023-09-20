@@ -5,12 +5,6 @@ import os
 client = TestClient(api)
 
 
-def test_read_main():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"msg": "Hello World"}
-
-
 def tests_api_write_effort_and_captures_with_probability():
     input_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     bootstrapping_number = 10

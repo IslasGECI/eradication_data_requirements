@@ -39,3 +39,4 @@ def tests_api_write_progress_probability_figure():
     assert response.status_code == 200
 
     assert os.path.exists(output_path)
+    os.remove(output_path)

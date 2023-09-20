@@ -14,6 +14,7 @@ from eradication_data_requirements import (
     resample_fit_ramsey_plot,
     sample_fit_ramsey_plot,
     set_up_ramsey_time_series,
+    xxset_up_ramsey_time_series,
 )
 
 
@@ -132,7 +133,7 @@ def test_set_up_ramsey_time_series():
             "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = set_up_ramsey_time_series(data)
+    obtained = xxset_up_ramsey_time_series(data)
     assert (obtained.columns == ["Fecha", "CPUE", "Cumulative_captures"]).all()
     assert (obtained.Cumulative_captures == expected.Cumulative_captures).all()
     assert (obtained.CPUE == expected.CPUE).all()

@@ -10,7 +10,7 @@ from eradication_data_requirements.resample_raw_data import resample_valid_data
 
 
 def add_slopes_to_effort_capture_data(data):
-    ramsey_time_series = set_up_ramsey_time_series(data)
+    ramsey_time_series = xxset_up_ramsey_time_series(data)
     slopes_and_intercept = calculate_six_months_slope(ramsey_time_series)
     slopes_status = extract_slopes(slopes_and_intercept)
     ramsey_time_series = paste_status(ramsey_time_series, slopes_status, "slope")

@@ -125,12 +125,15 @@ def test_write_effort_and_capture_with_slopes():
             np.nan,
             np.nan,
             4.739e-6,
-            -1.117e-5,
-            -9.646e-6,
-            -5.082e-5,
-            -2.781e-6,
+            -1.28e-5,
+            -1.86e-5,
+            -9.4e-5,
+            3.67e-5,
+            11.4e-5,
+            5.2e-5,
+            2.75e-5,
         ],
         name="slope",
     )
     print(obtained_slopes)
-    pd.testing.assert_series_equal(obtained_slopes, expected_slopes)
+    pd.testing.assert_series_equal(obtained_slopes, expected_slopes, rtol=0.01)

@@ -13,7 +13,6 @@ from eradication_data_requirements import (
     paste_status,
     resample_fit_ramsey_plot,
     sample_fit_ramsey_plot,
-    set_up_ramsey_time_series,
     xxset_up_ramsey_time_series,
 )
 

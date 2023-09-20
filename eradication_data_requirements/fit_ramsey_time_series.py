@@ -13,7 +13,7 @@ def add_slopes_to_effort_capture_data(data):
     ramsey_time_series = set_up_ramsey_time_series(data)
     slopes_and_intercept = calculate_six_months_slope(ramsey_time_series)
     slopes_status = extract_slopes(slopes_and_intercept)
-    paste_status(ramsey_time_series, slopes_status, "slope")
+    ramsey_time_series = paste_status(ramsey_time_series, slopes_status, "slope")
     return ramsey_time_series
 
 
@@ -21,18 +21,21 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     samples = calculate_resampled_six_months_slope(resized_data, bootstrapping_number)
     probs_status = extract_prob(samples)
-    paste_status(resized_data, probs_status, "prob")
+    resized_data = paste_status(resized_data, probs_status, "prob")
     return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
 def paste_status(data_copy, probs_status, column_name):
-    add_empty_column(data_copy, column_name)
-    assert len(data_copy.loc[5:, column_name]) == len(probs_status), "Different dimensions"
-    data_copy.loc[5:, column_name] = probs_status
+    df = add_empty_column(data_copy, column_name)
+    assert len(df.loc[5:, column_name]) == len(probs_status), "Different dimensions"
+    df.loc[5:, column_name] = probs_status
+    return df
 
 
 def add_empty_column(data_copy, column_name):
-    data_copy.loc[:, column_name] = np.nan
+    df_copy = data_copy.copy()
+    df_copy.loc[:, column_name] = np.nan
+    return df_copy
 
 
 def set_up_ramsey_time_series(data):

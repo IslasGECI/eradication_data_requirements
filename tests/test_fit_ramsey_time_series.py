@@ -232,5 +232,5 @@ def test_paste_status():
 def test_add_empty_column():
     ramsey_time_series_copy = ramsey_time_series.copy()
     column_name = "slope"
-    add_empty_column(ramsey_time_series_copy, column_name)
+    ramsey_time_series_copy = add_empty_column(ramsey_time_series_copy, column_name)
     assert isinstance(ramsey_time_series_copy[column_name][0], type(np.nan))

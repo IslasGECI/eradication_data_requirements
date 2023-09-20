@@ -6,7 +6,6 @@ from eradication_data_requirements import (
     add_empty_column,
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
-    calculate_resampled_six_months_slope,
     xxcalculate_resampled_six_months_slope,
     calculate_six_months_slope,
     extract_prob,

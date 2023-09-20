@@ -46,11 +46,6 @@ def set_up_ramsey_time_series(data):
     return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
 
 
-def sample_fit_ramsey_plot(datos):
-    fits = [fit_ramsey_plot(datos.drop(i)) for i in datos.index]
-    return fits
-
-
 def resample_fit_ramsey_plot(datos, bootstrapping_number):
     resampled_data = resample_valid_data(datos, bootstrapping_number)
     ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]

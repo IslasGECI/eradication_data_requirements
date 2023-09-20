@@ -12,7 +12,6 @@ from eradication_data_requirements import (
     extract_slopes,
     paste_status,
     resample_fit_ramsey_plot,
-    sample_fit_ramsey_plot,
     set_up_ramsey_time_series,
 )
 
@@ -61,13 +60,6 @@ def test_add_probability_to_effort_capture_data():
 time_series_for_ramsey = pd.DataFrame(
     {"CPUE": [1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
 )
-
-
-def test_sample_fit_ramsey_plot():
-    obtained = sample_fit_ramsey_plot(time_series_for_ramsey)
-    expected_length = 6
-    obtained_length = len(obtained)
-    assert obtained_length == expected_length
 
 
 def test_resampled_fit_ramsey_plot():

@@ -39,7 +39,9 @@ def test_add_probability_to_effort_capture_data():
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = add_probs_to_effort_capture_data(effort_and_capture_data, bootstrapping_number)
+    obtained = xxadd_probs_to_effort_capture_data(
+        effort_and_capture_data, bootstrapping_number, window_length
+    )
     obtained_probs = obtained.prob.iloc[6:]
     is_positive = obtained_probs >= 0
     assert is_positive.all()

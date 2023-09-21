@@ -28,15 +28,17 @@ def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_l
 
 
 def paste_status(data_copy, probs_status, column_name):
-    window_length = 5
+    window_length = 6
     df = paste_status_by_window(data_copy, probs_status, column_name, window_length)
     return df
 
 
 def paste_status_by_window(data_copy, probs_status, column_name, window_length):
     df = add_empty_column(data_copy, column_name)
-    assert len(df.loc[window_length:, column_name]) == len(probs_status), "Different dimensions"
-    df.loc[window_length:, column_name] = probs_status
+    assert len(df.loc[(window_length - 1) :, column_name]) == len(
+        probs_status
+    ), "Different dimensions"
+    df.loc[(window_length - 1) :, column_name] = probs_status
     return df
 
 

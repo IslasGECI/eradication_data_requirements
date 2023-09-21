@@ -5,6 +5,7 @@ import pytest
 from eradication_data_requirements import (
     add_empty_column,
     add_probs_to_effort_capture_data,
+    xxadd_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_resampled_six_months_slope,
     calculate_six_months_slope,
@@ -27,7 +28,8 @@ data = pd.DataFrame(
 
 def test_add_probability_to_effort_capture_data():
     bootstrapping_number = 10
-    obtained = add_probs_to_effort_capture_data(data, bootstrapping_number)
+    window_length = 6
+    obtained = xxadd_probs_to_effort_capture_data(data, bootstrapping_number, window_length)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns

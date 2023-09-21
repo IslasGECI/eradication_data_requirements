@@ -8,11 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 ### Fixed
 
 ### Changed
 
 ### Removed
+
+## [1.0.0] - 2023-09-21
+
+### Added
+- Add window length argument to `add_probs_to_effort_capture_data()`, `write_effort_and_captures_with_probability()` and entrypoint `/write_effort_and_captures_with_probability`
+
+### Removed
+- Deleted function `calculate_resample_six_month_slope()`
 
 ## [0.3.0] - 2023-09-20
 

@@ -27,8 +27,16 @@ def write_effort_and_captures_with_probability(
     bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
     output_path: str = typer.Option("", help="Output file path"),
 ):
-    effort_capture_data = pd.read_csv(input_path)
     window_length = 6
+    xxwrite_effort_and_captures_with_probability(
+        input_path, bootstrapping_number, output_path, window_length
+    )
+
+
+def xxwrite_effort_and_captures_with_probability(
+    input_path, bootstrapping_number, output_path, window_length
+):
+    effort_capture_data = pd.read_csv(input_path)
     effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length
     )

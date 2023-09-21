@@ -14,7 +14,7 @@ def add_slopes_to_effort_capture_data(data):
     return ramsey_time_series
 
 
-def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
+def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     samples = calculate_resampled_slope_by_window(resized_data, bootstrapping_number, window_length)
     probs_status = extract_prob(samples)

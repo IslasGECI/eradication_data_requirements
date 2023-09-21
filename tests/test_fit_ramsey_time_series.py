@@ -6,7 +6,7 @@ from eradication_data_requirements import (
     add_empty_column,
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
-    calculate_resampled_six_months_slope,
+    calculate_resampled_slope_by_window,
     calculate_six_months_slope,
     extract_prob,
     extract_slopes,
@@ -203,7 +203,8 @@ def test_calculate_six_months_slope():
 
 def test_calculate_sample_six_months_slope():
     bootstrapping_number = 10
-    obtained_slopes = calculate_resampled_six_months_slope(data, bootstrapping_number)
+    window_length = 6
+    obtained_slopes = calculate_resampled_slope_by_window(data, bootstrapping_number, window_length)
     expected_number_slopes = 1
     obtained_number_slopes = len(obtained_slopes)
     assert obtained_number_slopes == expected_number_slopes

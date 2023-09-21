@@ -22,7 +22,7 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number):
     return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
-def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number):
+def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     samples = calculate_resampled_six_months_slope(resized_data, bootstrapping_number)
     probs_status = extract_prob(samples)

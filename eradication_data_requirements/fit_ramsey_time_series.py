@@ -35,10 +35,11 @@ def paste_status(data_copy, probs_status, column_name):
 
 def paste_status_by_window(data_copy, probs_status, column_name, window_length):
     df = add_empty_column(data_copy, column_name)
-    assert len(df.loc[(window_length - 1) :, column_name]) == len(
+    number_of_empty_rows = window_length - 1
+    assert len(df.loc[number_of_empty_rows:, column_name]) == len(
         probs_status
     ), "Different dimensions"
-    df.loc[(window_length - 1) :, column_name] = probs_status
+    df.loc[number_of_empty_rows:, column_name] = probs_status
     return df
 
 

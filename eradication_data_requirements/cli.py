@@ -22,18 +22,6 @@ def write_progress_probability_figure(
 
 
 @app.command()
-def write_effort_and_captures_with_probability(
-    input_path: str = typer.Option("", help="Input file path"),
-    bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
-    output_path: str = typer.Option("", help="Output file path"),
-):
-    window_length = 6
-    xxwrite_effort_and_captures_with_probability(
-        input_path, bootstrapping_number, output_path, window_length
-    )
-
-
-@app.command()
 def xxwrite_effort_and_captures_with_probability(
     input_path: str = typer.Option("", help="Input file path"),
     bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),

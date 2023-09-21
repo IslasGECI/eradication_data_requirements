@@ -29,8 +29,9 @@ def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_l
 
 def paste_status(data_copy, probs_status, column_name):
     df = add_empty_column(data_copy, column_name)
-    assert len(df.loc[5:, column_name]) == len(probs_status), "Different dimensions"
-    df.loc[5:, column_name] = probs_status
+    window_length = 5
+    assert len(df.loc[window_length:, column_name]) == len(probs_status), "Different dimensions"
+    df.loc[window_length:, column_name] = probs_status
     return df
 
 

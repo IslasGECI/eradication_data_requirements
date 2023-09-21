@@ -22,6 +22,14 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number):
     return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
+def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number):
+    resized_data = data_copy[data_copy.Esfuerzo != 0]
+    samples = calculate_resampled_six_months_slope(resized_data, bootstrapping_number)
+    probs_status = extract_prob(samples)
+    resized_data = paste_status(resized_data, probs_status, "prob")
+    return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
+
+
 def paste_status(data_copy, probs_status, column_name):
     df = add_empty_column(data_copy, column_name)
     assert len(df.loc[5:, column_name]) == len(probs_status), "Different dimensions"

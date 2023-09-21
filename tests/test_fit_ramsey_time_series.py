@@ -57,7 +57,9 @@ def test_add_probability_to_effort_capture_data():
             "Fecha": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = add_probs_to_effort_capture_data(data_with_zero_effort_row, bootstrapping_number)
+    obtained = xxadd_probs_to_effort_capture_data(
+        data_with_zero_effort_row, bootstrapping_number, window_length
+    )
     assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
 
 

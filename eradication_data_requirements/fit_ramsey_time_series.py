@@ -59,11 +59,6 @@ def resample_fit_ramsey_plot(datos, bootstrapping_number):
     return fits
 
 
-def calculate_resampled_six_months_slope(ramsey_series, bootstrapping_number):
-    window_length = 6
-    return calculate_resampled_slope_by_window(ramsey_series, bootstrapping_number, window_length)
-
-
 def calculate_resampled_slope_by_window(ramsey_series, bootstrapping_number, window_length):
     return [
         resample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)

@@ -22,7 +22,7 @@ def write_progress_probability_figure(
 
 
 @app.command()
-def xxwrite_effort_and_captures_with_probability(
+def write_effort_and_captures_with_probability(
     input_path: str = typer.Option("", help="Input file path"),
     bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
     output_path: str = typer.Option("", help="Output file path"),

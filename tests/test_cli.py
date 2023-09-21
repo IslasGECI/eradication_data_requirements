@@ -45,7 +45,7 @@ def test_write_effort_and_capture_with_probability():
     output_path = "tests/data/probability_time_series.csv"
 
     window_length = 6
-    result = runner.invoke(app, ["xxwrite-effort-and-captures-with-probability", "--help"])
+    result = runner.invoke(app, ["write-effort-and-captures-with-probability", "--help"])
     assert " Input file path " in result.stdout
     assert " Bootstrapping number " in result.stdout
     assert " Output file path " in result.stdout
@@ -57,7 +57,7 @@ def test_write_effort_and_capture_with_probability():
     result = runner.invoke(
         app,
         [
-            "xxwrite-effort-and-captures-with-probability",
+            "write-effort-and-captures-with-probability",
             "--input-path",
             monthly_path,
             "--bootstrapping-number",

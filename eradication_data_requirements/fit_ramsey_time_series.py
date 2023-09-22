@@ -3,7 +3,10 @@ import pandas as pd
 
 
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
-from eradication_data_requirements.resample_raw_data import resample_valid_data
+from eradication_data_requirements.resample_raw_data import (
+    resample_valid_data,
+    resample_valid_cumulative_data,
+)
 
 
 def add_slopes_to_effort_capture_data(data):
@@ -56,6 +59,13 @@ def resample_fit_ramsey_plot(datos, bootstrapping_number):
     resampled_data = resample_valid_data(datos, bootstrapping_number)
     ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]
     fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
+    return fits
+
+
+def fit_resampled_cumulative(datos, bootstrapping_number):
+    ramsey_series = set_up_ramsey_time_series(datos)
+    resampled_data = resample_valid_cumulative_data(ramsey_series, bootstrapping_number)
+    fits = [fit_ramsey_plot(sample) for sample in resampled_data]
     return fits
 
 

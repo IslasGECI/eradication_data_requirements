@@ -8,6 +8,7 @@ from eradication_data_requirements.plot_progress_probability import plot_progres
 
 import pandas as pd
 import typer
+from typing_extensions import Annotated
 import matplotlib.pyplot as plt
 
 app = typer.Typer()
@@ -29,7 +30,7 @@ def write_effort_and_captures_with_probability(
     bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
     output_path: str = typer.Option("", help="Output file path"),
     window_length: int = typer.Option("", help="Window length for removal rate"),
-    resample_method: str = typer.Option(default="captures", help=""),
+    resample_method: Annotated[str, typer.Option(help="")] = "captures",
 ):
     effort_capture_data = pd.read_csv(input_path)
     resample_method_dictionary = {
@@ -40,7 +41,7 @@ def write_effort_and_captures_with_probability(
         effort_capture_data,
         bootstrapping_number,
         window_length,
-        resample_method_dictionary["captures"],
+        resample_method_dictionary[resample_method],
     )
     effort_captures_with_slopes.to_csv(output_path, index=False)
 

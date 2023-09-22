@@ -69,6 +69,7 @@ def test_write_effort_and_capture_with_probability():
             window_length,
         ],
     )
+    print(result.stdout)
     assert result.exit_code == 0
     assert os.path.exists(output_path)
     obtained = pd.read_csv(output_path)

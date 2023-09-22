@@ -9,9 +9,10 @@ def resample_valid_data(effort_and_capture_data, bootstrapping_number):
 
 
 def resample_valid_cumulative_data(cumulative_captures_data, bootstrapping_number):
-    blocks_length = 2
-    samples = generate_samples(cumulative_captures_data, bootstrapping_number, blocks_length)
-    return validate_cumulative_samples_to_fit(samples)
+    validate_method = validate_cumulative_samples_to_fit
+    return resample_valid_data_by_method(
+        cumulative_captures_data, bootstrapping_number, validate_method
+    )
 
 
 def resample_valid_data_by_method(effort_and_capture_data, bootstrapping_number, validate_method):

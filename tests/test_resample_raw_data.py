@@ -1,4 +1,8 @@
-from eradication_data_requirements import resample_valid_data, validate_samples_to_fit
+from eradication_data_requirements import (
+    resample_valid_data,
+    validate_samples_to_fit,
+    validate_cumulative_samples_to_fit,
+)
 
 import pandas as pd
 
@@ -20,6 +24,11 @@ def test_resample_valid_data():
     expected_len = 3
     obtained_len = len(obtained)
     assert obtained_len == expected_len
+
+
+def tests_validate_cumulative_samples_to_fit():
+    valid_data = pd.DataFrame({"Cumulative_captures": [14, 15, 15, 23, 23, 26]})
+    validate_cumulative_samples_to_fit([valid_data])
 
 
 def test_validate_samples_to_fit():

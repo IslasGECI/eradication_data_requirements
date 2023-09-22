@@ -10,6 +10,15 @@ def resample_valid_data(effort_and_capture_data, bootstrapping_number):
     return validate_samples_to_fit(sample)
 
 
+def resample_valid_cumulative_data(cumulative_captures_data, bootstrapping_number):
+    blocks_length = 2
+    samples = [
+        resample_data(cumulative_captures_data, seed, blocks_length)
+        for seed in range(bootstrapping_number)
+    ]
+    return validate_cumulative_samples_to_fit(samples)
+
+
 def validate_samples_to_fit(samples):
     validated = [
         valid_sample

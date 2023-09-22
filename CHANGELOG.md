@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.1] - 2023-09-22
+
+### Changed
+- The resampling occurs over the `Cumulative_captures`
+
 ## [1.0.0] - 2023-09-21
 
 ### Added

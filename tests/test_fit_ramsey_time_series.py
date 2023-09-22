@@ -12,7 +12,7 @@ from eradication_data_requirements import (
     extract_slopes,
     fit_resampled_cumulative,
     paste_status,
-    resample_fit_ramsey_plot,
+    fit_resampled_captures,
     set_up_ramsey_time_series,
 )
 
@@ -78,7 +78,7 @@ def test_fit_resampled_cumulative():
 
 def test_resampled_fit_ramsey_plot():
     bootstrapping_number = 10
-    obtained = resample_fit_ramsey_plot(data, bootstrapping_number)
+    obtained = fit_resampled_captures(data, bootstrapping_number)
     obtained_list_len = len(obtained)
     assert obtained_list_len == bootstrapping_number
 

@@ -55,7 +55,7 @@ def set_up_ramsey_time_series(data):
     return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
 
 
-def resample_fit_ramsey_plot(datos, bootstrapping_number):
+def fit_resampled_captures(datos, bootstrapping_number):
     resampled_data = resample_valid_data(datos, bootstrapping_number)
     ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]
     fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
@@ -71,7 +71,7 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
 
 def calculate_resampled_slope_by_window(ramsey_series, bootstrapping_number, window_length):
     return [
-        resample_fit_ramsey_plot(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)
+        fit_resampled_captures(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)
         for i in range(window_length, len(ramsey_series) + 1)
     ]
 

@@ -2,6 +2,7 @@ from eradication_data_requirements import (
     resample_valid_data,
     validate_samples_to_fit,
     validate_cumulative_samples_to_fit,
+    resample_valid_cumulative_data,
 )
 
 import pandas as pd

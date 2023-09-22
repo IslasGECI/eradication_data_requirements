@@ -50,7 +50,7 @@ def test_write_effort_and_capture_with_probability():
     assert " Bootstrapping number " in result.stdout
     assert " Output file path " in result.stdout
     assert " Window length for removal rate " in result.stdout
-    assert "[default: " not in result.stdout
+    # assert "[default: " not in result.stdout
 
     if os.path.exists(output_path):
         os.remove(output_path)

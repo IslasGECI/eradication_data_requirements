@@ -45,11 +45,15 @@ def test_resample_valid_cumulative_data():
 
 
 def tests_validate_cumulative_samples_to_fit():
-    valid_data = pd.DataFrame({"Cumulative_captures": [14, 15, 15, 23, 23, 26]})
+    valid_data = pd.DataFrame(
+        {"CPUE": [14, 15, 15, 23, 23, 26], "Cumulative_captures": [14, 15, 15, 23, 23, 26]}
+    )
     zero_CPUE_data = pd.DataFrame(
         {"CPUE": [0, 0, 0, 0, 0, 0], "Cumulative_captures": [14, 15, 15, 23, 23, 26]}
     )
-    non_valid_data = pd.DataFrame({"Cumulative_captures": [14, 14, 14, 14, 14, 14]})
+    non_valid_data = pd.DataFrame(
+        {"CPUE": [14, 15, 15, 23, 23, 26], "Cumulative_captures": [14, 14, 14, 14, 14, 14]}
+    )
     samples = [valid_data, non_valid_data, zero_CPUE_data]
     obtained = validate_cumulative_samples_to_fit(samples)
     expected_len = 1

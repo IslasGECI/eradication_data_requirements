@@ -29,7 +29,10 @@ def test_resample_valid_data():
 
 def test_resample_valid_cumulative_data():
     cumulative_data = pd.DataFrame(
-        {"Cumulative_captures": [14, 14, 14, 14, 14, 14, 14, 15, 15, 23, 23, 26]}
+        {
+            "CPUE": [14, 14, 14, 14, 14, 14, 14, 15, 15, 23, 23, 26],
+            "Cumulative_captures": [14, 14, 14, 14, 14, 14, 14, 15, 15, 23, 23, 26],
+        }
     )
     bootstrapping_number = 4
     obtained = resample_valid_cumulative_data(cumulative_data[0:6], bootstrapping_number)

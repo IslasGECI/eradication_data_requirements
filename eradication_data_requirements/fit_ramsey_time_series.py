@@ -17,9 +17,20 @@ def add_slopes_to_effort_capture_data(data):
     return ramsey_time_series
 
 
-def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
+def fit_resampled_captures(datos, bootstrapping_number):
+    resampled_data = resample_valid_data(datos, bootstrapping_number)
+    ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]
+    fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
+    return fits
+
+
+def add_probs_to_effort_capture_data(
+    data_copy, bootstrapping_number, window_length, fit_method=fit_resampled_captures
+):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
-    samples = calculate_resampled_slope_by_window(resized_data, bootstrapping_number, window_length)
+    samples = calculate_resampled_slope_by_window(
+        resized_data, bootstrapping_number, window_length, fit_method
+    )
     probs_status = extract_prob(samples)
     resized_data = paste_status_by_window(resized_data, probs_status, "prob", window_length)
     return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
@@ -53,13 +64,6 @@ def set_up_ramsey_time_series(data):
     cumulative_captures["Cumulative_captures"] = data["Capturas"].cumsum()
     cumulative_captures["CPUE"] = data["Capturas"] / data["Esfuerzo"]
     return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
-
-
-def fit_resampled_captures(datos, bootstrapping_number):
-    resampled_data = resample_valid_data(datos, bootstrapping_number)
-    ramsey_series = [set_up_ramsey_time_series(sample) for sample in resampled_data]
-    fits = [fit_ramsey_plot(ramsey_serie) for ramsey_serie in ramsey_series]
-    return fits
 
 
 def fit_resampled_cumulative(datos, bootstrapping_number):

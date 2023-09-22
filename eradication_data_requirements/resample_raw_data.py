@@ -17,3 +17,7 @@ def validate_samples_to_fit(samples):
         if valid_sample.Capturas.sum() != valid_sample.Capturas[0]
     ]
     return validated
+
+
+def validate_cumulative_samples_to_fit(samples):
+    pass

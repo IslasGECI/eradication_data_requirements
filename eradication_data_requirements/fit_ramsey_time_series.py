@@ -69,9 +69,11 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
     return fits
 
 
-def calculate_resampled_slope_by_window(ramsey_series, bootstrapping_number, window_length):
+def calculate_resampled_slope_by_window(
+    ramsey_series, bootstrapping_number, window_length, fit_method=fit_resampled_captures
+):
     return [
-        fit_resampled_captures(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)
+        fit_method(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)
         for i in range(window_length, len(ramsey_series) + 1)
     ]
 

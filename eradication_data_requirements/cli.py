@@ -26,10 +26,10 @@ def write_progress_probability_figure(
 
 @app.command()
 def write_effort_and_captures_with_probability(
-    input_path: str = typer.Option("", help="Input file path"),
+    input_path: str = typer.Option(help="Input file path"),
     bootstrapping_number: int = typer.Option("", help="Bootstrapping number"),
-    output_path: str = typer.Option("", help="Output file path"),
-    window_length: int = typer.Option("", help="Window length for removal rate"),
+    output_path: str = typer.Option(help="Output file path"),
+    window_length: int = typer.Option(help="Window length for removal rate"),
     resample_method: Annotated[str, typer.Option(help="")] = "captures",
 ):
     effort_capture_data = pd.read_csv(input_path)

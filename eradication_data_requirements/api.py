@@ -11,8 +11,9 @@ api = FastAPI()
 async def api_write_effort_and_captures_with_probability(
     input_path: str, bootstrapping_number: int, output_path: str, window_length: int
 ):
+    resample_method = "cumulative"
     write_effort_and_captures_with_probability(
-        input_path, bootstrapping_number, output_path, window_length
+        input_path, bootstrapping_number, output_path, window_length, resample_method
     )
 
 

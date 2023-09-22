@@ -42,5 +42,6 @@ def validate_cumulative_samples_to_fit(samples):
         valid_sample
         for valid_sample in samples
         if len(valid_sample.Cumulative_captures.unique()) > 1
+        and len(valid_sample.CPUE.unique()) > 1
     ]
     return validated

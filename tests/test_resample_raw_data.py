@@ -37,6 +37,12 @@ def test_resample_valid_cumulative_data():
     obtained_len = len(obtained)
     assert obtained_len == expected_len
 
+    bootstrapping_number = 10
+    obtained = resample_valid_cumulative_data(cumulative_data[3:9], bootstrapping_number)
+    expected_len = 8
+    obtained_len = len(obtained)
+    assert obtained_len == expected_len
+
 
 def tests_validate_cumulative_samples_to_fit():
     valid_data = pd.DataFrame({"Cumulative_captures": [14, 15, 15, 23, 23, 26]})

@@ -30,7 +30,7 @@ def tests_validate_cumulative_samples_to_fit():
     valid_data = pd.DataFrame({"Cumulative_captures": [14, 15, 15, 23, 23, 26]})
     non_valid_data = pd.DataFrame({"Cumulative_captures": [14, 14, 14, 14, 14, 14]})
     samples = [valid_data, non_valid_data]
-    obtained = validate_cumulative_samples_to_fit()
+    obtained = validate_cumulative_samples_to_fit(samples)
     expected_len = 1
     obtained_len = len(obtained)
     assert obtained_len == expected_len

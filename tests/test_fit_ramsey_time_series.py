@@ -10,6 +10,7 @@ from eradication_data_requirements import (
     calculate_six_months_slope,
     extract_prob,
     extract_slopes,
+    fit_resampled_cumulative,
     paste_status,
     resample_fit_ramsey_plot,
     set_up_ramsey_time_series,
@@ -65,6 +66,14 @@ def test_add_probability_to_effort_capture_data():
 time_series_for_ramsey = pd.DataFrame(
     {"CPUE": [1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
 )
+
+
+def test_fit_resampled_cumulative():
+    bootstrapping_number = 10
+    obtained = fit_resampled_cumulative(data, bootstrapping_number)
+    obtained_list_len = len(obtained)
+    assert obtained_list_len == bootstrapping_number
+    assert obtained[0].shape == (2,)
 
 
 def test_resampled_fit_ramsey_plot():

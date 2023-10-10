@@ -38,7 +38,7 @@ def tests_api_write_progress_probability_figure():
 
 
 def tests_api_plot_cpue_vs_cum_captures():
-    input_path = "tests/data/progress_probability_tests.csv"
+    input_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
     output_path = "tests/data/cpue_vs_cumulative.png"
 
     if os.path.exists(output_path):

@@ -35,3 +35,18 @@ def tests_api_write_progress_probability_figure():
 
     assert os.path.exists(output_path)
     os.remove(output_path)
+
+
+def tests_api_plot_cpue_vs_cum_captures():
+    input_path = "tests/data/progress_probability_tests.csv"
+    output_path = "tests/data/cpue_vs_cumulative.png"
+
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
+    request = f"/plot_cpue_vs_cum_captures/?input_path={input_path}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+    assert os.path.exists(output_path)
+    os.remove(output_path)

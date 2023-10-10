@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.1.0] - 2023-10-10
+
+### Add
+- Entrypoint for plot cpue vs cumulative captures (Ramsey's plot)
+
 ## [1.0.1] - 2023-09-22
 
 ### Changed

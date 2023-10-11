@@ -22,7 +22,7 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
     plot_catch_curve(guadalupe_data, "Guadalupe")
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel("CPUE (captures/night traps)", size=15)
-    plt.legend(fontsize="medium")
+    plt.legend(fontsize="xx-large")
     plt.savefig(output_path, dpi=300, transparent=True)
 
 

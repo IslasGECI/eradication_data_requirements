@@ -15,9 +15,11 @@ def fit_ramsey_plot(data):
 
 
 def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
-    data = pd.read_csv(socorro_path)
+    socorro_data = pd.read_csv(socorro_path)
+    guadalupe_data = pd.read_csv(guadalupe_path)
     geci_plot()
-    plot_catch_curve(data)
+    plot_catch_curve(socorro_data)
+    plot_catch_curve(guadalupe_data)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel("CPUE (captures/night traps)", size=15)
     plt.savefig(output_path, dpi=300, transparent=True)

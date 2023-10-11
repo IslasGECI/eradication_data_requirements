@@ -14,6 +14,15 @@ def fit_ramsey_plot(data):
     return slope_and_intercept
 
 
+def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
+    data = pd.read_csv(socorro_path)
+    geci_plot()
+    plot_catch_curve(data)
+    plt.xlabel("Cumulative captures", size=15, labelpad=15)
+    plt.ylabel("CPUE (captures/night traps)", size=15)
+    plt.savefig(output_path, dpi=300, transparent=True)
+
+
 def data_requirements_plot(input_path, output_path):
     data = pd.read_csv(input_path)
     geci_plot()

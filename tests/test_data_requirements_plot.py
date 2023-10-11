@@ -17,7 +17,6 @@ def test_plot_comparative_catch_curves():
     obtained_hash = hashlib.md5(file_content).hexdigest()
     expected_hash = "0f6baede0ee8e01974f01e2109e81535"
     assert obtained_hash != expected_hash
-    remove_file_if_exists(output_path)
 
 
 def test_data_requirements_plot():

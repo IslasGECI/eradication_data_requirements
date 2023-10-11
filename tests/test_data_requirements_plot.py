@@ -7,6 +7,14 @@ import pytest
 import eradication_data_requirements as dt
 
 
+def test_plot_comparative_catch_curves():
+    socorro_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
+    guadalupe_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"
+    output_path = "/workdir/tests/data/plot_comparative_catch_curves.png"
+    remove_file_if_exists(output_path)
+    dt.plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path)
+
+
 def test_data_requirements_plot():
     input_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
     output_path = "/workdir/tests/data/yearly_ramsey_plot.png"

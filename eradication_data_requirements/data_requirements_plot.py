@@ -34,8 +34,8 @@ def data_requirements_plot(input_path, output_path):
     plt.savefig(output_path, dpi=300, transparent=True)
 
 
-def plot_catch_curve(data):
+def plot_catch_curve(data, label=None):
     theta = fit_ramsey_plot(data.drop([0]))
     y_line = theta[1] + theta[0] * data["Cumulative_captures"]
     plt.plot(data["Cumulative_captures"], y_line, "r")
-    plt.scatter(data["Cumulative_captures"], data["CPUE"], marker="o", label=None)
+    plt.scatter(data["Cumulative_captures"], data["CPUE"], marker="o", label=label)

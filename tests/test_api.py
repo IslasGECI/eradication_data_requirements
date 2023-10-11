@@ -50,3 +50,19 @@ def tests_api_plot_cpue_vs_cum_captures():
 
     assert os.path.exists(output_path)
     os.remove(output_path)
+
+
+def tests_plot_comparative_catch_curves():
+    socorro_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
+    guadalupe_path = "tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"
+    output_path = "tests/data/comparative_catch_curves.png"
+
+    if os.path.exists(output_path):
+        os.remove(output_path)
+
+    request = f"/plot_comparative_catch_curves/?socorro_path={socorro_path}&guadalupe_path={guadalupe_path}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+    assert os.path.exists(output_path)
+    os.remove(output_path)

@@ -13,6 +13,11 @@ def test_plot_comparative_catch_curves():
     output_path = "/workdir/tests/data/plot_comparative_catch_curves.png"
     remove_file_if_exists(output_path)
     dt.plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path)
+    file_content = open(output_path, "rb").read()
+    obtained_hash = hashlib.md5(file_content).hexdigest()
+    expected_hash = "0f6baede0ee8e01974f01e2109e81535"
+    assert obtained_hash != expected_hash
+    remove_file_if_exists(output_path)
 
 
 def test_data_requirements_plot():

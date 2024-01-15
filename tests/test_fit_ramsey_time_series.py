@@ -75,6 +75,20 @@ def test_fit_resampled_cumulative():
     assert obtained_list_len == bootstrapping_number
     assert obtained[0].shape == (2,)
 
+    data_failing = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3, 4, 5, 6],
+            "Capturas": [1, 0, 0, 0, 0, 0],
+            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
+        }
+    )
+
+    obtained = fit_resampled_cumulative(data_failing, bootstrapping_number)
+    print(obtained)
+    obtained_list_len = len(obtained)
+    assert obtained_list_len == bootstrapping_number
+    assert obtained[0].shape == (2,)
+
 
 def test_resampled_fit_ramsey_plot():
     bootstrapping_number = 10

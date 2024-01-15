@@ -84,10 +84,8 @@ def test_fit_resampled_cumulative():
     )
 
     obtained = fit_resampled_cumulative(data_failing, bootstrapping_number)
-    print(obtained)
     obtained_list_len = len(obtained)
-    assert obtained_list_len == bootstrapping_number
-    assert obtained[0].shape == (2,)
+    assert obtained_list_len == 0
 
 
 def test_resampled_fit_ramsey_plot():

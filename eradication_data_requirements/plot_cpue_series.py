@@ -1,9 +1,11 @@
 from geci_plots import roundup, order_magnitude
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
-def plot_cumulative_series_cpue_by_season(effort_capture_df, output_png, fontsize):
+def plot_cumulative_series_cpue_by_season(effort_capture_path, output_png, fontsize):
+    effort_capture_df = pd.read_csv(effort_capture_path)
     data_year = calculate_cpue_and_cumulative_by_season(effort_capture_df)
     plot_cumulative_series_cpue(fontsize, data_year)
     plt.savefig(output_png, dpi=300, transparent=True)

@@ -37,15 +37,16 @@ def calculate_cpue_and_cumulative(effort_capture_df):
     extract_year(effort_capture_df)
     effort_capture_df = effort_capture_df[effort_capture_df["Season"] >= 2014]
     column_name = "Season"
-    data_year = calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
-    return data_year
+    return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
 
 
 def calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name):
-    data_year = effort_capture_df.groupby(by=column_name).sum(numeric_only=False)
-    data_year["cpue"] = data_year["Capturas"] / data_year["Esfuerzo"]
-    data_year["cumulative_cpue"] = data_year["cpue"].cumsum()
-    return data_year
+    data_grouped_by_column = effort_capture_df.groupby(by=column_name).sum(numeric_only=False)
+    data_grouped_by_column["cpue"] = (
+        data_grouped_by_column["Capturas"] / data_grouped_by_column["Esfuerzo"]
+    )
+    data_grouped_by_column["cumulative_cpue"] = data_grouped_by_column["cpue"].cumsum()
+    return data_grouped_by_column
 
 
 def extract_year(effort_capture_df):

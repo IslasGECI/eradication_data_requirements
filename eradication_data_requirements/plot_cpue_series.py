@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 def plot_cumulative_series_cpue_by_season(effort_capture_df, output_png, fontsize):
     data_year = calculate_cpue_and_cumulative_by_season(effort_capture_df)
     plot_cumulative_series_cpue(output_png, fontsize, data_year)
+    plt.savefig(output_png, dpi=300, transparent=True)
 
 
 def plot_cumulative_series_cpue(output_png, fontsize, data_year):
@@ -34,7 +35,6 @@ def plot_cumulative_series_cpue(output_png, fontsize, data_year):
     ax[1].set_ylim(0, 0.035)
     ax[1].set_ylabel("Cumulative CPUE", fontsize=fontsize)
     ax[1].set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
-    plt.savefig(output_png, dpi=300, transparent=True)
     return ax
 
 

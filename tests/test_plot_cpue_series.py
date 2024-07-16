@@ -1,7 +1,6 @@
 from eradication_data_requirements.plot_cpue_series import (
     plot_cumulative_series_cpue_by_season,
     plot_cumulative_series_cpue,
-    calculate_cpue_and_cumulative_by_season,
 )
 import geci_test_tools as gtt
 

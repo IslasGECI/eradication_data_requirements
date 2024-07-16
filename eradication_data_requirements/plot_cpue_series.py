@@ -1,7 +1,6 @@
 from geci_plots import roundup, order_magnitude
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 
 
 def plot_cumulative_series_cpue(fontsize, cpue_df):

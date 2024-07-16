@@ -1,4 +1,5 @@
 from eradication_data_requirements.cli import (
+    plot_cumulative_series_cpue_by_flight,
     write_effort_and_captures_with_probability,
     write_progress_probability_figure,
 )
@@ -29,6 +30,12 @@ async def api_write_probability_figure(input_path: str, output_path: str):
 @api.get("/plot_cpue_vs_cum_captures")
 async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
     data_requirements_plot(input_path, output_path)
+
+
+@api.get("/plot_cumulative_series_cpue_by_flight")
+async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
+    font_size = 27
+    plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
 
 
 @api.get("/plot_comparative_catch_curves")

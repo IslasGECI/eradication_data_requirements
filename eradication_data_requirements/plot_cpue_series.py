@@ -3,12 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_cumulative_series_cpue(effort_capture_df, output_png, fontsize):
-    effort_capture_df["Season"] = effort_capture_df["Fecha"].str[:4]
-    effort_capture_df["Season"] = np.array([int(season) for season in effort_capture_df["Season"]])
-    effort_capture_df = effort_capture_df[effort_capture_df["Season"] >= 2014]
-    data_year = effort_capture_df.groupby(by="Season").sum(numeric_only=False)
-    data_year["cpue"] = data_year["Capturas"] / data_year["Esfuerzo"]
-    data_year["cumulative_cpue"] = data_year["cpue"].cumsum()
+    data_year = calculate_cpue_and_cumulative(effort_capture_df)
     seasons = data_year.index.values
     seasons_labels = [*seasons, ""]
     ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
@@ -36,3 +31,13 @@ def plot_cumulative_series_cpue(effort_capture_df, output_png, fontsize):
     ax[1].set_ylabel("Cumulative CPUE", fontsize=fontsize)
     ax[1].set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
     plt.savefig(output_png, dpi=300, transparent=True)
+
+
+def calculate_cpue_and_cumulative(effort_capture_df):
+    effort_capture_df["Season"] = effort_capture_df["Fecha"].str[:4]
+    effort_capture_df["Season"] = np.array([int(season) for season in effort_capture_df["Season"]])
+    effort_capture_df = effort_capture_df[effort_capture_df["Season"] >= 2014]
+    data_year = effort_capture_df.groupby(by="Season").sum(numeric_only=False)
+    data_year["cpue"] = data_year["Capturas"] / data_year["Esfuerzo"]
+    data_year["cumulative_cpue"] = data_year["cpue"].cumsum()
+    return data_year

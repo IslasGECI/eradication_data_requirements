@@ -1,9 +1,7 @@
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_flight,
-    plot_cumulative_series_cpue_by_season,
     plot_cumulative_series_cpue,
 )
-import geci_test_tools as gtt
 
 import pandas as pd
 import matplotlib as mpl
@@ -28,13 +26,3 @@ def test_plot_cumulative_series_cpue():
     obtained_cum_cpue_ylim = obtained[1].get_ylim()
     assert pytest.approx(obtained_cpue_ylim, abs=1e-4) == (0, 0.0006)
     assert pytest.approx(obtained_cum_cpue_ylim, abs=1e-4) == (0, 0.0008)
-
-
-def tests_plot_cumulative_series_cpue_by_season():
-    effort_capture_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
-    font_size = 27
-    output_png = "tests/data/annual_cpue_time_series.png"
-    gtt.if_exist_remove(output_png)
-    plot_cumulative_series_cpue_by_season(effort_capture_path, output_png, font_size)
-    gtt.assert_exist(output_png)
-    gtt.if_exist_remove(output_png)

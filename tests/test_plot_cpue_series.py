@@ -17,7 +17,7 @@ def test_plot_cumulative_series_cpue():
     cpue_df = pd.read_csv(cpue_data_path)
     fontsize = 20
     obtained = plot_cumulative_series_cpue(output_png, fontsize, cpue_df)
-    assert isinstance(obtained, mpl.axes._axes.Axes)
+    assert isinstance(obtained[0], mpl.axes._axes.Axes)
 
 
 def tests_plot_cumulative_series_cpue_by_season():

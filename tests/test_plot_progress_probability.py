@@ -9,7 +9,8 @@ import matplotlib as plt
 def test_plot_progress_probability():
     data = pd.read_csv("tests/data/progress_probability_tests.csv")
     obtained = plot_progress_probability(data)
-    assert isinstance(obtained, plt.axes._axes.Axes)
+    print(obtained)
+    assert isinstance(obtained[0], plt.axes._axes.Axes)
 
     obtained_y_label = obtained.get_ylabel()
     expected_y_label = "Progress probability"

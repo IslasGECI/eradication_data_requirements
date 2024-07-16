@@ -19,7 +19,7 @@ def tests_api_write_effort_and_captures_with_probability():
     assert response.status_code == 200
 
     gtt.assert_exist(output_path)
-    os.remove(output_path)
+    gtt.if_exist_remove(output_path)
 
 
 def tests_api_write_progress_probability_figure():
@@ -32,8 +32,8 @@ def tests_api_write_progress_probability_figure():
     response = client.get(request)
     assert response.status_code == 200
 
-    assert os.path.exists(output_path)
-    os.remove(output_path)
+    gtt.assert_exist(output_path)
+    gtt.if_exist_remove(output_path)
 
 
 def tests_plot_cumulative_series_cpue_by_flight():
@@ -48,7 +48,8 @@ def tests_plot_cumulative_series_cpue_by_flight():
     response = client.get(request)
     assert response.status_code == 200
 
-    assert os.path.exists(output_path)
+    gtt.assert_exist(output_path)
+    gtt.if_exist_remove(output_path)
 
 
 def tests_api_plot_cpue_vs_cum_captures():
@@ -61,8 +62,8 @@ def tests_api_plot_cpue_vs_cum_captures():
     response = client.get(request)
     assert response.status_code == 200
 
-    assert os.path.exists(output_path)
-    os.remove(output_path)
+    gtt.assert_exist(output_path)
+    gtt.if_exist_remove(output_path)
 
 
 def tests_plot_comparative_catch_curves():
@@ -75,6 +76,5 @@ def tests_plot_comparative_catch_curves():
     request = f"/plot_comparative_catch_curves/?socorro_path={socorro_path}&guadalupe_path={guadalupe_path}&output_path={output_path}"
     response = client.get(request)
     assert response.status_code == 200
-
-    assert os.path.exists(output_path)
-    os.remove(output_path)
+    gtt.assert_exist(output_path)
+    gtt.if_exist_remove(output_path)

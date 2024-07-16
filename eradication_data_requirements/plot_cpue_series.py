@@ -36,7 +36,13 @@ def plot_cumulative_series_cpue(effort_capture_df, output_png, fontsize):
 def calculate_cpue_and_cumulative(effort_capture_df):
     extract_year(effort_capture_df)
     effort_capture_df = effort_capture_df[effort_capture_df["Season"] >= 2014]
-    data_year = effort_capture_df.groupby(by="Season").sum(numeric_only=False)
+    column_name = "Season"
+    data_year = calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
+    return data_year
+
+
+def calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name):
+    data_year = effort_capture_df.groupby(by=column_name).sum(numeric_only=False)
     data_year["cpue"] = data_year["Capturas"] / data_year["Esfuerzo"]
     data_year["cumulative_cpue"] = data_year["cpue"].cumsum()
     return data_year

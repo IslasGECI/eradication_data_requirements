@@ -16,6 +16,7 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
     ax[0].set_xticklabels(seasons_labels, size=fontsize)
     ax[0].tick_params(axis="both", labelsize=fontsize)
     ax[0].spines["right"].set_visible(False)
+    ax[0].spines["top"].set_visible(False)
     max_cpue = max(cpue_df["cpue"])
     cpue_limit = roundup(max_cpue, 10 ** order_magnitude(max_cpue))
     ax[0].set_ylim(0, cpue_limit)

@@ -36,6 +36,21 @@ def tests_api_write_progress_probability_figure():
     os.remove(output_path)
 
 
+def tests_plot_cumulative_series_cpue_by_flight():
+    input_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
+    output_path = "tests/data/flight_cpue_series.png"
+
+    gtt.if_exist_remove(output_path)
+
+    request = (
+        f"/plot_cumulative_series_cpue_by_flight/?input_path={input_path}&output_path={output_path}"
+    )
+    response = client.get(request)
+    assert response.status_code == 200
+
+    assert os.path.exists(output_path)
+
+
 def tests_api_plot_cpue_vs_cum_captures():
     input_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
     output_path = "tests/data/cpue_vs_cumulative.png"

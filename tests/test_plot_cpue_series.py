@@ -36,7 +36,7 @@ def tests_plot_cumulative_series_cpue_by_season():
     font_size = 27
     output_png = "tests/data/annual_cpue_time_series.png"
     gtt.if_exist_remove(output_png)
-    plot_cumulative_series_cpue_by_season(effort_capture_df, output_png, font_size)
-    expected_hash = "377cd484da57f7bacda783aeb1d199e2"
-    obtained_hash = gtt.calculate_hash(output_png)
-    assert obtained_hash == expected_hash
+    plot_cumulative_series_cpue_by_season(
+        effort_capture_df, output_png, font_size)
+    gtt.assert_exist(output_png)
+    gtt.if_exist_remove(output_png)

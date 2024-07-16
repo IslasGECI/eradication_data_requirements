@@ -30,4 +30,4 @@ def test_plot_progress_probability():
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
     assert obtained_hash == expected_hash
-    remove_file_if_exists(output_path)
+    # remove_file_if_exists(output_path)

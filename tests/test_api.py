@@ -37,7 +37,7 @@ def tests_api_write_progress_probability_figure():
 
 
 def tests_plot_cumulative_series_cpue_by_flight():
-    input_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
+    input_path = "tests/data/feral_goat_capture_effort.csv"
     output_path = "tests/data/flight_cpue_series.png"
 
     gtt.if_exist_remove(output_path)

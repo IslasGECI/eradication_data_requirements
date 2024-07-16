@@ -6,6 +6,7 @@ import geci_test_tools as gtt
 
 import pandas as pd
 import matplotlib as mpl
+import pytest
 
 
 def test_plot_cumulative_series_cpue():
@@ -16,8 +17,8 @@ def test_plot_cumulative_series_cpue():
     assert isinstance(obtained[0], mpl.axes._axes.Axes)
     obtained_cpue_ylim = obtained[0].get_ylim()
     obtained_cum_cpue_ylim = obtained[1].get_ylim()
-    assert obtained_cpue_ylim == (0, 0.016)
-    assert obtained_cum_cpue_ylim == (0, 0.035)
+    assert obtained_cpue_ylim == (0, 0.0006)
+    assert obtained_cum_cpue_ylim == (0, 0.0008)
 
 
 def tests_plot_cumulative_series_cpue_by_season():

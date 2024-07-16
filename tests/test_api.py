@@ -18,7 +18,7 @@ def tests_api_write_effort_and_captures_with_probability():
     response = client.get(request)
     assert response.status_code == 200
 
-    assert os.path.exists(output_path)
+    gtt.assert_exist(output_path)
     os.remove(output_path)
 
 

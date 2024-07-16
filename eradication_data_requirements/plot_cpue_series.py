@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_cumulative_series_cpue(effort_capture_df, output_png, fontsize):
-    data_year = calculate_cpue_and_cumulative(effort_capture_df)
+    data_year = calculate_cpue_and_cumulative_by_season(effort_capture_df)
     seasons = data_year.index.values
     seasons_labels = [*seasons, ""]
     ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
@@ -33,7 +33,7 @@ def plot_cumulative_series_cpue(effort_capture_df, output_png, fontsize):
     plt.savefig(output_png, dpi=300, transparent=True)
 
 
-def calculate_cpue_and_cumulative(effort_capture_df):
+def calculate_cpue_and_cumulative_by_season(effort_capture_df):
     extract_year(effort_capture_df)
     effort_capture_df = effort_capture_df[effort_capture_df["Season"] >= 2014]
     column_name = "Season"

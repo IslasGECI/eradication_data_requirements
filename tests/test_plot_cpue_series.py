@@ -1,4 +1,5 @@
 from eradication_data_requirements.plot_cpue_series import (
+    calculate_cpue_and_cumulative_by_flight,
     plot_cumulative_series_cpue_by_season,
     plot_cumulative_series_cpue,
 )
@@ -7,6 +8,14 @@ import geci_test_tools as gtt
 import pandas as pd
 import matplotlib as mpl
 import pytest
+
+
+def tests_calculate_cpue_and_cumulative_by_flight():
+    effort_goats_raw = pd.read_csv("tests/data/feral_goat_capture_effort.csv")
+    obtained = calculate_cpue_and_cumulative_by_flight(effort_goats_raw)
+    obtained_number_columns = len(obtained.columns)
+    expected_number_columns = len(effort_goats_raw) + 2
+    assert obtained_number_columns == expected_number_columns
 
 
 def test_plot_cumulative_series_cpue():

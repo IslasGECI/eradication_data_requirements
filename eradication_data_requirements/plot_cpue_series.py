@@ -1,3 +1,4 @@
+from geci_plots import roundup, order_magnitude
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -21,8 +22,9 @@ def plot_cumulative_series_cpue(fontsize, data_year):
     ax[0].set_xticklabels(seasons_labels, size=fontsize)
     ax[0].tick_params(axis="both", labelsize=fontsize)
     ax[0].spines["right"].set_visible(False)
-    ax[0].spines["top"].set_visible(False)
-    ax[0].set_ylim(0, 0.016)
+    max_cpue = max(data_year["cpue"])
+    cpue_limit = roundup(max_cpue, 10 ** order_magnitude(max_cpue))
+    ax[0].set_ylim(0, cpue_limit)
     ax[0].set_ylabel("Catch Per Unit Effort (CPUE)", fontsize=fontsize)
     ax[0].set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
 
@@ -32,7 +34,9 @@ def plot_cumulative_series_cpue(fontsize, data_year):
     ax[1].tick_params(axis="both", labelsize=fontsize)
     ax[1].spines["right"].set_visible(False)
     ax[1].spines["top"].set_visible(False)
-    ax[1].set_ylim(0, 0.035)
+    max_cum_cpue = max(data_year["cumulative_cpue"])
+    cum_cpue_limit = roundup(max_cum_cpue, 10 ** order_magnitude(max_cum_cpue))
+    ax[1].set_ylim(0, cum_cpue_limit)
     ax[1].set_ylabel("Cumulative CPUE", fontsize=fontsize)
     ax[1].set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
     return ax

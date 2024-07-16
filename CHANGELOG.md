@@ -15,6 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.3.0] - 2024-07-16
+
+### Add
+- Entrypoint for cpue feral goat eradication
+- Cli commands `plot_cumulative_series_cpue_by_flight()` and `plot_cumulative_series_cpue_by_season()`
+
 ## [1.2.0] - 2023-10-11
 
 ### Add

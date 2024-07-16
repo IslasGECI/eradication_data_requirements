@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 
 def plot_cumulative_series_cpue_by_season(effort_capture_df, output_png, fontsize):
     data_year = calculate_cpue_and_cumulative_by_season(effort_capture_df)
-    plot_cumulative_series_cpue(output_png, fontsize, data_year)
+    plot_cumulative_series_cpue(fontsize, data_year)
     plt.savefig(output_png, dpi=300, transparent=True)
 
 
-def plot_cumulative_series_cpue(output_png, fontsize, data_year):
+def plot_cumulative_series_cpue(fontsize, data_year):
     seasons = data_year.index.values
     seasons_labels = [*seasons, ""]
     ticks_positions = np.arange(seasons[0], seasons[-1] + 2)

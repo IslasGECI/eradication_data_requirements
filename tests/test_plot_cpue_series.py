@@ -12,8 +12,7 @@ def test_plot_cumulative_series_cpue():
     cpue_data_path = "tests/data/processed_yearly_cpue_for_plot.csv"
     cpue_df = pd.read_csv(cpue_data_path)
     fontsize = 20
-    output_png = "tests/data/annual_cpue_time_series_2.png"
-    obtained = plot_cumulative_series_cpue(output_png, fontsize, cpue_df)
+    obtained = plot_cumulative_series_cpue(fontsize, cpue_df)
     assert isinstance(obtained[0], mpl.axes._axes.Axes)
 
 

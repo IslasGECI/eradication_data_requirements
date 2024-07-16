@@ -49,6 +49,11 @@ def calculate_cpue_and_cumulative_by_season(effort_capture_df):
     return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
 
 
+def calculate_cpue_and_cumulative_by_flight(effort_capture_df):
+    column_name = "No_vuelo"
+    return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
+
+
 def calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name):
     data_grouped_by_column = effort_capture_df.groupby(by=column_name).sum(numeric_only=False)
     data_grouped_by_column["cpue"] = (

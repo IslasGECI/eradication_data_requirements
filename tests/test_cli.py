@@ -49,8 +49,7 @@ def test_write_progress_probability_figure():
     data_path = "tests/data/progress_probability_tests.csv"
     figure_path = "tests/data/progress_probability_tests.png"
 
-    if os.path.exists(figure_path):
-        os.remove(figure_path)
+    gtt.if_exist_remove(figure_path)
 
     result = runner.invoke(
         app,
@@ -64,8 +63,8 @@ def test_write_progress_probability_figure():
     )
     assert result.exit_code == 0
 
-    os.path.exists(figure_path)
-    os.remove(figure_path)
+    gtt.assert_exist(figure_path)
+    gtt.if_exist_remove(figure_path)
 
 
 monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
@@ -82,8 +81,7 @@ def test_write_effort_and_capture_with_probability():
     assert " Window length for removal rate " in result.stdout
     assert "[default: captures" in result.stdout
 
-    if os.path.exists(output_path):
-        os.remove(output_path)
+    gtt.if_exist_remove(output_path)
 
     result = runner.invoke(
         app,
@@ -99,9 +97,8 @@ def test_write_effort_and_capture_with_probability():
             window_length,
         ],
     )
-    print(result.stdout)
     assert result.exit_code == 0
-    assert os.path.exists(output_path)
+    gtt.assert_exist(output_path)
     obtained = pd.read_csv(output_path)
     assert obtained.shape[1] == 4
 
@@ -125,6 +122,7 @@ def test_write_effort_and_capture_with_probability():
         name="prob",
     )
     pd.testing.assert_series_equal(obtained_probability, expected_probability)
+    gtt.if_exist_remove(output_path)
 
 
 def test_write_effort_and_capture_with_slopes():
@@ -135,8 +133,7 @@ def test_write_effort_and_capture_with_slopes():
     assert " Output file path " in result.stdout
     assert "[default: " not in result.stdout
 
-    if os.path.exists(output_path):
-        os.remove(output_path)
+    gtt.if_exist_remove(output_path)
     result = runner.invoke(
         app,
         [
@@ -148,7 +145,7 @@ def test_write_effort_and_capture_with_slopes():
         ],
     )
     assert result.exit_code == 0
-    assert os.path.exists(output_path)
+    gtt.assert_exist(output_path)
     obtained = pd.read_csv(output_path)
     assert obtained.shape[1] == 4
 
@@ -171,5 +168,4 @@ def test_write_effort_and_capture_with_slopes():
         ],
         name="slope",
     )
-    print(obtained_slopes)
     pd.testing.assert_series_equal(obtained_slopes, expected_slopes, rtol=0.01)

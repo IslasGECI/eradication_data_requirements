@@ -63,6 +63,11 @@ jobs:
         docker image ls -a
     - name: Evalúa resistencia a mutaciones
       run: docker run islasgeci/eradication_data_requirements:latest make mutants
+    - name: Upload surviving mutants
+      uses: actions/upload-artifact@main
+      with:
+        name: mutant registry
+        path: html
 
   deploy-image-and-package:
     needs: run-tests

@@ -1,7 +1,5 @@
 from eradication_data_requirements import plot_progress_probability
-from test_data_requirements_plot import remove_file_if_exists
 
-import hashlib
 import pandas as pd
 import matplotlib as plt
 

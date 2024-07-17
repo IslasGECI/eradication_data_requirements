@@ -33,7 +33,7 @@ async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
 
 
 @api.get("/plot_cumulative_series_cpue_by_flight")
-async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
+async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path: str):
     font_size = 27
     plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
 

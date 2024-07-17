@@ -1,6 +1,5 @@
 from eradication_data_requirements import api
 from fastapi.testclient import TestClient
-import os
 import geci_test_tools as gtt
 
 client = TestClient(api)

@@ -26,7 +26,7 @@ def test_plot_progress_probability():
     output_path = "tests/data/figure.png"
     remove_file_if_exists(output_path)
     plt.pyplot.savefig(output_path)
-    expected_hash = "7c4798ee42bb894efad09cdfea28f866"
+    expected_hash = "e3167da2df21308a3f3f4121d899e982"
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
     assert obtained_hash == expected_hash

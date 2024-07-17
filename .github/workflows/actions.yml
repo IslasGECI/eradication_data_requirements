@@ -39,7 +39,7 @@ jobs:
     - name: Verifica el formato
       run: docker run islasgeci/eradication_data_requirements:latest make check
     - name: Corre pruebas y evalúa cobertura
-      run: docker run --volume $PWD:/workdir islasgeci/eradication_data_requirements:latest make coverage
+      run: docker run islasgeci/eradication_data_requirements:latest make coverage
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@v3
       with:

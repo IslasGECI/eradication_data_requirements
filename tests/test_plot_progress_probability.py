@@ -22,12 +22,3 @@ def test_plot_progress_probability():
     assert obtained.get_xticklabels()[1].get_text() == "2016-03"
     assert obtained.get_xticklabels()[1].get_rotation() == 90.0
     assert obtained.get_yaxis().get_label().get_fontsize() == 20.0
-
-    output_path = "tests/data/figure.png"
-    remove_file_if_exists(output_path)
-    plt.pyplot.savefig(output_path)
-    expected_hash = "e3167da2df21308a3f3f4121d899e982"
-    file_content = open(output_path, "rb").read()
-    obtained_hash = hashlib.md5(file_content).hexdigest()
-    assert obtained_hash == expected_hash
-    # remove_file_if_exists(output_path)

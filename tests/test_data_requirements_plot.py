@@ -37,8 +37,11 @@ def test_goat_data_requirement_plot():
 
     output_path = "/workdir/tests/data/goat_ramsey_plot.png"
     remove_file_if_exists(output_path)
-    dt.goat_data_requirements_plot(input_path, output_path)
+    obtained_plot = dt.goat_data_requirements_plot(input_path, output_path)
     assert os.path.exists(input_path)
+
+    assert isinstance(obtained_plot, plt.axes._axes.Axes)
+    expected_ylabel = "Dispatched"
 
 
 def remove_file_if_exists(output_path):

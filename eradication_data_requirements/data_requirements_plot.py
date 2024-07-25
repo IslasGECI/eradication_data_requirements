@@ -55,7 +55,12 @@ SPECIES_CONFIG = {
 
 
 def set_cumulative_captures_column(data):
-    return data.rename(columns=SPECIES_CONFIG["hunt"])
+    config = SPECIES_CONFIG
+    return xxset_cumulative_captures_column(data, config)
+
+
+def xxset_cumulative_captures_column(data, config):
+    return data.rename(columns=config["hunt"])
 
 
 def plot_catch_curve(data, ax, label=None):

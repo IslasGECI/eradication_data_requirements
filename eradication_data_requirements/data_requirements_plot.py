@@ -32,7 +32,7 @@ def traps_data_requirements_plot(input_path, output_path):
     return data_requirements_plot(input_path, output_path, config_plot)
 
 
-def hunt_data_requirements_plot(input_path, output_path, config_path):
+def plot_data_requirements_from_config_file(input_path, output_path, config_path):
     with open(config_path, encoding="utf8") as config_file:
         config_plot = json.load(config_file)
     return data_requirements_plot(input_path, output_path, config_plot)

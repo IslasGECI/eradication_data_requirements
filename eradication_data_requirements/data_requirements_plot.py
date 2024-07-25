@@ -26,11 +26,14 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
     plt.savefig(output_path, dpi=300, transparent=True)
 
 
+SPECIES_CONFIG = {
+    "cat": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"}
+}
+
+
 def XXdata_requirements_plot(input_path, output_path, species="cat"):
     data = pd.read_csv(input_path)
-    config_plot = {
-        "cat": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"}
-    }
+    config_plot = SPECIES_CONFIG
     geci_plot()
     plot_catch_curve(data)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)

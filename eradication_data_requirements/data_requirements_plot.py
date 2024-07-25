@@ -48,6 +48,11 @@ def data_requirements_plot(input_path, output_path):
     XXdata_requirements_plot(input_path, output_path, species)
 
 
+def goat_data_requirements_plot(input_path, output_path):
+    species = "goat"
+    XXdata_requirements_plot(input_path, output_path, species)
+
+
 def rename_goat_date(data):
     return data.rename(columns=SPECIES_CONFIG["goat"])
 

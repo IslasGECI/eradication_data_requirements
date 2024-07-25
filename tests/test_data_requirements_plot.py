@@ -60,4 +60,4 @@ def test_fit_ramsey_plot():
 def test_rename_goat_data():
     data = pd.DataFrame({"Acumulado": [1, 2], "CPUE": [2, 3]})
     renamed = dt.rename_goat_date(data)
-    assert renamed.columns in ["Cumulative_captures", "CPUE"]
+    assert all(["Cumulative_captures", "CPUE"] == renamed.columns)

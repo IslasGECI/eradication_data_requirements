@@ -32,6 +32,15 @@ def test_data_requirements_plot():
     remove_file_if_exists(output_path)
 
 
+def test_goat_data_requirement_plot():
+    input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas.csv"
+
+    output_path = "/workdir/tests/data/goat_ramsey_plot.png"
+    remove_file_if_exists(output_path)
+    dt.goat_data_requirements_plot(input_path, output_path)
+    assert os.path.exists(input_path)
+
+
 def remove_file_if_exists(output_path):
     if os.path.exists(output_path):
         os.remove(output_path)

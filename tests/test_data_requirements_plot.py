@@ -61,3 +61,7 @@ def test_rename_goat_data():
     data = pd.DataFrame({"Acumulado": [1, 2], "CPUE": [2, 3]})
     renamed = dt.rename_goat_date(data)
     assert all(["Cumulative_captures", "CPUE"] == renamed.columns)
+
+    data = pd.DataFrame({"Cumulative_captures": [1, 2], "CPUE": [2, 3]})
+    renamed = dt.rename_goat_date(data)
+    assert all(["Cumulative_captures", "CPUE"] == renamed.columns)

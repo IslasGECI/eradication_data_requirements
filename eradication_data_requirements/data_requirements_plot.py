@@ -35,8 +35,9 @@ SPECIES_CONFIG = {
 def XXdata_requirements_plot(input_path, output_path, species="cat"):
     data = pd.read_csv(input_path)
     config_plot = SPECIES_CONFIG
+    configured_data = rename_goat_date(data)
     geci_plot()
-    plot_catch_curve(data)
+    plot_catch_curve(configured_data)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel(config_plot[species]["ylabel"], size=15)
     plt.savefig(output_path, dpi=300, transparent=True)

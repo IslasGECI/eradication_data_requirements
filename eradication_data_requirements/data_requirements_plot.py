@@ -32,8 +32,7 @@ def traps_data_requirements_plot(input_path, output_path):
 
 
 def hunt_data_requirements_plot(input_path, output_path):
-    species = "hunt"
-    config_plot = SPECIES_CONFIG[species]
+    config_plot = {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"}
     return data_requirements_plot(input_path, output_path, config_plot)
 
 

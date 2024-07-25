@@ -36,7 +36,6 @@ def test_data_requirements_plot():
 
 def test_goat_data_requirement_plot():
     input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas.csv"
-
     output_path = "/workdir/tests/data/goat_ramsey_plot.png"
     remove_file_if_exists(output_path)
     obtained_plot = dt.hunt_data_requirements_plot(input_path, output_path)

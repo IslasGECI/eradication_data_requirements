@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import json
 
 from geci_plots import geci_plot
 
@@ -31,8 +32,9 @@ def traps_data_requirements_plot(input_path, output_path):
     return data_requirements_plot(input_path, output_path, config_plot)
 
 
-def hunt_data_requirements_plot(input_path, output_path):
-    config_plot = {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"}
+def hunt_data_requirements_plot(input_path, output_path, config_path):
+    with open(config_path, encoding="utf8") as config_file:
+        config_plot = json.load(config_file)
     return data_requirements_plot(input_path, output_path, config_plot)
 
 

@@ -27,12 +27,12 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
 
 
 SPECIES_CONFIG = {
-    "cat": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
+    "traps": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
     "goat": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
 }
 
 
-def XXdata_requirements_plot(input_path, output_path, species="cat"):
+def XXdata_requirements_plot(input_path, output_path, species="traps"):
     data = pd.read_csv(input_path)
     config_plot = SPECIES_CONFIG
     configured_data = rename_goat_date(data)
@@ -45,7 +45,7 @@ def XXdata_requirements_plot(input_path, output_path, species="cat"):
 
 
 def data_requirements_plot(input_path, output_path):
-    species = "cat"
+    species = "traps"
     return XXdata_requirements_plot(input_path, output_path, species)
 
 

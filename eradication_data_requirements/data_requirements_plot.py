@@ -27,8 +27,7 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
 
 
 def traps_data_requirements_plot(input_path, output_path):
-    species = "traps"
-    config_plot = SPECIES_CONFIG[species]
+    config_plot = {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"}
     return data_requirements_plot(input_path, output_path, config_plot)
 
 

@@ -40,8 +40,7 @@ def test_goat_data_requirement_plot():
     config_path = "/workdir/tests/data/hunt_config.json"
     remove_file_if_exists(output_path)
     obtained_plot = dt.hunt_data_requirements_plot(input_path, output_path, config_path)
-    assert os.path.exists(input_path)
-
+    assert os.path.exists(output_path)
     assert isinstance(obtained_plot, mpl.axes._axes.Axes)
 
     obtained_ylabel = obtained_plot.get_ylabel()

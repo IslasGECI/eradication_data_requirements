@@ -28,15 +28,12 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
 
 def traps_data_requirements_plot(input_path, output_path):
     species = "traps"
-    return data_requirements_plot(input_path, output_path, species)
+    config_plot = SPECIES_CONFIG[species]
+    return xxdata_requirements_plot(input_path, output_path, config_plot)
 
 
 def hunt_data_requirements_plot(input_path, output_path):
     species = "hunt"
-    return data_requirements_plot(input_path, output_path, species)
-
-
-def data_requirements_plot(input_path, output_path, species="traps"):
     config_plot = SPECIES_CONFIG[species]
     return xxdata_requirements_plot(input_path, output_path, config_plot)
 

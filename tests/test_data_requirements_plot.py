@@ -80,9 +80,9 @@ def test_rename_goat_data():
         "hunt": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
     }
     data = pd.DataFrame({"Acumulado": [1, 2], "CPUE": [2, 3]})
-    renamed = dt.xxset_cumulative_captures_column(data, SPECIES_CONFIG)
+    renamed = dt.set_cumulative_captures_column(data, SPECIES_CONFIG)
     assert all(["Cumulative_captures", "CPUE"] == renamed.columns)
 
     data = pd.DataFrame({"Cumulative_captures": [1, 2], "CPUE": [2, 3]})
-    renamed = dt.xxset_cumulative_captures_column(data, SPECIES_CONFIG)
+    renamed = dt.set_cumulative_captures_column(data, SPECIES_CONFIG)
     assert all(["Cumulative_captures", "CPUE"] == renamed.columns)

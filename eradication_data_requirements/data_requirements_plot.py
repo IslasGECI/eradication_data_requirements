@@ -32,7 +32,7 @@ SPECIES_CONFIG = {
 }
 
 
-def XXdata_requirements_plot(input_path, output_path, species="traps"):
+def data_requirements_plot(input_path, output_path, species="traps"):
     data = pd.read_csv(input_path)
     config_plot = SPECIES_CONFIG
     configured_data = rename_goat_date(data)
@@ -46,12 +46,12 @@ def XXdata_requirements_plot(input_path, output_path, species="traps"):
 
 def traps_data_requirements_plot(input_path, output_path):
     species = "traps"
-    return XXdata_requirements_plot(input_path, output_path, species)
+    return data_requirements_plot(input_path, output_path, species)
 
 
 def hunt_data_requirements_plot(input_path, output_path):
     species = "hunt"
-    return XXdata_requirements_plot(input_path, output_path, species)
+    return data_requirements_plot(input_path, output_path, species)
 
 
 def rename_goat_date(data):

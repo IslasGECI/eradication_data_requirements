@@ -29,16 +29,16 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
 def traps_data_requirements_plot(input_path, output_path):
     species = "traps"
     config_plot = SPECIES_CONFIG[species]
-    return xxdata_requirements_plot(input_path, output_path, config_plot)
+    return data_requirements_plot(input_path, output_path, config_plot)
 
 
 def hunt_data_requirements_plot(input_path, output_path):
     species = "hunt"
     config_plot = SPECIES_CONFIG[species]
-    return xxdata_requirements_plot(input_path, output_path, config_plot)
+    return data_requirements_plot(input_path, output_path, config_plot)
 
 
-def xxdata_requirements_plot(input_path, output_path, config_plot):
+def data_requirements_plot(input_path, output_path, config_plot):
     data = pd.read_csv(input_path)
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()

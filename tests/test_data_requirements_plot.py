@@ -43,7 +43,10 @@ def test_goat_data_requirement_plot():
     assert os.path.exists(input_path)
 
     assert isinstance(obtained_plot, mpl.axes._axes.Axes)
+
+    obtained_ylabel = obtained_plot.get_ylabel()
     expected_ylabel = "Dispatched"
+    assert obtained_ylabel == expected_ylabel
 
 
 def remove_file_if_exists(output_path):

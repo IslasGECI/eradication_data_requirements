@@ -44,7 +44,7 @@ def XXdata_requirements_plot(input_path, output_path, species="traps"):
     return ax
 
 
-def data_requirements_plot(input_path, output_path):
+def traps_data_requirements_plot(input_path, output_path):
     species = "traps"
     return XXdata_requirements_plot(input_path, output_path, species)
 

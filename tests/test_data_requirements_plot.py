@@ -55,3 +55,9 @@ def test_fit_ramsey_plot():
         {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 2]}
     )
     assert isinstance(dt.fit_ramsey_plot(data_without_error), type(np.array(0)))
+
+
+def test_rename_goat_data():
+    data = pd.DataFrame({"Acumulado": [1, 2], "CPUE": [2, 3]})
+    renamed = dt.rename_goat_date(data)
+    assert renamed.columns in ["Cumulative_captures", "CPUE"]

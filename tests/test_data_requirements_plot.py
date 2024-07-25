@@ -6,6 +6,8 @@ import pytest
 
 import eradication_data_requirements as dt
 
+import matplotlib as mpl
+
 
 def test_plot_comparative_catch_curves():
     socorro_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
@@ -40,7 +42,7 @@ def test_goat_data_requirement_plot():
     obtained_plot = dt.goat_data_requirements_plot(input_path, output_path)
     assert os.path.exists(input_path)
 
-    assert isinstance(obtained_plot, plt.axes._axes.Axes)
+    assert isinstance(obtained_plot, mpl.axes._axes.Axes)
     expected_ylabel = "Dispatched"
 
 

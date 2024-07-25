@@ -36,25 +36,34 @@ def XXdata_requirements_plot(input_path, output_path, species="cat"):
     data = pd.read_csv(input_path)
     config_plot = SPECIES_CONFIG
     configured_data = rename_goat_date(data)
-    geci_plot()
-    plot_catch_curve(configured_data)
+    _, ax = geci_plot()
+    ax = xxplot_catch_curve(configured_data, ax)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel(config_plot[species]["ylabel"], size=15)
     plt.savefig(output_path, dpi=300, transparent=True)
+    return ax
 
 
 def data_requirements_plot(input_path, output_path):
     species = "cat"
-    XXdata_requirements_plot(input_path, output_path, species)
+    return XXdata_requirements_plot(input_path, output_path, species)
 
 
 def goat_data_requirements_plot(input_path, output_path):
     species = "cat"
-    XXdata_requirements_plot(input_path, output_path, species)
+    return XXdata_requirements_plot(input_path, output_path, species)
 
 
 def rename_goat_date(data):
     return data.rename(columns=SPECIES_CONFIG["goat"])
+
+
+def xxplot_catch_curve(data, ax, label=None):
+    theta = fit_ramsey_plot(data.drop([0]))
+    y_line = theta[1] + theta[0] * data["Cumulative_captures"]
+    ax.plot(data["Cumulative_captures"], y_line, "r")
+    ax.scatter(data["Cumulative_captures"], data["CPUE"], marker="o", label=label)
+    return ax
 
 
 def plot_catch_curve(data, label=None):

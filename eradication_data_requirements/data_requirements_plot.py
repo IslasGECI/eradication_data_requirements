@@ -37,13 +37,17 @@ def hunt_data_requirements_plot(input_path, output_path):
 
 
 def data_requirements_plot(input_path, output_path, species="traps"):
+    config_plot = SPECIES_CONFIG[species]
+    return xxdata_requirements_plot(input_path, output_path, config_plot)
+
+
+def xxdata_requirements_plot(input_path, output_path, config_plot):
     data = pd.read_csv(input_path)
-    config_plot = SPECIES_CONFIG
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()
     ax = plot_catch_curve(configured_data, ax)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
-    plt.ylabel(config_plot[species]["ylabel"], size=15)
+    plt.ylabel(config_plot["ylabel"], size=15)
     plt.savefig(output_path, dpi=300, transparent=True)
     return ax
 
@@ -55,7 +59,7 @@ SPECIES_CONFIG = {
 
 
 def set_cumulative_captures_column(data, config):
-    return data.rename(columns=config["hunt"])
+    return data.rename(columns=config)
 
 
 def plot_catch_curve(data, ax, label=None):

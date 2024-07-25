@@ -75,10 +75,7 @@ def test_fit_ramsey_plot():
 
 
 def test_rename_goat_data():
-    SPECIES_CONFIG = {
-        "traps": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
-        "hunt": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
-    }
+    SPECIES_CONFIG = {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"}
     data = pd.DataFrame({"Acumulado": [1, 2], "CPUE": [2, 3]})
     renamed = dt.set_cumulative_captures_column(data, SPECIES_CONFIG)
     assert all(["Cumulative_captures", "CPUE"] == renamed.columns)

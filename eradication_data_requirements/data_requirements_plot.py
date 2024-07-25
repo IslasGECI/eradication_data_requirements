@@ -26,10 +26,14 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
     plt.savefig(output_path, dpi=300, transparent=True)
 
 
-SPECIES_CONFIG = {
-    "traps": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
-    "hunt": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
-}
+def traps_data_requirements_plot(input_path, output_path):
+    species = "traps"
+    return data_requirements_plot(input_path, output_path, species)
+
+
+def hunt_data_requirements_plot(input_path, output_path):
+    species = "hunt"
+    return data_requirements_plot(input_path, output_path, species)
 
 
 def data_requirements_plot(input_path, output_path, species="traps"):
@@ -44,14 +48,10 @@ def data_requirements_plot(input_path, output_path, species="traps"):
     return ax
 
 
-def traps_data_requirements_plot(input_path, output_path):
-    species = "traps"
-    return data_requirements_plot(input_path, output_path, species)
-
-
-def hunt_data_requirements_plot(input_path, output_path):
-    species = "hunt"
-    return data_requirements_plot(input_path, output_path, species)
+SPECIES_CONFIG = {
+    "traps": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
+    "hunt": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
+}
 
 
 def set_cumulative_captures_column(data):

@@ -35,7 +35,7 @@ SPECIES_CONFIG = {
 def data_requirements_plot(input_path, output_path, species="traps"):
     data = pd.read_csv(input_path)
     config_plot = SPECIES_CONFIG
-    configured_data = rename_goat_date(data)
+    configured_data = set_cumulative_captures_column(data)
     _, ax = geci_plot()
     ax = plot_catch_curve(configured_data, ax)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
@@ -54,7 +54,7 @@ def hunt_data_requirements_plot(input_path, output_path):
     return data_requirements_plot(input_path, output_path, species)
 
 
-def rename_goat_date(data):
+def set_cumulative_captures_column(data):
     return data.rename(columns=SPECIES_CONFIG["hunt"])
 
 

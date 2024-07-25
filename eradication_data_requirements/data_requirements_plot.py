@@ -49,7 +49,7 @@ def traps_data_requirements_plot(input_path, output_path):
     return XXdata_requirements_plot(input_path, output_path, species)
 
 
-def goat_data_requirements_plot(input_path, output_path):
+def hunt_data_requirements_plot(input_path, output_path):
     species = "hunt"
     return XXdata_requirements_plot(input_path, output_path, species)
 

@@ -49,12 +49,6 @@ def data_requirements_plot(input_path, output_path, config_plot):
     return ax
 
 
-SPECIES_CONFIG = {
-    "traps": {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"},
-    "hunt": {"ylabel": "Dispatched", "Acumulado": "Cumulative_captures"},
-}
-
-
 def set_cumulative_captures_column(data, config):
     return data.rename(columns=config)
 

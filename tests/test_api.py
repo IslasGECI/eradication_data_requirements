@@ -65,6 +65,21 @@ def tests_api_plot_cpue_vs_cum_captures():
     gtt.if_exist_remove(output_path)
 
 
+def tests_api_plot_custom_cpue_vs_cum_captures():
+    input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
+    config_path = "tests/data/hunt_config.json"
+    output_path = "tests/data/cpue_vs_cumulative_from_config.png"
+
+    gtt.if_exist_remove(output_path)
+
+    request = f"/plot_custom_cpue_vs_cum_captures/?input_path={input_path}&config_path={config_path}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+    gtt.assert_exist(output_path)
+    gtt.if_exist_remove(output_path)
+
+
 def tests_plot_comparative_catch_curves():
     socorro_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
     guadalupe_path = "tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"

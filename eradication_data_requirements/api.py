@@ -6,6 +6,7 @@ from eradication_data_requirements.cli import (
 from eradication_data_requirements.data_requirements_plot import (
     traps_data_requirements_plot,
     plot_comparative_catch_curves,
+    plot_data_requirements_from_config_file,
 )
 from fastapi import FastAPI
 
@@ -25,6 +26,11 @@ async def api_write_effort_and_captures_with_probability(
 @api.get("/write_probability_figure")
 async def api_write_probability_figure(input_path: str, output_path: str):
     write_progress_probability_figure(input_path, output_path)
+
+
+@api.get("/plot_custom_cpue_vs_cum_captures")
+async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str, output_path: str):
+    plot_data_requirements_from_config_file(input_path, output_path, config_path)
 
 
 @api.get("/plot_cpue_vs_cum_captures")

@@ -8,9 +8,20 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
 )
+from eradication_data_requirements.calculate_intersect import get_intercept_latex_string
+
+
 from fastapi import FastAPI
+import pandas as pd
 
 api = FastAPI()
+
+
+@api.get("/write_population_status")
+async def api_write_population_status(input_path: str, bootstrapping_number: int, output_path: str):
+    raw_data = pd.read_csv(input_path)
+    seed = 42
+    return get_intercept_latex_string(raw_data, bootstrapping_number, seed)
 
 
 @api.get("/write_effort_and_captures_with_probability")

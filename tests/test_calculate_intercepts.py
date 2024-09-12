@@ -5,9 +5,17 @@ import eradication_data_requirements as edr
 
 raw_data = pd.DataFrame({"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Capturas": [1, 2, 3, 4, 5, 6]})
 
+seed = 42
+
+
+def tests_get_intercept_latex_string():
+    bootstrap_number = 20
+    obtained = edr.get_intercept_latex_string(raw_data, bootstrap_number, seed)
+    assert isinstance(obtained, str)
+
 
 def test_resample_eradication_data():
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(seed)
     sample = edr.resample_eradication_data(raw_data, rng)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()

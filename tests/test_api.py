@@ -5,6 +5,18 @@ import geci_test_tools as gtt
 client = TestClient(api)
 
 
+def tests_api_write_population_status():
+    input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
+    bootstrapping_number = 10
+    output_path = "tests/data/population_status.json"
+
+    gtt.if_exist_remove(output_path)
+
+    request = f"/write_population_status/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+
 def tests_api_write_effort_and_captures_with_probability():
     input_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     bootstrapping_number = 10

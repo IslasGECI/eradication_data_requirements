@@ -79,7 +79,7 @@ def tests_get_intercepts_distribution():
 
 
 def test_calculate_intercept_interval():
-    intercepts_distribution = [1, 5, 5, 5, 5, 10]
+    intercepts_distribution = [1, 1, 1, 5, 5, 5, 5, 10, 10, 10]
     obtained = dt.calculate_intercept_interval(intercepts_distribution)
     expected = "5 (1 - 10)"
     assert obtained == expected

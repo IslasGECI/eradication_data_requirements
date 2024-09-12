@@ -3,6 +3,11 @@ from bootstrapping_tools import generate_latex_interval_string
 from eradication_data_requirements import fit_ramsey_plot
 
 
+def get_intercept_latex_string(raw_data, bootstrap_number, seed):
+    intercepts_distribution = get_intercepts_distribution(raw_data, bootstrap_number, seed)
+    return calculate_intercept_interval(intercepts_distribution)
+
+
 def calculate_intercept_interval(distribution):
     interval = np.percentile(distribution, [2.5, 50, 97.5]).astype(int)
     latex_string = generate_latex_interval_string(interval, deltas=False, decimals=0)

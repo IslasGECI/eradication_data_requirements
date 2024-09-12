@@ -64,7 +64,7 @@ def test_resample_eradication_data():
     data = pd.DataFrame({"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Capturas": [1, 2, 3, 4, 5, 6]})
     sample = dt.resample_eradication_data(data)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
-    assert sample.columns == expected_columns_names
+    assert (sample.columns == expected_columns_names).all()
 
 
 def test_fit_ramsey_plot():

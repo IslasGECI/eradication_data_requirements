@@ -64,7 +64,8 @@ raw_data = pd.DataFrame({"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Capturas": [1,
 
 
 def test_resample_eradication_data():
-    sample = dt.resample_eradication_data(raw_data)
+    rng = np.random.default_rng(42)
+    sample = dt.resample_eradication_data(raw_data, rng)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()
     assert len(sample) == len(raw_data)

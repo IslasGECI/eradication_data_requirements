@@ -15,6 +15,7 @@ def tests_api_write_population_status():
     request = f"/write_population_status/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}"
     response = client.get(request)
     assert response.status_code == 200
+    gtt.assert_exist(output_path)
 
 
 def tests_api_write_effort_and_captures_with_probability():

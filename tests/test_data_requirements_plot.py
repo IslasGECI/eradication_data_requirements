@@ -53,6 +53,13 @@ def remove_file_if_exists(output_path):
         os.remove(output_path)
 
 
+def test_calculate_x_intercept():
+    data = pd.DataFrame({"CPUE": [2, 1], "Cumulative_captures": [1, 2]})
+    obtained = dt.calculate_x_intercept(data)
+    expected = 3
+    assert obtained == expected
+
+
 def test_fit_ramsey_plot():
     data = pd.DataFrame(
         {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}

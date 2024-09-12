@@ -78,6 +78,13 @@ def tests_get_intercepts_distribution():
     assert obtained_rows == bootstrap_number
 
 
+def test_calculate_intercept_interval():
+    intercepts_distribution = [1, 5, 5, 5, 5, 10]
+    obtained = dt.calculate_intercept_interval(intercepts_distribution)
+    expected = "5 (1 - 10)"
+    assert obtained == expected
+
+
 def test_fit_ramsey_plot():
     data = pd.DataFrame(
         {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}

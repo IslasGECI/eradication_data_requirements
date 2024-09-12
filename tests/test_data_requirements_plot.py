@@ -65,6 +65,7 @@ def test_resample_eradication_data():
     sample = dt.resample_eradication_data(data)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()
+    assert len(sample) == len(data)
 
 
 def test_fit_ramsey_plot():

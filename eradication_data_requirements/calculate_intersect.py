@@ -3,7 +3,7 @@ import numpy as np
 from eradication_data_requirements import fit_ramsey_plot
 
 
-def get_intercepts_distribution(raw_data, bootstrap_number, seed=2):
+def get_intercepts_distribution(raw_data, bootstrap_number, seed=None):
     rng = np.random.default_rng(seed)
     return [
         calculate_x_intercept(resample_eradication_data(raw_data, rng))

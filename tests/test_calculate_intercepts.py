@@ -31,7 +31,6 @@ def tests_remaining_interval():
 def test_resample_eradication_data():
     rng = np.random.default_rng(seed)
     sample = edr.resample_eradication_data(raw_data, rng)
-    print(sample)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()
     assert len(sample) == len(raw_data)

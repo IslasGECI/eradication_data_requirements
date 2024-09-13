@@ -136,7 +136,6 @@ def test_add_slopes_to_effort_capture_data():
 
 def test_get_status_slopes():
     obtained = add_slopes_to_effort_capture_data(data)
-    print(obtained)
     obtained_len = len(obtained)
     expected_len = 6
     assert obtained_len == expected_len

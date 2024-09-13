@@ -8,14 +8,14 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
     interval = get_confidence_interval(intercepts_distribution)
     n0_interval = generate_latex_interval_string(interval, deltas=False, decimals=0)
 
-    remanentes = remaining_interval(interval, raw_data)
+    captures = raw_data.Capturas.sum()
+    remanentes = remaining_interval(interval, captures)
     remanentes_interval = generate_latex_interval_string(remanentes, deltas=False, decimals=0)
     json_content = {"n0": n0_interval, "remanentes": remanentes_interval}
     return json_content
 
 
-def remaining_interval(n0_interval, raw_data):
-    captures = raw_data.Capturas.sum()
+def remaining_interval(n0_interval, captures):
     remanentes = n0_interval - captures
     return [x if x > 0 else 0 for x in remanentes]
 

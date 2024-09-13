@@ -19,6 +19,13 @@ def tests_get_population_status_dict():
     assert obtained["remanentes"] == expected_remanents
 
 
+def tests_remaining_interval():
+    n0_interval = [10, 100, 120]
+    capturas = 20
+    obtained = edr.remaining_interval(n0_interval, capturas)
+    assert obtained[0] == 0
+
+
 def test_resample_eradication_data():
     rng = np.random.default_rng(seed)
     sample = edr.resample_eradication_data(raw_data, rng)

@@ -31,6 +31,7 @@ def tests_get_intercepts_distribution():
     obtained = edr.get_intercepts_distribution(raw_data, bootstrap_number)
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
+    assert (obtained > 0).all()
 
 
 def test_calculate_intercept_interval():

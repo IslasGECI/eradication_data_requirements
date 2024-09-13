@@ -7,7 +7,7 @@ client = TestClient(api)
 
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
-    bootstrapping_number = 10
+    bootstrapping_number = 2000
     output_path = "tests/data/population_status.json"
 
     gtt.if_exist_remove(output_path)

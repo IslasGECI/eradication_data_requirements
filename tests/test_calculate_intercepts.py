@@ -37,13 +37,6 @@ def tests_get_intercepts_distribution():
     assert (np.array(obtained) > 0).all()
 
 
-def test_calculate_intercept_interval():
-    intercepts_distribution = [1, 1, 1, 5, 5, 5, 5, 10, 10, 10]
-    obtained = edr.calculate_intercept_interval(intercepts_distribution)
-    expected = "5 (1 - 10)"
-    assert obtained == expected
-
-
 def test_calculate_x_intercept():
     data = pd.DataFrame({"CPUE": [2, 1], "Cumulative_captures": [1, 2]})
     obtained = edr.calculate_x_intercept(data)

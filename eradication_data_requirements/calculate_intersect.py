@@ -11,11 +11,6 @@ def get_intercept_latex_string(raw_data, bootstrap_number, seed):
     return json_content
 
 
-def calculate_intercept_interval(distribution):
-    interval = get_confidence_interval(distribution)
-    return generate_latex_interval_string(interval, deltas=False, decimals=0)
-
-
 def get_confidence_interval(distribution):
     interval = np.percentile(distribution, [2.5, 50, 97.5]).astype(int)
     return interval

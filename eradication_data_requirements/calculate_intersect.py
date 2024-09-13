@@ -11,7 +11,7 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
     captures = raw_data.Capturas.sum()
     remanentes = remaining_interval(interval, captures)
     remanentes_interval = generate_latex_interval_string(remanentes, deltas=False, decimals=0)
-    json_content = {"n0": n0_interval, "remanentes": remanentes_interval}
+    json_content = {"n0": n0_interval, "remanentes": remanentes_interval, "capturas": int(captures)}
     return json_content
 
 

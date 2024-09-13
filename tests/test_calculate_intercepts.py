@@ -17,9 +17,12 @@ def tests_get_intercept_latex_string():
 def test_resample_eradication_data():
     rng = np.random.default_rng(seed)
     sample = edr.resample_eradication_data(raw_data, rng)
+    print(sample)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()
     assert len(sample) == len(raw_data)
+
+    assert (sample.Cumulative_captures.diff() > 0).all()
 
 
 def tests_get_intercepts_distribution():

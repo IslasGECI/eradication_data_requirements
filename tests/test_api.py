@@ -16,6 +16,8 @@ def tests_api_write_population_status():
     response = client.get(request)
     assert response.status_code == 200
     gtt.assert_exist(output_path)
+    # with open('data.json') as json_file:
+    # data = json.load(json_file)
 
 
 def tests_api_write_effort_and_captures_with_probability():

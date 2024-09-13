@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Removed
+## [1.5.0] - 2024-09-13
+
+### Add
+- Entrypoint `/write_population_status` for population status after eradication effort.
+
 
 ## [1.4.0] - 2024-07-26
 

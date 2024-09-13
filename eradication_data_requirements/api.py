@@ -13,7 +13,7 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
 )
-from eradication_data_requirements.calculate_intersect import get_intercept_latex_string
+from eradication_data_requirements.calculate_intersect import get_population_status_dict
 
 
 api = FastAPI()
@@ -23,7 +23,7 @@ api = FastAPI()
 async def api_write_population_status(input_path: str, bootstrapping_number: int, output_path: str):
     raw_data = pd.read_csv(input_path)
     seed = 42
-    json_content = get_intercept_latex_string(raw_data, bootstrapping_number, seed)
+    json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
     with open(output_path, "w") as jsonfile:
         json.dump(json_content, jsonfile)
 

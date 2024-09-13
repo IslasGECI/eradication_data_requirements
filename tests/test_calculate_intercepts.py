@@ -11,7 +11,7 @@ seed = 42
 def tests_get_intercept_latex_string():
     bootstrap_number = 20
     obtained = edr.get_intercept_latex_string(raw_data, bootstrap_number, seed)
-    assert isinstance(obtained, str)
+    assert isinstance(obtained, dict)
 
 
 def test_resample_eradication_data():

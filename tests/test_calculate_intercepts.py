@@ -20,7 +20,7 @@ def tests_get_population_status_dict():
 
 
 def tests_remaining_interval():
-    n0_interval = [10, 100, 120]
+    n0_interval = np.array([10, 100, 120])
     capturas = 20
     obtained = edr.remaining_interval(n0_interval, capturas)
     assert obtained[0] == 0

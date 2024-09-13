@@ -12,6 +12,8 @@ def tests_get_intercept_latex_string():
     bootstrap_number = 20
     obtained = edr.get_intercept_latex_string(raw_data, bootstrap_number, seed)
     assert isinstance(obtained, dict)
+    expected_n0_interval = "188 (127 - 317)"
+    assert obtained["n0"] == expected_n0_interval
 
 
 def test_resample_eradication_data():

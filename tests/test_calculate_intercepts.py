@@ -8,12 +8,15 @@ raw_data = pd.DataFrame({"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Capturas": [1,
 seed = 42
 
 
-def tests_get_intercept_latex_string():
+def tests_get_population_status_dict():
     bootstrap_number = 20
     obtained = edr.get_population_status_dict(raw_data, bootstrap_number, seed)
     assert isinstance(obtained, dict)
     expected_n0_interval = "188 (127 - 317)"
     assert obtained["n0"] == expected_n0_interval
+
+    expected_remanents = "157 (106 - 296)"
+    assert obtained["remanentes"] == expected_remanents
 
 
 def test_resample_eradication_data():

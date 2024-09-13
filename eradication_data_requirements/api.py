@@ -1,3 +1,8 @@
+from fastapi import FastAPI
+import pandas as pd
+import json
+
+
 from eradication_data_requirements.cli import (
     plot_cumulative_series_cpue_by_flight,
     write_effort_and_captures_with_probability,
@@ -11,9 +16,6 @@ from eradication_data_requirements.data_requirements_plot import (
 from eradication_data_requirements.calculate_intersect import get_intercept_latex_string
 
 
-from fastapi import FastAPI
-import pandas as pd
-
 api = FastAPI()
 
 
@@ -21,7 +23,10 @@ api = FastAPI()
 async def api_write_population_status(input_path: str, bootstrapping_number: int, output_path: str):
     raw_data = pd.read_csv(input_path)
     seed = 42
-    return get_intercept_latex_string(raw_data, bootstrapping_number, seed)
+    n0 = get_intercept_latex_string(raw_data, bootstrapping_number, seed)
+    json_content = {"n0": n0}
+    with open(output_path, "w") as jsonfile:
+        json.dump(json_content, jsonfile)
 
 
 @api.get("/write_effort_and_captures_with_probability")

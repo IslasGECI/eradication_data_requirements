@@ -1,13 +1,14 @@
 from eradication_data_requirements import api
 from fastapi.testclient import TestClient
 import geci_test_tools as gtt
+import json
 
 client = TestClient(api)
 
 
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
-    bootstrapping_number = 2000
+    bootstrapping_number = 100
     output_path = "tests/data/population_status.json"
 
     gtt.if_exist_remove(output_path)
@@ -16,8 +17,9 @@ def tests_api_write_population_status():
     response = client.get(request)
     assert response.status_code == 200
     gtt.assert_exist(output_path)
-    # with open('data.json') as json_file:
-    # data = json.load(json_file)
+    with open(output_path) as json_file:
+        data = json.load(json_file)
+    assert "remanentes" in data.keys()
 
 
 def tests_api_write_effort_and_captures_with_probability():

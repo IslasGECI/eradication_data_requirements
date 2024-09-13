@@ -23,7 +23,7 @@ def test_resample_eradication_data():
     assert len(sample) == len(raw_data)
 
     assert (sample.Cumulative_captures.diff()[1:] > 0).all()
-    assert (np.diff(sample.index.values[1:]) >= 0).all()
+    assert (sample.index.diff()[1:] >= 0).all()
 
 
 def tests_get_intercepts_distribution():

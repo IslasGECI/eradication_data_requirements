@@ -6,7 +6,9 @@ from eradication_data_requirements import fit_ramsey_plot
 def get_intercept_latex_string(raw_data, bootstrap_number, seed):
     intercepts_distribution = get_intercepts_distribution(raw_data, bootstrap_number, seed)
     interval = get_confidence_interval(intercepts_distribution)
-    return generate_latex_interval_string(interval, deltas=False, decimals=0)
+    n0_interval = generate_latex_interval_string(interval, deltas=False, decimals=0)
+    json_content = {"n0": n0_interval, "remanentes": 0}
+    return json_content
 
 
 def calculate_intercept_interval(distribution):

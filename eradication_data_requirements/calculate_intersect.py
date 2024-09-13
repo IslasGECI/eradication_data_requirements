@@ -16,10 +16,14 @@ def calculate_intercept_interval(distribution):
 
 def get_intercepts_distribution(raw_data, bootstrap_number, seed=None):
     rng = np.random.default_rng(seed)
-    return [
-        calculate_x_intercept(resample_eradication_data(raw_data, rng))
-        for _ in range(bootstrap_number)
-    ]
+    raw_distribution = []
+    distribution_size = 0
+    while distribution_size < bootstrap_number:
+        intercept = calculate_x_intercept(resample_eradication_data(raw_data, rng))
+        if intercept > 0:
+            raw_distribution.append(intercept)
+        distribution_size = len(raw_distribution)
+    return raw_distribution
 
 
 def resample_eradication_data(data, rng):

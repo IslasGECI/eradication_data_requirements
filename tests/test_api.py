@@ -6,6 +6,18 @@ import json
 client = TestClient(api)
 
 
+def tests_api_filter_by_method():
+    input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
+    output_path = "tests/data/filtered_by_tecnique.csv"
+    method = "Cacería terrestre"
+
+    gtt.if_exist_remove(output_path)
+
+    request = f"/filer_by_method/?input_path={input_path}&method={method}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     bootstrapping_number = 100

@@ -47,8 +47,9 @@ def tests_get_intercepts_distribution():
     assert obtained_rows == bootstrap_number
 
     bootstrap_number = 50
+    seed = 2
     raw_data_high_removals = pd.read_csv("tests/data/erradicacion_cabras_maria_cleofas.csv")
-    obtained = edr.get_intercepts_distribution(raw_data_high_removals, bootstrap_number)
+    obtained = edr.get_intercepts_distribution(raw_data_high_removals, bootstrap_number, seed)
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
     total_captures = raw_data_high_removals.Capturas.sum()

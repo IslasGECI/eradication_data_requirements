@@ -7,7 +7,7 @@ client = TestClient(api)
 
 
 def tests_api_filter_by_method():
-    input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
+    input_path = "tests/data/terrestrial_hunting.csv"
     output_path = "tests/data/filtered_by_tecnique.csv"
     method = "Cacería terrestre"
 

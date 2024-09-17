@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Removed
+
+## [1.6.0] - 2024-09-17
+
+### Add
+- Entrypoint `/filter_by_method` to filter by removals technique.
+
+### Changed
+- Entrypoint `/write_population_status` discards initial population lower than total captures.
+
+
 ## [1.5.0] - 2024-09-13
 
 ### Add

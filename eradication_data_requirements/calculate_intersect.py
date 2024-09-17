@@ -29,9 +29,10 @@ def get_intercepts_distribution(raw_data, bootstrap_number, seed=None):
     rng = np.random.default_rng(seed)
     raw_distribution = []
     distribution_size = 0
+    captures = raw_data.Capturas.sum()
     while distribution_size < bootstrap_number:
         intercept = calculate_x_intercept(resample_eradication_data(raw_data, rng))
-        if intercept > 0:
+        if intercept > captures:
             raw_distribution.append(intercept)
         distribution_size = len(raw_distribution)
     return raw_distribution

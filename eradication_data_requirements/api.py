@@ -14,9 +14,16 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_data_requirements_from_config_file,
 )
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
+from eradication_data_requirements.set_data import filter_data_by_method
 
 
 api = FastAPI()
+
+
+@api.get("/filer_by_method")
+async def api_filter_by_method(input_path: str, method: str, output_path: str):
+    raw_data = pd.read_csv(input_path)
+    filtered_data = filter_data_by_method(raw_data, method)
 
 
 @api.get("/write_population_status")

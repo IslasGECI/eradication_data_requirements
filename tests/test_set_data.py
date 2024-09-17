@@ -14,3 +14,5 @@ def test_filter_data_by_method():
     obtained = filter_data_by_method(raw_data, method)
     expected_rows = 2
     assert len(obtained) == expected_rows
+
+    assert "Acumulado" in obtained.columns

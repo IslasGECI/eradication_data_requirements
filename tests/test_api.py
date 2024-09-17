@@ -2,6 +2,7 @@ from eradication_data_requirements import api
 from fastapi.testclient import TestClient
 import geci_test_tools as gtt
 import json
+import pandas as pd
 
 client = TestClient(api)
 
@@ -18,6 +19,9 @@ def tests_api_filter_by_method():
     assert response.status_code == 200
 
     gtt.assert_exist(output_path)
+    obtained = pd.read_csv(output_path)
+    assert obtained.shape[1] == 9
+    gtt.if_exist_remove(output_path)
 
 
 def tests_api_write_population_status():

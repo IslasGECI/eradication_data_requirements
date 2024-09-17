@@ -24,7 +24,7 @@ api = FastAPI()
 async def api_filter_by_method(input_path: str, method: str, output_path: str):
     raw_data = pd.read_csv(input_path)
     filtered_data = filter_data_by_method(raw_data, method)
-    filtered_data.to_csv(output_path)
+    filtered_data.to_csv(output_path, index=False)
 
 
 @api.get("/write_population_status")

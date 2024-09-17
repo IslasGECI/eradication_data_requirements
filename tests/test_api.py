@@ -14,7 +14,9 @@ def tests_api_filter_by_method():
 
     gtt.if_exist_remove(output_path)
 
-    request = f"/filer_by_method/?input_path={input_path}&method={method}&output_path={output_path}"
+    request = (
+        f"/filter_by_method/?input_path={input_path}&method={method}&output_path={output_path}"
+    )
     response = client.get(request)
     assert response.status_code == 200
 

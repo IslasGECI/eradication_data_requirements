@@ -20,7 +20,7 @@ from eradication_data_requirements.set_data import filter_data_by_method
 api = FastAPI()
 
 
-@api.get("/filer_by_method")
+@api.get("/filter_by_method")
 async def api_filter_by_method(input_path: str, method: str, output_path: str):
     raw_data = pd.read_csv(input_path)
     filtered_data = filter_data_by_method(raw_data, method)

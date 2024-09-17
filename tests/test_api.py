@@ -17,6 +17,8 @@ def tests_api_filter_by_method():
     response = client.get(request)
     assert response.status_code == 200
 
+    gtt.assert_exist(output_path)
+
 
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"

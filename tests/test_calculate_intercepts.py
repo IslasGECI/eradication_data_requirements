@@ -40,12 +40,19 @@ def test_resample_eradication_data():
 
 
 def tests_get_intercepts_distribution():
-    raw_data = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
+    raw_data_2 = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
     bootstrap_number = 10
-    obtained = edr.get_intercepts_distribution(raw_data, bootstrap_number)
+    obtained = edr.get_intercepts_distribution(raw_data_2, bootstrap_number)
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
-    assert (np.array(obtained) > 0).all()
+
+    bootstrap_number = 50
+    raw_data_high_removals = pd.read_csv("tests/data/erradicacion_cabras_maria_cleofas.csv")
+    obtained = edr.get_intercepts_distribution(raw_data_high_removals, bootstrap_number)
+    obtained_rows = len(obtained)
+    assert obtained_rows == bootstrap_number
+    total_captures = raw_data_high_removals.Capturas.sum()
+    assert (np.array(obtained) > total_captures).all()
 
 
 def test_calculate_x_intercept():

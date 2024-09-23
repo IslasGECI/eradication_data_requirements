@@ -18,6 +18,11 @@ def tests_api_write_aerial_monitoring():
     response = client.get(request)
     assert response.status_code == 200
 
+    gtt.assert_exist(output_path)
+    with open(output_path) as json_file:
+        data = json.load(json_file)
+    assert "total" in data.keys()
+
 
 def tests_api_filter_by_method():
     input_path = "tests/data/terrestrial_hunting.csv"

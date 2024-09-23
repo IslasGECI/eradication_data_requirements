@@ -8,5 +8,4 @@ def test_get_sum_distribution():
     bootstrap_number = 10
     obtained = get_sum_distribution(goats_data, bootstrap_number)
     assert len(obtained) == bootstrap_number
-    print(obtained)
     assert isinstance(obtained[0], int)

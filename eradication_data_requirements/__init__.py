@@ -9,4 +9,5 @@ from .plot_progress_probability import *  # noqa
 from .resample_raw_data import *  # noqa
 from .plot_cpue_series import *  # noqa
 from .set_data import *  # noqa
+from .resample_aerial_monitoring import *  # noqa
 from .api import *  # noqa

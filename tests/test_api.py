@@ -7,6 +7,18 @@ import pandas as pd
 client = TestClient(api)
 
 
+def tests_api_write_aerial_monitoring():
+    input_path = "tests/data/monitoreo_cabras_magdalena.csv"
+    bootstrapping_number = 10
+    output_path = "tests/data/monitoring_status.json"
+
+    gtt.if_exist_remove(output_path)
+
+    request = f"/write_aerial_monitoring/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+
 def tests_api_filter_by_method():
     input_path = "tests/data/terrestrial_hunting.csv"
     output_path = "tests/data/filtered_by_tecnique.csv"

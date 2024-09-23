@@ -1,6 +1,13 @@
 import pandas as pd
 
-from eradication_data_requirements import get_sum_distribution
+from eradication_data_requirements import get_sum_distribution, get_population_status_dict
+
+
+def test_get_monitoring_dict():
+    raw_data = pd.read_csv("tests/data/monitoreo_cabras_magdalena.csv")
+    bootstrap_number = 10
+    obtained = get_population_status_dict(raw_data, bootstrap_number)
+    assert isinstance(obtained, dict)
 
 
 def test_get_sum_distribution():

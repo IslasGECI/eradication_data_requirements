@@ -20,6 +20,11 @@ from eradication_data_requirements.set_data import filter_data_by_method
 api = FastAPI()
 
 
+@api.get("/write_aerial_monitoring")
+async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int, output_path: str):
+    pass
+
+
 @api.get("/filter_by_method")
 async def api_filter_by_method(input_path: str, method: str, output_path: str):
     raw_data = pd.read_csv(input_path)

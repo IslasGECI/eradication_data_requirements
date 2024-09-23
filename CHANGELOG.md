@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.7.0] - 2024-09-23
+
+### Add
+- Entrypoint `/write_aerial_monitoring` to calculate total population of feral goat confidence interval from aerial monitoring.
+
 ## [1.6.0] - 2024-09-17
 
 ### Add

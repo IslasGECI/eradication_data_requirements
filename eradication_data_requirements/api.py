@@ -25,8 +25,7 @@ api = FastAPI()
 async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int, output_path: str):
     raw_data = pd.read_csv(input_path)
     json_content = get_monitoring_dict(raw_data, bootstrapping_number)
-    with open(output_path, "w") as jsonfile:
-        json.dump(json_content, jsonfile)
+    write_json(output_path, json_content)
 
 
 @api.get("/filter_by_method")

@@ -1,5 +1,7 @@
 import pandas as pd
 
+from eradication_data_requirements import get_sum_distribution
+
 
 def test_get_sum_distribution():
     goats_data = pd.DataFrame({"No_goats": [1, 3, 5, 7, 9, 12, 14, 50, 50]})

@@ -8,6 +8,7 @@ def test_get_monitoring_dict():
     bootstrap_number = 10
     obtained = get_monitoring_dict(raw_data, bootstrap_number)
     assert isinstance(obtained, dict)
+    assert isinstance(obtained["total"], str)
 
 
 def test_get_sum_distribution():

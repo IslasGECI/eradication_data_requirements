@@ -15,6 +15,7 @@ from eradication_data_requirements.data_requirements_plot import (
 )
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.set_data import filter_data_by_method
+from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
 
 
 api = FastAPI()
@@ -22,7 +23,10 @@ api = FastAPI()
 
 @api.get("/write_aerial_monitoring")
 async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int, output_path: str):
-    pass
+    raw_data = pd.read_csv(input_path)
+    json_content = get_monitoring_dict(raw_data, bootstrapping_number)
+    with open(output_path, "w") as jsonfile:
+        json.dump(json_content, jsonfile)
 
 
 @api.get("/filter_by_method")

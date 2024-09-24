@@ -8,7 +8,7 @@ from eradication_data_requirements.calculate_intersect import resample_eradicati
 def get_progress_probability(raw_data, bootstrap_number, seed):
     slope_distribution = get_slopes_distribution(raw_data, bootstrap_number, seed)
     progress_probability = calculate_progress_probability(slope_distribution)
-    return progress_probability
+    return np.round(progress_probability, decimals=3)
 
 
 def calculate_progress_probability(slopes_distribution):

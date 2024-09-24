@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.7.1] - 2024-09-24
+### Changed
+- Add the progress probability to entrypoint `/write_population_status`
+
 ## [1.7.0] - 2024-09-23
 
 ### Add

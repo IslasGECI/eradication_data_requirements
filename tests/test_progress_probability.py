@@ -15,6 +15,13 @@ def tests_get_slopes_distribution():
     assert isinstance(obtained[0], float)
     assert pytest.approx(obtained[0], abs=1e-3) == 0.83
 
+    raw_data_low_captures = pd.DataFrame(
+        {"CPUE": [1, 0, 0, 0, 0, 27], "Capturas": [1, 0, 0, 0, 0, 1]}
+    )
+    obtained = get_slopes_distribution(raw_data_low_captures, bootstrap_number, seed)
+    obtained_rows = len(obtained)
+    assert obtained_rows == bootstrap_number
+
 
 def test_get_slope():
     data = pd.DataFrame({"CPUE": [2, 1], "Cumulative_captures": [1, 2]})

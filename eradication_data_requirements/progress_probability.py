@@ -6,8 +6,9 @@ from eradication_data_requirements.calculate_intersect import resample_eradicati
 
 
 def calculate_progress_probability(slopes_distribution):
-    slopes_len = len(slopes_distribution)
-    is_in_progress = slopes_distribution < np.zeros(slopes_len)
+    valid_slopes = [valid_slope for valid_slope in slopes_distribution if not np.isnan(valid_slope)]
+    slopes_len = len(valid_slopes)
+    is_in_progress = valid_slopes < np.zeros(slopes_len)
     return sum(is_in_progress) / slopes_len
 
 

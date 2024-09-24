@@ -1,4 +1,5 @@
 import numpy as np
+import warnings
 
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 from eradication_data_requirements.calculate_intersect import resample_eradication_data
@@ -10,5 +11,9 @@ def get_slopes_distribution(raw_data, bootstrap_number, seed):
 
 
 def get_slope(data):
-    parameters = fit_ramsey_plot(data)
+    try:
+        parameters = fit_ramsey_plot(data)
+    except AssertionError as error:
+        warnings.warn(error)
+        parameters = [np.nan]
     return parameters[0]

@@ -32,7 +32,7 @@ def validate_samples_to_fit(samples):
     validated = [
         valid_sample
         for valid_sample in samples
-        if valid_sample.Capturas.sum() != valid_sample.Capturas[0]
+        if valid_sample.Capturas.sum() != valid_sample.Capturas.iloc[0]
     ]
     return validated
 

@@ -5,9 +5,19 @@ import numpy as np
 
 from eradication_data_requirements.progress_probability import (
     calculate_progress_probability,
+    get_progress_probability,
     get_slope,
     get_slopes_distribution,
 )
+
+raw_data_2 = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
+bootstrap_number = 10
+seed = 42
+
+
+def tests_get_progress_probability():
+    obtained = get_progress_probability(raw_data_2, bootstrap_number, seed)
+    assert isinstance(obtained, float)
 
 
 def tests_calculate_progress_probability():
@@ -23,9 +33,6 @@ def tests_calculate_progress_probability():
 
 
 def tests_get_slopes_distribution():
-    raw_data_2 = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
-    bootstrap_number = 10
-    seed = 42
     obtained = get_slopes_distribution(raw_data_2, bootstrap_number, seed)
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number

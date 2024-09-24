@@ -1,7 +1,18 @@
 import pandas as pd
 import pytest
 
-from eradication_data_requirements.progress_probability import get_slope, get_slopes_distribution
+from eradication_data_requirements.progress_probability import (
+    calculate_progress_probability,
+    get_slope,
+    get_slopes_distribution,
+)
+
+
+def tests_calculate_progress_probability():
+    slopes = [1, 0.5, 0, -0.5, -1]
+    obtained = calculate_progress_probability(slopes)
+    expected = 2 / 5
+    assert obtained == expected
 
 
 def tests_get_slopes_distribution():

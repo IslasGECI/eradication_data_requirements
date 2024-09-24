@@ -18,6 +18,8 @@ seed = 42
 def tests_get_progress_probability():
     obtained = get_progress_probability(raw_data_2, bootstrap_number, seed)
     assert isinstance(obtained, float)
+    positions_after_decimal = str(obtained)[::-1].find(".")
+    assert positions_after_decimal == 2
 
 
 def tests_calculate_progress_probability():

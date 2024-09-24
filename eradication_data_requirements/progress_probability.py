@@ -6,7 +6,7 @@ from eradication_data_requirements.calculate_intersect import resample_eradicati
 
 def get_slopes_distribution(raw_data, bootstrap_number):
     rng = np.random.default_rng()
-    return [resample_eradication_data(raw_data, rng) for _ in range(bootstrap_number)]
+    return [get_slope(resample_eradication_data(raw_data, rng)) for _ in range(bootstrap_number)]
 
 
 def get_slope(data):

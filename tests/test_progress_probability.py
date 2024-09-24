@@ -1,5 +1,7 @@
 import pandas as pd
 import pytest
+import numpy as np
+
 
 from eradication_data_requirements.progress_probability import (
     calculate_progress_probability,
@@ -12,6 +14,11 @@ def tests_calculate_progress_probability():
     slopes = [1, 0.5, 0, -0.5, -1]
     obtained = calculate_progress_probability(slopes)
     expected = 2 / 5
+    assert obtained == expected
+
+    slopes = [1, 0.5, 0, -0.5, -1, np.nan, -0.7]
+    obtained = calculate_progress_probability(slopes)
+    expected = 3 / 6
     assert obtained == expected
 
 

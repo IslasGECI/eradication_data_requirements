@@ -5,6 +5,12 @@ from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 from eradication_data_requirements.calculate_intersect import resample_eradication_data
 
 
+def get_progress_probability(raw_data, bootstrap_number, seed):
+    slope_distribution = get_slopes_distribution(raw_data, bootstrap_number, seed)
+    progress_probability = calculate_progress_probability(slope_distribution)
+    return progress_probability
+
+
 def calculate_progress_probability(slopes_distribution):
     valid_slopes = [valid_slope for valid_slope in slopes_distribution if not np.isnan(valid_slope)]
     slopes_len = len(valid_slopes)

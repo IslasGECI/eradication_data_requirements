@@ -11,6 +11,8 @@ def tests_get_slopes_distribution():
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
 
+    assert isinstance(obtained[0], float)
+
 
 def test_get_slope():
     data = pd.DataFrame({"CPUE": [2, 1], "Cumulative_captures": [1, 2]})

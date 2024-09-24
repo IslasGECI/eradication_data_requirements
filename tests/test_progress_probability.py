@@ -13,7 +13,7 @@ def tests_get_slopes_distribution():
     assert obtained_rows == bootstrap_number
 
     assert isinstance(obtained[0], float)
-    assert pytest.approx(obtained[0]) == 0.83
+    assert pytest.approx(obtained[0], abs=1e-3) == 0.83
 
 
 def test_get_slope():

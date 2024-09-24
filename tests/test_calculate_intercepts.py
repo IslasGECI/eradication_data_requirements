@@ -19,6 +19,7 @@ def tests_get_population_status_dict():
     assert obtained["remanentes"] == expected_remanents
     expected_captures = 21
     assert obtained["capturas"] == expected_captures
+    assert isinstance(obtained["progress_probability"], float)
 
 
 def tests_remaining_interval():

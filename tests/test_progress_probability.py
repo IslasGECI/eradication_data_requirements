@@ -7,11 +7,13 @@ from eradication_data_requirements.progress_probability import get_slope, get_sl
 def tests_get_slopes_distribution():
     raw_data_2 = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
     bootstrap_number = 10
-    obtained = get_slopes_distribution(raw_data_2, bootstrap_number)
+    seed = 42
+    obtained = get_slopes_distribution(raw_data_2, bootstrap_number, seed)
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
 
     assert isinstance(obtained[0], float)
+    assert pytest.approx(obtained[0]) == 0.83
 
 
 def test_get_slope():

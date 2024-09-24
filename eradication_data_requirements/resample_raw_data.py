@@ -1,6 +1,13 @@
 from bootstrapping_tools import resample_data
 
 
+def resample_eradication_data(data, rng):
+    resampled_data = data.sample(replace=True, frac=1, random_state=rng)
+    sorted_data = resampled_data.sort_index()
+    sorted_data["Cumulative_captures"] = sorted_data.Capturas.cumsum()
+    return sorted_data[["CPUE", "Cumulative_captures"]]
+
+
 def resample_valid_data(effort_and_capture_data, bootstrapping_number):
     validate_method = validate_samples_to_fit
     return resample_valid_data_by_method(

@@ -1,6 +1,8 @@
 import numpy as np
 from bootstrapping_tools import generate_latex_interval_string
-from eradication_data_requirements import fit_ramsey_plot
+from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
+from eradication_data_requirements.progress_probability import get_progress_probability
+from eradication_data_requirements.resample_raw_data import resample_eradication_data
 
 
 def get_population_status_dict(raw_data, bootstrap_number, seed):
@@ -11,7 +13,13 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
     captures = raw_data.Capturas.sum()
     remanentes = remaining_interval(interval, captures)
     remanentes_interval = generate_latex_interval_string(remanentes, deltas=False, decimals=0)
-    json_content = {"n0": n0_interval, "remanentes": remanentes_interval, "capturas": int(captures)}
+    progress_probability = get_progress_probability(raw_data, bootstrap_number, seed)
+    json_content = {
+        "n0": n0_interval,
+        "remanentes": remanentes_interval,
+        "capturas": int(captures),
+        "progress_probability": progress_probability,
+    }
     return json_content
 
 
@@ -36,13 +44,6 @@ def get_intercepts_distribution(raw_data, bootstrap_number, seed=None):
             raw_distribution.append(intercept)
         distribution_size = len(raw_distribution)
     return raw_distribution
-
-
-def resample_eradication_data(data, rng):
-    resampled_data = data.sample(replace=True, frac=1, random_state=rng)
-    sorted_data = resampled_data.sort_index()
-    sorted_data["Cumulative_captures"] = sorted_data.Capturas.cumsum()
-    return sorted_data[["CPUE", "Cumulative_captures"]]
 
 
 def calculate_x_intercept(data):

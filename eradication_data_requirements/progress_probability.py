@@ -2,7 +2,7 @@ import numpy as np
 import warnings
 
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
-from eradication_data_requirements.calculate_intersect import resample_eradication_data
+from eradication_data_requirements.resample_raw_data import resample_eradication_data
 
 
 def get_progress_probability(raw_data, bootstrap_number, seed):

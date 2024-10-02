@@ -33,6 +33,7 @@ def tests_add_cpue():
     raw_data_without_cpue = raw_data.drop(columns="CPUE")
     obtained = edr.add_cpue(raw_data_without_cpue)
     assert "CPUE" in obtained.columns
+    assert (obtained.CPUE == expected_cpue).all()
 
 
 def tests_remaining_interval():

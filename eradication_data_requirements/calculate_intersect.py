@@ -24,7 +24,7 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
 
 
 def add_cpue(raw_data):
-    raw_data["CPUE"] = 1
+    raw_data["CPUE"] = raw_data.Capturas / raw_data.Esfuerzo
     return raw_data
 
 

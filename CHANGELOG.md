@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.7.2] - 2024-10-02
+### Changed
+- The entrypoint `/write_population_status` now calculates the CPUE from Esfuerzo and Capturas columns
+
 ## [1.7.1] - 2024-09-24
 ### Changed
 - Add the progress probability to entrypoint `/write_population_status`

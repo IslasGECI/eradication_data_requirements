@@ -3,10 +3,11 @@ import numpy as np
 
 import eradication_data_requirements as edr
 
+expected_cpue = [19.5, 19, 18.5, 18, 17.5, 17]
 raw_data = pd.DataFrame(
     {
         "Esfuerzo": [1 / 19.5, 2 / 19, 3 / 18.5, 4 / 18, 5 / 17.5, 6 / 17],
-        "CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+        "CPUE": expected_cpue,
         "Capturas": [1, 2, 3, 4, 5, 6],
     }
 )
@@ -26,6 +27,12 @@ def tests_get_population_status_dict():
     expected_captures = 21
     assert obtained["capturas"] == expected_captures
     assert isinstance(obtained["progress_probability"], float)
+
+
+def tests_add_cpue():
+    raw_data_without_cpue = raw_data.drop(columns="CPUE")
+    obtained = edr.add_cpue(raw_data_without_cpue)
+    assert "CPUE" in obtained.columns
 
 
 def tests_remaining_interval():

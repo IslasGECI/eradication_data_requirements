@@ -3,7 +3,13 @@ import numpy as np
 
 import eradication_data_requirements as edr
 
-raw_data = pd.DataFrame({"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Capturas": [1, 2, 3, 4, 5, 6]})
+raw_data = pd.DataFrame(
+    {
+        "Esfuerzo": [1 / 19.5, 2 / 19, 3 / 18.5, 4 / 18, 5 / 17.5, 6 / 17],
+        "CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+        "Capturas": [1, 2, 3, 4, 5, 6],
+    }
+)
 
 seed = 42
 

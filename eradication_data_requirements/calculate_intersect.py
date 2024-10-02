@@ -6,14 +6,15 @@ from eradication_data_requirements.resample_raw_data import resample_eradication
 
 
 def get_population_status_dict(raw_data, bootstrap_number, seed):
-    intercepts_distribution = get_intercepts_distribution(raw_data, bootstrap_number, seed)
+    data_with_cpue = add_cpue(raw_data)
+    intercepts_distribution = get_intercepts_distribution(data_with_cpue, bootstrap_number, seed)
     interval = get_confidence_interval(intercepts_distribution)
     n0_interval = generate_latex_interval_string(interval, deltas=False, decimals=0)
 
-    captures = raw_data.Capturas.sum()
+    captures = data_with_cpue.Capturas.sum()
     remanentes = remaining_interval(interval, captures)
     remanentes_interval = generate_latex_interval_string(remanentes, deltas=False, decimals=0)
-    progress_probability = get_progress_probability(raw_data, bootstrap_number, seed)
+    progress_probability = get_progress_probability(data_with_cpue, bootstrap_number, seed)
     json_content = {
         "n0": n0_interval,
         "remanentes": remanentes_interval,

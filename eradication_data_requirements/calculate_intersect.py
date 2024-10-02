@@ -23,6 +23,11 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
     return json_content
 
 
+def add_cpue(raw_data):
+    raw_data["CPUE"] = 1
+    return raw_data
+
+
 def remaining_interval(n0_interval, captures):
     remanentes = n0_interval - captures
     return [x if x > 0 else 0 for x in remanentes]

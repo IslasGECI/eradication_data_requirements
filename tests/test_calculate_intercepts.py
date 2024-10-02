@@ -44,11 +44,17 @@ def tests_remaining_interval():
 
 
 def test_resample_eradication_data():
+    data_with_cpue = pd.DataFrame(
+        {
+            "CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+            "Capturas": [1, 2, 3, 4, 5, 6],
+        }
+    )
     rng = np.random.default_rng(seed)
-    sample = edr.resample_eradication_data(raw_data, rng)
+    sample = edr.resample_eradication_data(data_with_cpue, rng)
     expected_columns_names = ["CPUE", "Cumulative_captures"]
     assert (sample.columns == expected_columns_names).all()
-    assert len(sample) == len(raw_data)
+    assert len(sample) == len(data_with_cpue)
 
     assert (sample.Cumulative_captures.diff()[1:] > 0).all()
     assert (sample.index.diff()[1:] >= 0).all()

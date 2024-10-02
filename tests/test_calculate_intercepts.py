@@ -47,7 +47,13 @@ def test_resample_eradication_data():
 
 
 def tests_get_intercepts_distribution():
-    raw_data_2 = pd.DataFrame({"CPUE": [1, 1, 18.5, 18, 17.5, 27], "Capturas": [1, 2, 3, 4, 5, 6]})
+    raw_data_2 = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3 / 18.5, 4 / 18, 5 / 17.5, 6 / 27],
+            "CPUE": [1, 1, 18.5, 18, 17.5, 27],
+            "Capturas": [1, 2, 3, 4, 5, 6],
+        }
+    )
     bootstrap_number = 10
     obtained = edr.get_intercepts_distribution(raw_data_2, bootstrap_number)
     obtained_rows = len(obtained)

@@ -11,3 +11,4 @@ from .plot_cpue_series import *  # noqa
 from .set_data import *  # noqa
 from .resample_aerial_monitoring import *  # noqa
 from .api import *  # noqa
+from .calculate_eradication_progress import *  # noqa

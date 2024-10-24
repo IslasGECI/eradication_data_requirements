@@ -25,7 +25,8 @@ api = FastAPI()
 async def write_bootstrap_progress_intervals_json(
     input_path: str, bootstrapping_number: int, output_path: str
 ):
-    pass
+    data = pd.read_csv(input_path)
+    data.to_csv(output_path)
 
 
 @api.get("/write_aerial_monitoring")

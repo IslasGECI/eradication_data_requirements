@@ -3,6 +3,7 @@ import json
 
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 from eradication_data_requirements import ProgressBootstrapper
+from geci_test_tools import if_exist_remove
 
 raw_data = pd.DataFrame(
     {
@@ -45,3 +46,4 @@ def test_ProgressBootstrapper():
         "bootstrap_intermediate_distribution",
     ]
     assert set(obtained_fields) == set(expected_fields)
+    if_exist_remove(output_path)

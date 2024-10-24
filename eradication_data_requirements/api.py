@@ -16,7 +16,8 @@ from eradication_data_requirements.data_requirements_plot import (
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.set_data import filter_data_by_method
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
-
+from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
+from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 
 api = FastAPI()
 
@@ -25,8 +26,16 @@ api = FastAPI()
 async def write_bootstrap_progress_intervals_json(
     input_path: str, bootstrapping_number: int, output_path: str
 ):
+    parametrizer = Bootstrap_from_time_series_parametrizer(
+        blocks_length=1,
+        column_name="CPUE",
+        N=bootstrapping_number,
+        independent_variable="Capturas",
+    )
     data = pd.read_csv(input_path)
-    data.to_csv(output_path)
+    parametrizer.set_data(data)
+    bootstrapper = ProgressBootstrapper(parametrizer)
+    bootstrapper.save_intervals(output_path)
 
 
 @api.get("/write_aerial_monitoring")

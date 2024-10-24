@@ -19,6 +19,9 @@ def tests_api_write_bootstrap_progress_intervals_json():
     assert response.status_code == 200
 
     gtt.assert_exist(output_path)
+    with open(output_path) as json_file:
+        data = json.load(json_file)
+    assert "intervals" in data.keys()
 
 
 def tests_api_write_aerial_monitoring():

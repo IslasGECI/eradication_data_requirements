@@ -18,6 +18,8 @@ def tests_api_write_bootstrap_progress_intervals_json():
     response = client.get(request)
     assert response.status_code == 200
 
+    gtt.assert_exist(output_path)
+
 
 def tests_api_write_aerial_monitoring():
     input_path = "tests/data/monitoreo_cabras_magdalena.csv"

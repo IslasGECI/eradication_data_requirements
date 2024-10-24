@@ -21,6 +21,13 @@ from eradication_data_requirements.resample_aerial_monitoring import get_monitor
 api = FastAPI()
 
 
+@api.get("/write_bootstrap_progress_intervals_json")
+async def write_bootstrap_progress_intervals_json(
+    input_path: str, bootstrapping_number: int, output_path: str
+):
+    pass
+
+
 @api.get("/write_aerial_monitoring")
 async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int, output_path: str):
     raw_data = pd.read_csv(input_path)

@@ -30,10 +30,6 @@ def add_probs_to_effort_capture_data(
     data_copy, bootstrapping_number, window_length, fit_method=fit_resampled_captures
 ):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
-    # samples = calculate_resampled_slope_by_window(
-    #     resized_data, bootstrapping_number, window_length, fit_method
-    # )
-    # probs_status = extract_prob(samples)
     data_with_cpue = add_cpue(resized_data)
     probs_status = calculate_resampled_probability_by_window(
         data_with_cpue, bootstrapping_number, window_length, fit_method=get_progress_probability

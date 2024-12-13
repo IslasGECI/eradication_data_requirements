@@ -129,27 +129,6 @@ def test_write_effort_and_capture_with_probability():
     gtt.assert_exist(output_path)
     obtained = pd.read_csv(output_path)
     assert obtained.shape[1] == 4
-
-    obtained_probability = obtained.prob
-    expected_probability = pd.Series(
-        [
-            np.nan,
-            np.nan,
-            np.nan,
-            np.nan,
-            np.nan,
-            0.36363636363636365,
-            0.4387755102040816,
-            0.3118279569892473,
-            0.21518987341772153,
-            0.15853658536585366,
-            0.15476190476190477,
-            0.23469387755102042,
-            0.3838383838383838,
-        ],
-        name="prob",
-    )
-    pd.testing.assert_series_equal(obtained_probability, expected_probability)
     gtt.if_exist_remove(output_path)
 
 

@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 
 
+from eradication_data_requirements.progress_probability import get_progress_probability
+from eradication_data_requirements.calculate_intersect import add_cpue
 from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
@@ -28,12 +30,16 @@ def add_probs_to_effort_capture_data(
     data_copy, bootstrapping_number, window_length, fit_method=fit_resampled_captures
 ):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
-    samples = calculate_resampled_slope_by_window(
-        resized_data, bootstrapping_number, window_length, fit_method
+    # samples = calculate_resampled_slope_by_window(
+    #     resized_data, bootstrapping_number, window_length, fit_method
+    # )
+    # probs_status = extract_prob(samples)
+    data_with_cpue = add_cpue(resized_data)
+    probs_status = calculate_resampled_probability_by_window(
+        data_with_cpue, bootstrapping_number, window_length, fit_method=get_progress_probability
     )
-    probs_status = extract_prob(samples)
-    resized_data = paste_status_by_window(resized_data, probs_status, "prob", window_length)
-    return resized_data[["Fecha", "Esfuerzo", "Capturas", "prob"]]
+    data_with_cpue = paste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
+    return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
 def paste_status(data_copy, probs_status, column_name):
@@ -71,6 +77,16 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
     resampled_data = resample_valid_cumulative_data(ramsey_series, bootstrapping_number)
     fits = [fit_ramsey_plot(sample) for sample in resampled_data]
     return fits
+
+
+def calculate_resampled_probability_by_window(
+    ramsey_series, bootstrapping_number, window_length, fit_method=get_progress_probability
+):
+    seed = 42
+    return [
+        fit_method(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number, seed)
+        for i in range(window_length, len(ramsey_series) + 1)
+    ]
 
 
 def calculate_resampled_slope_by_window(

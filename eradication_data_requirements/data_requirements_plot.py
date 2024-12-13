@@ -2,16 +2,22 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import json
+import warnings
 
 from geci_plots import geci_plot
 
 
 def fit_ramsey_plot(data):
-    assert len(data["Cumulative_captures"].unique()) > 1, "It can not fit Ramsey plot"
-    fit = np.polynomial.polynomial.Polynomial.fit(data["Cumulative_captures"], data["CPUE"], deg=1)
-    intercept_and_slope = fit.convert().coef
-    idx = [1, 0]
-    slope_and_intercept = intercept_and_slope[idx]
+    try:
+        fit = np.polynomial.polynomial.Polynomial.fit(
+            data["Cumulative_captures"], data["CPUE"], deg=1
+        )
+        intercept_and_slope = fit.convert().coef
+        idx = [1, 0]
+        slope_and_intercept = intercept_and_slope[idx]
+    except (AssertionError, IndexError):
+        warnings.warn("Error")
+        slope_and_intercept = [np.nan, np.nan]
     return slope_and_intercept
 
 

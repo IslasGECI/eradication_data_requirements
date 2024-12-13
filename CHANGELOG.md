@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Changed
+- Change implementation of function `write_effort_and_captures_with_probability`
 
 ### Removed
 

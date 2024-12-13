@@ -4,7 +4,7 @@ import pytest
 
 from eradication_data_requirements import (
     add_empty_column,
-    add_probs_to_effort_capture_data,
+    xxadd_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_resampled_slope_by_window,
     calculate_six_months_slope,
@@ -29,7 +29,7 @@ data = pd.DataFrame(
 def test_add_probability_to_effort_capture_data():
     bootstrapping_number = 10
     window_length = 6
-    obtained = add_probs_to_effort_capture_data(data, bootstrapping_number, window_length)
+    obtained = xxadd_probs_to_effort_capture_data(data, bootstrapping_number, window_length)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
@@ -39,7 +39,7 @@ def test_add_probability_to_effort_capture_data():
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = add_probs_to_effort_capture_data(
+    obtained = xxadd_probs_to_effort_capture_data(
         effort_and_capture_data, bootstrapping_number, window_length
     )
     obtained_probs = obtained.prob.iloc[6:]
@@ -57,7 +57,7 @@ def test_add_probability_to_effort_capture_data():
             "Fecha": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
         }
     )
-    obtained = add_probs_to_effort_capture_data(
+    obtained = xxadd_probs_to_effort_capture_data(
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
     assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)

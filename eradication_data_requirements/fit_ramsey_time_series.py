@@ -30,7 +30,7 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     data_with_cpue = add_cpue(resized_data)
     probs_status = calculate_resampled_probability_by_window(
-        data_with_cpue, bootstrapping_number, window_length, get_progress_probability
+        data_with_cpue, bootstrapping_number, window_length
     )
     data_with_cpue = paste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
     return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
@@ -73,12 +73,12 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
     return fits
 
 
-def calculate_resampled_probability_by_window(
-    ramsey_series, bootstrapping_number, window_length, fit_method=get_progress_probability
-):
+def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
     seed = 42
     return [
-        fit_method(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number, seed)
+        get_progress_probability(
+            ramsey_series.iloc[(i - window_length) : i], bootstrapping_number, seed
+        )
         for i in range(window_length, len(ramsey_series) + 1)
     ]
 

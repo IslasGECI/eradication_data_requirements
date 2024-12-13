@@ -2,7 +2,6 @@ import os
 import hashlib
 import pandas as pd
 import numpy as np
-import pytest
 
 import eradication_data_requirements as dt
 

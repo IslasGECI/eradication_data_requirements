@@ -83,15 +83,6 @@ def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_numbe
     ]
 
 
-def calculate_resampled_slope_by_window(
-    ramsey_series, bootstrapping_number, window_length, fit_method=fit_resampled_captures
-):
-    return [
-        fit_method(ramsey_series.iloc[(i - window_length) : i], bootstrapping_number)
-        for i in range(window_length, len(ramsey_series) + 1)
-    ]
-
-
 def calculate_six_months_slope(data):
     window_length = 6
     return [

@@ -1,8 +1,6 @@
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_slopes_to_effort_capture_data,
     add_probs_to_effort_capture_data,
-    fit_resampled_cumulative,
-    fit_resampled_captures,
 )
 from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.plot_cpue_series import (
@@ -13,7 +11,6 @@ from eradication_data_requirements.plot_cpue_series import (
 
 import pandas as pd
 import typer
-from typing_extensions import Annotated
 import matplotlib.pyplot as plt
 
 app = typer.Typer()

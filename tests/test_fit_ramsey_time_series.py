@@ -7,7 +7,6 @@ from eradication_data_requirements import (
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
     calculate_resampled_probability_by_window,
-    calculate_resampled_slope_by_window,
     calculate_six_months_slope,
     extract_prob,
     extract_slopes,

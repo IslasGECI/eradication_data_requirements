@@ -35,13 +35,8 @@ def write_effort_and_captures_with_probability(
     bootstrapping_number: int = typer.Option(help="Bootstrapping number"),
     output_path: str = typer.Option(help="Output file path"),
     window_length: int = typer.Option(help="Window length for removal rate"),
-    resample_method: Annotated[str, typer.Option(help="")] = "captures",
 ):
     effort_capture_data = pd.read_csv(input_path)
-    resample_method_dictionary = {
-        "captures": fit_resampled_captures,
-        "cumulative": fit_resampled_cumulative,
-    }
     effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length
     )

@@ -26,12 +26,6 @@ def fit_resampled_captures(datos, bootstrapping_number):
     return fits
 
 
-def add_probs_to_effort_capture_data(
-    data_copy, bootstrapping_number, window_length, fit_method=fit_resampled_captures
-):
-    return xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length)
-
-
 def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     data_with_cpue = add_cpue(resized_data)

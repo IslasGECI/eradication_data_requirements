@@ -1,6 +1,6 @@
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_slopes_to_effort_capture_data,
-    xxadd_probs_to_effort_capture_data,
+    add_probs_to_effort_capture_data,
     fit_resampled_cumulative,
     fit_resampled_captures,
 )
@@ -42,7 +42,7 @@ def write_effort_and_captures_with_probability(
         "captures": fit_resampled_captures,
         "cumulative": fit_resampled_cumulative,
     }
-    effort_captures_with_slopes = xxadd_probs_to_effort_capture_data(
+    effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length
     )
     effort_captures_with_slopes.to_csv(output_path, index=False)

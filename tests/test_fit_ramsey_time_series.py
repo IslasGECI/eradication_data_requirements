@@ -6,6 +6,7 @@ from eradication_data_requirements import (
     add_empty_column,
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,
+    calculate_resampled_probability_by_window,
     calculate_resampled_slope_by_window,
     calculate_six_months_slope,
     extract_prob,
@@ -20,6 +21,7 @@ from eradication_data_requirements import (
 data = pd.DataFrame(
     {
         "Esfuerzo": [1, 2, 3, 4, 5, 6],
+        "CPUE": [1, 2, 3, 4, 5, 6],
         "Capturas": [1, 1, 1, 1, 1, 1],
         "Fecha": [2018, 2019, 2020, 2021, 2022, 2023],
     }
@@ -221,18 +223,30 @@ def test_calculate_six_months_slope():
     assert obtained_number_slopes == expected_number_slopes
 
 
-def test_calculate_sample_six_months_slope():
+def test_calculate_resampled_probability_by_window():
     bootstrapping_number = 10
     window_length = 6
-    obtained_slopes = calculate_resampled_slope_by_window(data, bootstrapping_number, window_length)
-    expected_number_slopes = 1
-    obtained_number_slopes = len(obtained_slopes)
-    assert obtained_number_slopes == expected_number_slopes
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
+        data, bootstrapping_number, window_length
+    )
+    expected_probability_by_window = 1
+    obtained_number_of_probabilities = len(obtained_probability_by_window)
+    assert obtained_number_of_probabilities == expected_probability_by_window
 
-    obtained_number_elements = len(obtained_slopes[0])
-    assert obtained_number_elements == bootstrapping_number
-    np.testing.assert_array_almost_equal(obtained_slopes[0][1][0], -0.12095238)
-    np.testing.assert_array_almost_equal(obtained_slopes[0][4][0], -0.05)
+    data_for_two_probabilities = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3, 4, 5, 6, 7],
+            "CPUE": [1, 2, 3, 4, 5, 6, 7],
+            "Capturas": [1, 1, 1, 1, 1, 1, 1],
+            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        }
+    )
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
+        data_for_two_probabilities, bootstrapping_number, window_length
+    )
+    expected_probability_by_window = 2
+    obtained_number_of_probabilities = len(obtained_probability_by_window)
+    assert obtained_number_of_probabilities == expected_probability_by_window
 
 
 def test_extract_slopes():

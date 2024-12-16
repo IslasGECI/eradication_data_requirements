@@ -8,6 +8,7 @@ from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_flight,
     plot_cumulative_series_cpue,
 )
+from eradication_data_requirements.set_data import select_december_of_every_year
 
 import pandas as pd
 import typer
@@ -37,7 +38,8 @@ def write_effort_and_captures_with_probability(
     effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length
     )
-    effort_captures_with_slopes.to_csv(output_path, index=False)
+    yearly_results = select_december_of_every_year(effort_captures_with_slopes)
+    yearly_results.to_csv(output_path, index=False)
 
 
 @app.command()

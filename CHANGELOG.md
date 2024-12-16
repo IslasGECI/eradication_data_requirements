@@ -8,12 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Removed
+
+## [2.0.0] - 2024-12-16
+
+### Added
 - The class `ProgressBootstrapper` to get slopes boostrap distribution json
 
 ### Fixed
 
 ### Changed
-- Change implementation of function `write_effort_and_captures_with_probability`
+- Change implementation of function `write_effort_and_captures_with_probability`. Now uses `calculate_resampled_probability_by_window()` that resample, sort and then acumulates to get the progress probability. Also, the resolution is fixed to give the last month of the year. Please, refers to issue [#556](https://github.com/IslasGECI/kanban/issues/556)
 
 ### Removed
 

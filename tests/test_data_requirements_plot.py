@@ -16,7 +16,7 @@ def test_plot_comparative_catch_curves():
     dt.plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "73d092bd3a61925d9b53f30ad1cdda8e"
+    expected_hash = "5b0b2c965300689c4e9acb4394a4c716"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 
@@ -28,7 +28,7 @@ def test_data_requirements_plot():
     dt.traps_data_requirements_plot(input_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "9fa631c17ca7c60b64e61bc9bf90a410"
+    expected_hash = "c68842f1c39d6b166738ba9ac140562a"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 

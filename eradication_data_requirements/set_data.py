@@ -5,4 +5,5 @@ def filter_data_by_method(raw_data, method):
 
 
 def select_december_of_every_year(data):
-    return data[data.Fecha.str.contains("-12-")]
+    month_to_plot = "-12-"
+    return data[data.Fecha.str.contains(month_to_plot)]

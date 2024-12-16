@@ -128,7 +128,7 @@ def test_write_effort_and_capture_with_probability():
     gtt.assert_exist(output_path)
     obtained = pd.read_csv(output_path)
     assert obtained.shape[1] == 4
-    gtt.if_exist_remove(output_path)
+    # gtt.if_exist_remove(output_path)
 
 
 def test_write_effort_and_capture_with_slopes():

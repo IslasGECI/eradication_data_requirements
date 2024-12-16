@@ -89,7 +89,7 @@ def tests_api_write_effort_and_captures_with_probability():
     assert response.status_code == 200
 
     gtt.assert_exist(output_path)
-    # gtt.if_exist_remove(output_path)
+    gtt.if_exist_remove(output_path)
 
 
 def tests_api_write_progress_probability_figure():

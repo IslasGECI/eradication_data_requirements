@@ -33,11 +33,12 @@ def test_select_dec_of_every_year():
                 "2015-05-01",
                 "2015-07-01",
                 "2015-12-01",
+                "2016-01-01",
             ],
-            "prob": [0, 1, 2, 3, 4, 5, 6, 7],
+            "prob": [0, 1, 2, 3, 4, 5, 6, 7, 8],
         }
     )
     obtained = select_december_of_every_year(data)
-    expected_number_of_rows = 2
+    expected_number_of_rows = 3
     obtained_number_of_rows = len(obtained)
     assert obtained_number_of_rows == expected_number_of_rows

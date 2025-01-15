@@ -60,6 +60,18 @@ def tests_api_filter_by_method():
     gtt.if_exist_remove(output_path)
 
 
+def tests_api_write_population_status_from_mixed_methods():
+    first_method_path = "tests/data/population_status_terrestrial_hunting.json"
+    second_method_path = "tests/data/population_status_aerial_hunting.json"
+    output_path = "tests/data/mixed_population_status.json"
+
+    gtt.if_exist_remove(output_path)
+
+    request = f"/write_population_status/?first_method_status={first_method_path}&second_method_status={second_method_path}&output_path={output_path}"
+    response = client.get(request)
+    assert response.status_code == 200
+
+
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     bootstrapping_number = 100

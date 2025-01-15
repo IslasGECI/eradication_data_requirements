@@ -17,7 +17,7 @@ pop_status_b = {"distribution": distribution_b, "capturas": 10}
 def test_combine_distributions_from_dict():
     obtained = combine_distributions_from_dict(pop_status_a, pop_status_b)
     assert "remanentes" in obtained.keys()
-    assert obtained["remanentes"] == "199 (82 — 301)"
+    assert obtained["remanentes"] == "199 (82 - 301)"
     assert len(obtained["remanentes_distribution"]) == len(distribution_a) + len(distribution_b)
     assert obtained["capturas"] == 30
 

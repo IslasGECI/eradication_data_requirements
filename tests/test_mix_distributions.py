@@ -7,11 +7,9 @@ import numpy as np
 
 rng = np.random.default_rng(seed=42)
 distribution_a = rng.normal(316, 5, 20)
-print(distribution_a)
-pop_status_a = {"distribution": distribution_a, "capturas": 20}
+pop_status_a = {"distribution": list(distribution_a), "capturas": 20}
 distribution_b = rng.normal(100, 10, 20)
-print(distribution_b)
-pop_status_b = {"distribution": distribution_b, "capturas": 10}
+pop_status_b = {"distribution": list(distribution_b), "capturas": 10}
 
 
 def test_combine_distributions_from_dict():

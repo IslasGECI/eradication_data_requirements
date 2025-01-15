@@ -1,6 +1,6 @@
 """A template Python module"""
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 from .cli import *  # noqa
 from .data_requirements_plot import *  # noqa
 from .resample_raw_data import *  # noqa

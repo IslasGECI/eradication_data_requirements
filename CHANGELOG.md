@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Removed
+## [2.1.0] - 2025-01-15
+
+### Added
+- New entrypoint `/write_population_status_from_mixed_methods` to mix the distributions from to hunting methods.
+
+### Changed
+- The entrypoint `/write_population_status` now saves the n0 distribution.
 
 ## [2.0.0] - 2024-12-16
 

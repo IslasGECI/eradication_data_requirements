@@ -17,6 +17,7 @@ from eradication_data_requirements.calculate_intersect import get_population_sta
 from eradication_data_requirements.set_data import filter_data_by_method
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
 from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
+from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 
 api = FastAPI()
@@ -58,6 +59,22 @@ async def api_write_population_status(input_path: str, bootstrapping_number: int
     seed = 42
     json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
     write_json(output_path, json_content)
+
+
+@api.get("/write_population_status_from_mixed_methods")
+async def api_write_population_status_from_mixed_methods(
+    first_method_status: str, second_method_status: str, output_path: str
+):
+    first_status_dict = read_json(first_method_status)
+    second_status_dict = read_json(second_method_status)
+    json_content = combine_distributions_from_dict(first_status_dict, second_status_dict)
+    write_json(output_path, json_content)
+
+
+def read_json(json_path):
+    with open(json_path) as json_file:
+        data = json.load(json_file)
+    return data
 
 
 def write_json(output_path, json_content):

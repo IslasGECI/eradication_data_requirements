@@ -14,7 +14,7 @@ def combine_distributions_from_dict(pop_status_a, pop_status_b):
     return {
         "remanentes": remanents_interval_string,
         "capturas": capturas_totales,
-        "remanentes_distribution": mixed_distribution,
+        "remanentes_distribution": list(mixed_distribution),
     }
 
 

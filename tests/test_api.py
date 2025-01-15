@@ -67,7 +67,7 @@ def tests_api_write_population_status_from_mixed_methods():
 
     gtt.if_exist_remove(output_path)
 
-    request = f"/write_population_status/?first_method_status={first_method_path}&second_method_status={second_method_path}&output_path={output_path}"
+    request = f"/write_population_status_from_mixed_methods/?first_method_status={first_method_path}&second_method_status={second_method_path}&output_path={output_path}"
     response = client.get(request)
     assert response.status_code == 200
 

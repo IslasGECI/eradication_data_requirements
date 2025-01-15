@@ -30,11 +30,6 @@ def add_cpue(raw_data):
     return raw_data
 
 
-def remaining_interval(n0_interval, captures):
-    remanentes = n0_interval - captures
-    return [x if x > 0 else 0 for x in remanentes]
-
-
 def get_confidence_interval(distribution):
     interval = np.percentile(distribution, [2.5, 50, 97.5]).astype(int)
     return interval

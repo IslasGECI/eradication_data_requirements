@@ -38,13 +38,6 @@ def tests_add_cpue():
     assert (obtained.CPUE == expected_cpue).all()
 
 
-def tests_remaining_interval():
-    n0_interval = np.array([10, 100, 120])
-    capturas = 20
-    obtained = edr.remaining_interval(n0_interval, capturas)
-    assert obtained[0] == 0
-
-
 def test_resample_eradication_data():
     data_with_cpue = pd.DataFrame(
         {

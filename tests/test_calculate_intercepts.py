@@ -28,7 +28,7 @@ def tests_get_population_status_dict():
     assert isinstance(obtained["progress_probability"], float)
 
     expected_distribution_len = bootstrap_number
-    assert obtained["distribution"] == expected_distribution_len
+    assert len(obtained["distribution"]) == expected_distribution_len
 
 
 def tests_add_cpue():

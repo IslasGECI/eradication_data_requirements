@@ -27,6 +27,9 @@ def tests_get_population_status_dict():
     assert obtained["capturas"] == expected_captures
     assert isinstance(obtained["progress_probability"], float)
 
+    expected_distribution_len = bootstrap_number
+    assert obtained["distribution"] == expected_distribution_len
+
 
 def tests_add_cpue():
     obtained = edr.add_cpue(raw_data)

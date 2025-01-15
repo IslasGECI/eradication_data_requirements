@@ -61,7 +61,6 @@ def tests_api_filter_by_method():
     gtt.if_exist_remove(output_path)
 
 
-@pytest.mark.skip("not yet")
 def tests_api_write_population_status_from_mixed_methods():
     first_method_path = "tests/data/population_status_terrestrial_hunting.json"
     second_method_path = "tests/data/population_status_aerial_hunting.json"

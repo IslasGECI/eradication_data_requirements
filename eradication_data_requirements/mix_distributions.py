@@ -19,6 +19,6 @@ def combine_distributions_from_dict(pop_status_a, pop_status_b):
 
 
 def concatenate_remanent_distributions(pop_status_a, pop_status_b):
-    remanents_a = pop_status_a["distribution"] - pop_status_a["capturas"]
-    remanents_b = pop_status_b["distribution"] - pop_status_b["capturas"]
+    remanents_a = [n0 - pop_status_a["capturas"] for n0 in pop_status_a["distribution"]]
+    remanents_b = [n0 - pop_status_b["capturas"] for n0 in pop_status_b["distribution"]]
     return np.concatenate((remanents_a, remanents_b))

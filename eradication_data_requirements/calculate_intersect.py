@@ -20,6 +20,7 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
         "remanentes": remanentes_interval,
         "capturas": int(captures),
         "progress_probability": progress_probability,
+        "distribution": intercepts_distribution,
     }
     return json_content
 

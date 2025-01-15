@@ -31,7 +31,7 @@ def add_cpue(raw_data):
 
 
 def get_confidence_interval(distribution):
-    interval = np.percentile(distribution, [2.5, 50, 97.5]).astype(int)
+    interval = np.round(np.percentile(distribution, [2.5, 50, 97.5])).astype(int)
     return interval
 
 

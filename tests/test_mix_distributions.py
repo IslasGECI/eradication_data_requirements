@@ -24,3 +24,4 @@ def test_concatenate_remanent_distributions():
     obtained = concatenate_remanent_distributions(pop_status_a, pop_status_b)
     expected_len = len(distribution_b) + len(distribution_a)
     assert len(obtained) == expected_len
+    assert max(obtained) < max(distribution_a)

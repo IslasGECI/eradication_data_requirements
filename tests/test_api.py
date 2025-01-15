@@ -3,7 +3,6 @@ from fastapi.testclient import TestClient
 import geci_test_tools as gtt
 import json
 import pandas as pd
-import pytest
 
 client = TestClient(api)
 

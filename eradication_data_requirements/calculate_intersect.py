@@ -12,7 +12,7 @@ def get_population_status_dict(raw_data, bootstrap_number, seed):
     n0_interval = generate_latex_interval_string(interval, deltas=False, decimals=0)
 
     captures = data_with_cpue.Capturas.sum()
-    remanentes = remaining_interval(interval, captures)
+    remanentes = interval - captures
     remanentes_interval = generate_latex_interval_string(remanentes, deltas=False, decimals=0)
     progress_probability = get_progress_probability(data_with_cpue, bootstrap_number, seed)
     json_content = {

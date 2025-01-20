@@ -36,6 +36,17 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
     return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
+def fill_missing_months_with_effort_one_and_captures_zero(effort_and_capture_data):
+    data_copy = effort_and_capture_data.copy()
+    data_copy["Fecha"] = pd.to_datetime(data_copy.Fecha, format="%Y-%m-%d")
+    data_copy = data_copy.set_index("Fecha")
+    data_copy = data_copy.resample("MS").asfreq()
+    data_copy = data_copy.reset_index()
+    data_copy.loc[data_copy.Esfuerzo.isnull(), "Esfuerzo"] = 1
+    data_copy.loc[data_copy.Capturas.isnull(), "Capturas"] = 0
+    return data_copy
+
+
 def paste_status(data_copy, probs_status, column_name):
     window_length = 6
     df = paste_status_by_window(data_copy, probs_status, column_name, window_length)

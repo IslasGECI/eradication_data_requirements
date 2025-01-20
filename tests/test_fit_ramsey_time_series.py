@@ -71,7 +71,7 @@ def test_fill_missing_months_with_effort_one_and_captures_zero():
         {
             "Esfuerzo": [1, 2, 3],
             "Capturas": [1, 1, 1],
-            "Fecha": ["2015-01-01", "2015-11-01", "2015-12-01"],
+            "Fecha": ["2015-01-01", "2015-10-01", "2015-11-01"],
         }
     )
     obtained = fill_missing_months_with_effort_one_and_captures_zero(incomplete_months)

@@ -38,19 +38,17 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
 
 def fill_missing_months_with_effort_one_and_captures_zero(effort_and_capture_data):
     data_copy = effort_and_capture_data.copy()
-    data_copy["Fecha"] = pd.to_datetime(data_copy["Fecha"], format="%Y-%m-%d")
-    data_copy = data_copy.set_index("Fecha")
-    data_copy = data_copy.resample("MS").asfreq()
-    data_copy = fill_empty_months_with_effort_one_and_captures_zero(data_copy)
-    return data_copy.reset_index()
+    data_with_all_months = complete_missing_months_in_year(data_copy)
+    return fill_empty_months_with_effort_one_and_captures_zero(data_with_all_months)
 
 
 def complete_missing_months_in_year(incomplete_data):
     incomplete_data["Fecha"] = pd.to_datetime(incomplete_data["Fecha"], format="%Y-%m-%d")
     incomplete_data = incomplete_data.set_index("Fecha")
     initial_year = pd.offsets.YearBegin()
+    one_day = pd.offsets.Day()
     date_index = pd.date_range(
-        incomplete_data.index.min() - initial_year, incomplete_data.index.max(), freq="MS"
+        incomplete_data.index.min() + one_day - initial_year, incomplete_data.index.max(), freq="MS"
     )
     return incomplete_data.reindex(date_index, fill_value=np.nan)
 

@@ -45,6 +45,16 @@ def fill_missing_months_with_effort_one_and_captures_zero(effort_and_capture_dat
     return data_copy.reset_index()
 
 
+def complete_missing_months_in_year(incomplete_data):
+    incomplete_data["Fecha"] = pd.to_datetime(incomplete_data["Fecha"], format="%Y-%m-%d")
+    incomplete_data = incomplete_data.set_index("Fecha")
+    initial_year = pd.offsets.YearBegin()
+    date_index = pd.date_range(
+        incomplete_data.index.min() - initial_year, incomplete_data.index.max(), freq="MS"
+    )
+    return incomplete_data.reindex(date_index, fill_value=np.nan)
+
+
 def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
     data_copy["Esfuerzo"] = data_copy["Esfuerzo"].fillna(1)
     data_copy["Capturas"] = data_copy["Capturas"].fillna(0)

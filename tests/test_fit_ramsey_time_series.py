@@ -76,6 +76,15 @@ def test_complete_missing_months_in_year():
     expected_len = 12
     assert obtained.shape[0] == expected_len
 
+    incomplete_months_with_january = pd.DataFrame(
+        {
+            "Fecha": ["2015-01-01", "2015-06-01", "2015-12-01"],
+        }
+    )
+    obtained = complete_missing_months_in_year(incomplete_months_with_january)
+    expected_len = 12
+    assert obtained.shape[0] == expected_len
+
 
 def test_fill_missing_months_with_effort_one_and_captures_zero():
 

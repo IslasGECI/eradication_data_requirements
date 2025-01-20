@@ -8,6 +8,7 @@ from eradication_data_requirements import (
     add_slopes_to_effort_capture_data,
     calculate_resampled_probability_by_window,
     calculate_six_months_slope,
+    complete_missing_months_in_year,
     extract_prob,
     extract_slopes,
     fit_resampled_cumulative,
@@ -63,6 +64,17 @@ def test_add_probability_to_effort_capture_data():
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
     assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
+
+
+def test_complete_missing_months_in_year():
+    incomplete_months = pd.DataFrame(
+        {
+            "Fecha": ["2015-01-01", "2015-06-01", "2015-10-01"],
+        }
+    )
+    obtained = complete_missing_months_in_year(incomplete_months)
+    expected_len = 12
+    assert obtained.shape[0] == expected_len
 
 
 def test_fill_missing_months_with_effort_one_and_captures_zero():

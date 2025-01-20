@@ -90,14 +90,14 @@ def test_fill_missing_months_with_effort_one_and_captures_zero():
     expected_len = 12
     assert obtained.shape[0] == expected_len
 
-    incomplete_months = pd.DataFrame(
+    incomplete_months_2 = pd.DataFrame(
         {
             "Esfuerzo": [1, 2, 3],
             "Capturas": [1, 1, 1],
             "Fecha": ["2015-04-01", "2015-10-01", "2015-12-01"],
         }
     )
-    obtained = fill_missing_months_with_effort_one_and_captures_zero(incomplete_months)
+    obtained = fill_missing_months_with_effort_one_and_captures_zero(incomplete_months_2)
     expected_len = 12
     assert obtained.shape[0] == expected_len
 

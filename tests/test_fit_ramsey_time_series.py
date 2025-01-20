@@ -69,7 +69,7 @@ def test_add_probability_to_effort_capture_data():
 def test_complete_missing_months_in_year():
     incomplete_months = pd.DataFrame(
         {
-            "Fecha": ["2015-01-01", "2015-06-01", "2015-10-01"],
+            "Fecha": ["2015-04-01", "2015-06-01", "2015-12-01"],
         }
     )
     obtained = complete_missing_months_in_year(incomplete_months)

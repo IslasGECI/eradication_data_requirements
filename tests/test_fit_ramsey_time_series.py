@@ -90,6 +90,17 @@ def test_fill_missing_months_with_effort_one_and_captures_zero():
     expected_len = 12
     assert obtained.shape[0] == expected_len
 
+    incomplete_months = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3],
+            "Capturas": [1, 1, 1],
+            "Fecha": ["2015-04-01", "2015-10-01", "2015-12-01"],
+        }
+    )
+    obtained = fill_missing_months_with_effort_one_and_captures_zero(incomplete_months)
+    expected_len = 12
+    assert obtained.shape[0] == expected_len
+
 
 time_series_for_ramsey = pd.DataFrame(
     {"CPUE": [1, 1 / 2, 1 / 3, 1 / 4, 1 / 5, 1 / 6], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}

@@ -13,6 +13,7 @@ from eradication_data_requirements import (
     fit_resampled_cumulative,
     paste_status,
     fit_resampled_captures,
+    fill_missing_months_with_effort_one_and_captures_zero,
     set_up_ramsey_time_series,
 )
 
@@ -62,6 +63,20 @@ def test_add_probability_to_effort_capture_data():
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
     assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
+
+
+def test_fill_missing_months_with_effort_one_and_captures_zero():
+
+    incomplete_months = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3],
+            "Capturas": [1, 1, 1],
+            "Fecha": ["2015-01-01", "2015-11-01", "2015-12-01"],
+        }
+    )
+    obtained = fill_missing_months_with_effort_one_and_captures_zero(incomplete_months)
+    expected_len = 12
+    assert obtained.shape[0] == expected_len
 
 
 time_series_for_ramsey = pd.DataFrame(

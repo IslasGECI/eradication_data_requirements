@@ -30,14 +30,30 @@ data = pd.DataFrame(
 
 
 def test_add_probability_to_effort_capture_data():
+
+    data_ = pd.DataFrame(
+        {
+            "Esfuerzo": [1, 2, 3, 4, 5, 6],
+            "Capturas": [1, 1, 1, 1, 1, 1],
+            "Fecha": [
+                "2018-01-01",
+                "2018-04-01",
+                "2018-08-01",
+                "2018-09-01",
+                "2018-10-01",
+                "2019-01-01",
+            ],
+        }
+    )
+
     bootstrapping_number = 10
     window_length = 6
-    obtained = add_probs_to_effort_capture_data(data, bootstrapping_number, window_length)
+    obtained = add_probs_to_effort_capture_data(data_, bootstrapping_number, window_length)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
     assert contains_date_column
-    assert obtained.Fecha[0] == data.Fecha[0]
+    assert obtained.Fecha[0] == data_.Fecha[0]
 
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
@@ -57,13 +73,24 @@ def test_add_probability_to_effort_capture_data():
         {
             "Esfuerzo": [1, 2, 3, 4, 5, 6, 0, 3, 0],
             "Capturas": [1, 1, 1, 1, 1, 1, 0, 1, 0],
-            "Fecha": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+            "Fecha": [
+                "2015-01-01",
+                "2015-02-01",
+                "2015-03-01",
+                "2015-08-01",
+                "2015-09-01",
+                "2015-11-01",
+                "2015-12-01",
+                "2016-01-01",
+                "2016-04-01",
+            ],
         }
     )
     obtained = add_probs_to_effort_capture_data(
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
-    assert obtained.shape[0] == (len(data_with_zero_effort_row) - 2)
+    are_all_efforts_not_zero = (obtained.Esfuerzo != 0).all()
+    assert are_all_efforts_not_zero
 
 
 def test_complete_missing_months_in_year():

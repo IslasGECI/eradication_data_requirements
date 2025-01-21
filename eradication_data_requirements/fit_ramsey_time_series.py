@@ -28,7 +28,8 @@ def fit_resampled_captures(datos, bootstrapping_number):
 
 def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
-    data_with_cpue = add_cpue(resized_data)
+    complete_months_data = fill_missing_months_with_effort_one_and_captures_zero(resized_data)
+    data_with_cpue = add_cpue(complete_months_data)
     probs_status = calculate_resampled_probability_by_window(
         data_with_cpue, bootstrapping_number, window_length
     )
@@ -50,13 +51,15 @@ def complete_missing_months_in_year(incomplete_data):
     date_index = pd.date_range(
         incomplete_data.index.min() + one_day - initial_year, incomplete_data.index.max(), freq="MS"
     )
-    return incomplete_data.reindex(date_index, fill_value=np.nan)
+    filled_months_df = incomplete_data.reindex(date_index, fill_value=np.nan)
+    filled_months_df["Fecha"] = filled_months_df.index.strftime("%Y-%m-%d").astype(str)
+    return filled_months_df
 
 
 def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
     data_copy["Esfuerzo"] = data_copy["Esfuerzo"].fillna(1)
     data_copy["Capturas"] = data_copy["Capturas"].fillna(0)
-    return data_copy
+    return data_copy.reset_index()
 
 
 def paste_status(data_copy, probs_status, column_name):

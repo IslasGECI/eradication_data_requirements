@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Removed
+
+## [2.1.1] - 2025-01-21
+
+### Changed
+- The function `add_probs_to_effort_capture_data` used by cli command and entrypoint `write_effort_and_captures_with_probability` now fill missing months in the data.
+- The function `plot_progress_probability()` now plots all rows given.
+
 ## [2.1.0] - 2025-01-15
 
 ### Added

@@ -50,6 +50,13 @@ def tests_get_slopes_distribution():
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
 
+    raw_data_without_captures = pd.DataFrame(
+        {"CPUE": [0, 0, 0, 0, 0, 0], "Capturas": [0, 0, 0, 0, 0, 0]}
+    )
+
+    with pytest.raises(TypeError):
+        get_slopes_distribution(raw_data_without_captures, bootstrap_number, seed)
+
 
 def test_get_slope():
     data = pd.DataFrame({"CPUE": [2, 1], "Cumulative_captures": [1, 2]})

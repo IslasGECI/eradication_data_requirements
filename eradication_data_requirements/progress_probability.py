@@ -20,7 +20,12 @@ def calculate_progress_probability(slopes_distribution):
 
 def get_slopes_distribution(raw_data, bootstrap_number, seed):
     rng = np.random.default_rng(seed)
-    return [get_slope(resample_eradication_data(raw_data, rng)) for _ in range(bootstrap_number)]
+    slopes_distribution = [
+        get_slope(resample_eradication_data(raw_data, rng)) for _ in range(bootstrap_number)
+    ]
+    if np.isnan(slopes_distribution).all():
+        raise TypeError("Empty slopes distribution")
+    return slopes_distribution
 
 
 def get_slope(data):

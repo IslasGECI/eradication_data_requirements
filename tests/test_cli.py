@@ -92,7 +92,7 @@ def test_write_progress_probability_figure():
     assert result.exit_code == 0
 
     gtt.assert_exist(figure_path)
-    gtt.if_exist_remove(figure_path)
+    # gtt.if_exist_remove(figure_path)
 
 
 monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"

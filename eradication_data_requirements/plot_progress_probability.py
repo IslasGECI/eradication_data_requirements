@@ -16,8 +16,8 @@ def plot_progress_probability(data):
     locs, labels = plt.xticks()
 
     labels = [item.get_text()[:7] for item in labels]
-    initial_tick = 6
-    tick_step = 2
+    initial_tick = 0
+    tick_step = 1
     plt.xticks(locs[initial_tick::tick_step], labels[initial_tick::tick_step], rotation=90)
     plt.ylabel("Progress probability", fontsize=20)
 

@@ -76,9 +76,6 @@ def tests_api_write_population_status_from_mixed_methods():
 def tests_api_write_population_status():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     bootstrapping_number = 100
-    output_path = "tests/data/population_status.json"
-
-    gtt.if_exist_remove(output_path)
 
     with open(input_path, "rb") as f:
         file_like = io.BytesIO(f.read())
@@ -86,15 +83,14 @@ def tests_api_write_population_status():
     request = {
         "url": "/write_population_status",
         "files": {"file": ("data.csv", file_like, "text/csv")},
-        "data": {"bootstrapping_number": bootstrapping_number, "output_path": output_path},
+        "data": {"bootstrapping_number": bootstrapping_number},
     }
 
     response = client.post(**request)
     assert response.status_code == 200
-    gtt.assert_exist(output_path)
-    with open(output_path) as json_file:
-        data = json.load(json_file)
-    assert "remanentes" in data.keys()
+    content = response.json()
+    assert "n0" in content
+    assert "remanentes" in content.keys()
 
 
 def tests_api_write_effort_and_captures_with_probability():

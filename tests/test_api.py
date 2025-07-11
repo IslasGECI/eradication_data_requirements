@@ -1,6 +1,7 @@
 from eradication_data_requirements import api
 from fastapi.testclient import TestClient
 import geci_test_tools as gtt
+import io
 import json
 import pandas as pd
 
@@ -79,8 +80,16 @@ def tests_api_write_population_status():
 
     gtt.if_exist_remove(output_path)
 
-    request = f"/write_population_status/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}"
-    response = client.get(request)
+    with open(input_path, "rb") as f:
+        file_like = io.BytesIO(f.read())
+
+    request = {
+        "url": "/write_population_status",
+        "files": {"file": ("data.csv", file_like, "text/csv")},
+        "data": {"bootstrapping_number": bootstrapping_number, "output_path": output_path},
+    }
+
+    response = client.post(**request)
     assert response.status_code == 200
     gtt.assert_exist(output_path)
     with open(output_path) as json_file:

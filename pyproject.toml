@@ -16,6 +16,7 @@ requires = [
     "httpx",
     "numpy",
     "pandas",
+    "python-multipart",
     "typer[all]"
 ]
 requires-python=">=3.9"

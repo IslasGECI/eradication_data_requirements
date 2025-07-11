@@ -1,7 +1,7 @@
-from fastapi import FastAPI
-import pandas as pd
+from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.responses import JSONResponse
 import json
-
+import pandas as pd
 
 from eradication_data_requirements.cli import (
     plot_cumulative_series_cpue_by_flight,
@@ -53,9 +53,13 @@ async def api_filter_by_method(input_path: str, method: str, output_path: str):
     filtered_data.to_csv(output_path, index=False)
 
 
-@api.get("/write_population_status")
-async def api_write_population_status(input_path: str, bootstrapping_number: int, output_path: str):
-    raw_data = pd.read_csv(input_path)
+@api.post("/write_population_status")
+async def api_write_population_status(
+    file: UploadFile = File(...),
+    bootstrapping_number: int = Form(...),
+    output_path: str = Form(...),
+):
+    raw_data = pd.read_csv(file.file)
     seed = 42
     json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
     write_json(output_path, json_content)

@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [3.0.0] - 2025-07-11
+### Changed
+- The entrypoint `/write_population_status` no longer reads or writes to disk; it now receives a POST request with a CSV file and returns a JSON response.
+
 ## [2.1.1] - 2025-01-21
 
 ### Changed

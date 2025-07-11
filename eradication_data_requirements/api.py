@@ -57,12 +57,11 @@ async def api_filter_by_method(input_path: str, method: str, output_path: str):
 async def api_write_population_status(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),
-    output_path: str = Form(...),
 ):
     raw_data = pd.read_csv(file.file)
     seed = 42
     json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
-    write_json(output_path, json_content)
+    return JSONResponse(content=json_content)
 
 
 @api.get("/write_population_status_from_mixed_methods")

@@ -97,16 +97,26 @@ def tests_api_write_effort_and_captures_with_probability():
     input_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     bootstrapping_number = 10
     output_path = "tests/data/api_effort_captures_probability.csv"
-
-    gtt.if_exist_remove(output_path)
-
     window_length = 6
-    request = f"/write_effort_and_captures_with_probability/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}&window_length={window_length}"
-    response = client.get(request)
+
+    with open(input_path, "rb") as f:
+        file_like = io.BytesIO(f.read())
+
+    request = {
+        "url": "/write_effort_and_captures_with_probability",
+        "files": {"file": ("data.csv", file_like, "text/csv")},
+        "data": {"bootstrapping_number": bootstrapping_number, "window_length": window_length},
+    }
+    response = client.post(**request)
     assert response.status_code == 200
 
-    gtt.assert_exist(output_path)
-    gtt.if_exist_remove(output_path)
+    content = response.json()
+    assert isinstance(content, list)
+    assert len(content) > 0
+    assert "Esfuerzo" in content[0]
+    assert "Capturas" in content[0]
+    assert "Fecha" in content[0]
+    assert "prob" in content[0]
 
 
 def tests_api_write_progress_probability_figure():

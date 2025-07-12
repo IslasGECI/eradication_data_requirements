@@ -4,6 +4,7 @@ import json
 import pandas as pd
 
 from eradication_data_requirements.cli import (
+    add_probs_to_effort_capture_data,
     plot_cumulative_series_cpue_by_flight,
     write_effort_and_captures_with_probability,
     write_progress_probability_figure,
@@ -13,12 +14,15 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
 )
-from eradication_data_requirements.calculate_intersect import get_population_status_dict
-from eradication_data_requirements.set_data import filter_data_by_method
-from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
-from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
-from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
+from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
+from eradication_data_requirements.calculate_intersect import get_population_status_dict
+from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
+from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
+from eradication_data_requirements.set_data import (
+    filter_data_by_method,
+    select_december_of_every_year,
+)
 
 api = FastAPI()
 
@@ -85,13 +89,19 @@ def write_json(output_path, json_content):
         json.dump(json_content, jsonfile)
 
 
-@api.get("/write_effort_and_captures_with_probability")
+@api.post("/write_effort_and_captures_with_probability")
 async def api_write_effort_and_captures_with_probability(
-    input_path: str, bootstrapping_number: int, output_path: str, window_length: int
+    file: UploadFile = File(...),
+    bootstrapping_number: int = Form(...),
+    window_length: int = Form(...),
 ):
-    write_effort_and_captures_with_probability(
-        input_path, bootstrapping_number, output_path, window_length
+    effort_capture_data = pd.read_csv(file.file)
+    effort_captures_with_slopes = add_probs_to_effort_capture_data(
+        effort_capture_data, bootstrapping_number, window_length
     )
+    yearly_results = select_december_of_every_year(effort_captures_with_slopes)
+    yearly_json = yearly_results.to_dict(orient="records")
+    return JSONResponse(content=yearly_json)
 
 
 @api.get("/write_probability_figure")

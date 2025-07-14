@@ -120,9 +120,6 @@ async def api_write_probability_figure(file: UploadFile = File(...)):
     return StreamingResponse(buffer, media_type="image/png")
 
 
-
-
-
 @api.get("/plot_custom_cpue_vs_cum_captures")
 async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str, output_path: str):
     plot_data_requirements_from_config_file(input_path, output_path, config_path)

@@ -121,16 +121,18 @@ def tests_api_write_effort_and_captures_with_probability():
 
 def tests_api_write_progress_probability_figure():
     input_path = "tests/data/progress_probability_tests.csv"
-    output_path = "tests/data/api_reggae_figure.png"
 
-    gtt.if_exist_remove(output_path)
+    with open(input_path, "rb") as f:
+        file_like = io.BytesIO(f.read())
 
-    request = f"/write_probability_figure/?input_path={input_path}&output_path={output_path}"
-    response = client.get(request)
+    request = {
+        "url": "/write_probability_figure",
+        "files": {"file": ("data.csv", file_like, "text/csv")},
+    }
+    response = client.post(**request)
     assert response.status_code == 200
-
-    gtt.assert_exist(output_path)
-    gtt.if_exist_remove(output_path)
+    assert response.headers["content-type"] == "image/png"
+    assert len(response.content) > 10  # sanity check: PNGs should not be tiny
 
 
 def tests_plot_cumulative_series_cpue_by_flight():

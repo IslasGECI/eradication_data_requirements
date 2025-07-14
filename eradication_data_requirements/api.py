@@ -1,8 +1,6 @@
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.responses import JSONResponse
-import json
-import pandas as pd
-
+from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
+from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
+from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.cli import (
     add_probs_to_effort_capture_data,
     plot_cumulative_series_cpue_by_flight,
@@ -14,15 +12,22 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
 )
-from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
-from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
-from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
+from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
 from eradication_data_requirements.set_data import (
     filter_data_by_method,
     select_december_of_every_year,
 )
+from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.responses import (
+    JSONResponse,
+    StreamingResponse,
+)
+import io
+import json
+import matplotlib.pyplot as plt
+import pandas as pd
 
 api = FastAPI()
 
@@ -104,9 +109,18 @@ async def api_write_effort_and_captures_with_probability(
     return JSONResponse(content=yearly_json)
 
 
-@api.get("/write_probability_figure")
-async def api_write_probability_figure(input_path: str, output_path: str):
-    write_progress_probability_figure(input_path, output_path)
+@api.post("/write_probability_figure")
+async def api_write_probability_figure(file: UploadFile = File(...)):
+    monthly_progress_probability = pd.read_csv(file.file)
+    plot_progress_probability(monthly_progress_probability)
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format="png", bbox_inches="tight")
+    buffer.seek(0)
+    plt.close()
+    return StreamingResponse(buffer, media_type="image/png")
+
+
+
 
 
 @api.get("/plot_custom_cpue_vs_cum_captures")

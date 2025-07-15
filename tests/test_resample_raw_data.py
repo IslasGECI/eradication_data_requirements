@@ -1,4 +1,4 @@
-from eradication_data_requirements import (
+from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
     validate_samples_to_fit,
     validate_cumulative_samples_to_fit,

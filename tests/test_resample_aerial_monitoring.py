@@ -1,6 +1,9 @@
 import pandas as pd
 
-from eradication_data_requirements import get_sum_distribution, get_monitoring_dict
+from eradication_data_requirements.resample_aerial_monitoring import (
+    get_sum_distribution,
+    get_monitoring_dict,
+)
 
 
 def test_get_monitoring_dict():

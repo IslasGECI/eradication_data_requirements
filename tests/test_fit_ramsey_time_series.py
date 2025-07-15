@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from eradication_data_requirements import (
+from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
     add_probs_to_effort_capture_data,
     add_slopes_to_effort_capture_data,

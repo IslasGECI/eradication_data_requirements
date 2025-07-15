@@ -5,7 +5,6 @@ import pytest
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
     add_probs_to_effort_capture_data,
-    add_slopes_to_effort_capture_data,
     calculate_resampled_probability_by_window,
     calculate_six_months_slope,
     complete_missing_months_in_year,
@@ -190,30 +189,6 @@ def test_extract_prob():
     expected = [1 / 6, 1 / 6]
     obtained = extract_prob(multi_month)
     assert obtained == expected
-
-
-def test_add_slopes_to_effort_capture_data():
-    obtained = add_slopes_to_effort_capture_data(data)
-    contains_slope_column = "slope" in obtained.columns
-    assert contains_slope_column
-    obtained_no_nan = obtained.slope.count()
-    expected_no_nan = 1
-    assert obtained_no_nan == expected_no_nan
-
-    effort_and_capture_data = pd.read_csv(
-        "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
-    )
-    obtained = add_slopes_to_effort_capture_data(effort_and_capture_data)
-    obtained_first_slope = obtained.slope.iloc[5]
-    expected_first_slope = 0.0000047
-    assert obtained_first_slope == pytest.approx(expected_first_slope, abs=1e-6)
-
-
-def test_get_status_slopes():
-    obtained = add_slopes_to_effort_capture_data(data)
-    obtained_len = len(obtained)
-    expected_len = 6
-    assert obtained_len == expected_len
 
 
 def test_set_up_ramsey_time_series():

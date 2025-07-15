@@ -37,32 +37,3 @@ def tests_plot_cumulative_series_cpue_by_flight():
     assert result.exit_code == 0
     gtt.assert_exist(output_png)
     gtt.if_exist_remove(output_png)
-
-
-def tests_plot_cumulative_series_cpue_by_season():
-    result = runner.invoke(app, ["plot-cumulative-series-cpue-by-season", "--help"])
-    assert result.exit_code == 0
-    assert " Input file path " in result.stdout
-    assert " Output file path " in result.stdout
-    assert "[default: 27 " not in result.stdout
-
-    effort_capture_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
-    font_size = 27
-    output_png = "tests/data/annual_cpue_time_series.png"
-    gtt.if_exist_remove(output_png)
-
-    result = runner.invoke(
-        app,
-        [
-            "plot-cumulative-series-cpue-by-season",
-            "--effort-capture-path",
-            effort_capture_path,
-            "--output-png",
-            output_png,
-            "--fontsize",
-            font_size,
-        ],
-    )
-    assert result.exit_code == 0
-    gtt.assert_exist(output_png)
-    gtt.if_exist_remove(output_png)

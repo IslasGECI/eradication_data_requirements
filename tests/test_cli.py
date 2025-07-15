@@ -1,8 +1,6 @@
-from eradication_data_requirements import app
+from eradication_data_requirements.cli import app
 import geci_test_tools as gtt
 
-import numpy as np
-import pandas as pd
 from typer.testing import CliRunner
 
 

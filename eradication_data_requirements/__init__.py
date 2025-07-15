@@ -2,7 +2,6 @@
 
 __version__ = "4.0.0"
 from .api import *  # noqa
-from .cli import *  # noqa
 from .calculate_eradication_progress import *  # noqa
 from .calculate_intersect import *  # noqa
 from .data_requirements_plot import *  # noqa

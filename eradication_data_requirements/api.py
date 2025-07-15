@@ -4,8 +4,6 @@ from eradication_data_requirements.calculate_intersect import get_population_sta
 from eradication_data_requirements.cli import (
     add_probs_to_effort_capture_data,
     plot_cumulative_series_cpue_by_flight,
-    write_effort_and_captures_with_probability,
-    write_progress_probability_figure,
 )
 from eradication_data_requirements.data_requirements_plot import (
     traps_data_requirements_plot,

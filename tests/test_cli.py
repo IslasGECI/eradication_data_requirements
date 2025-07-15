@@ -68,67 +68,7 @@ def tests_plot_cumulative_series_cpue_by_season():
     gtt.if_exist_remove(output_png)
 
 
-def test_write_progress_probability_figure():
-    result = runner.invoke(app, ["write-progress-probability-figure", "--help"])
-    assert " Input file path " in result.stdout
-    assert " Output file path " in result.stdout
-    assert "[default: " not in result.stdout
-
-    data_path = "tests/data/progress_probability_tests.csv"
-    figure_path = "tests/data/progress_probability_tests.png"
-
-    gtt.if_exist_remove(figure_path)
-
-    result = runner.invoke(
-        app,
-        [
-            "write-progress-probability-figure",
-            "--data-path",
-            data_path,
-            "--figure-path",
-            figure_path,
-        ],
-    )
-    assert result.exit_code == 0
-
-    gtt.assert_exist(figure_path)
-    gtt.if_exist_remove(figure_path)
-
-
 monthly_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
-
-
-def test_write_effort_and_capture_with_probability():
-    output_path = "tests/data/probability_time_series.csv"
-
-    window_length = 6
-    result = runner.invoke(app, ["write-effort-and-captures-with-probability", "--help"])
-    assert " Input file path " in result.stdout
-    assert " Bootstrapping number " in result.stdout
-    assert " Output file path " in result.stdout
-    assert " Window length for removal rate " in result.stdout
-
-    gtt.if_exist_remove(output_path)
-
-    result = runner.invoke(
-        app,
-        [
-            "write-effort-and-captures-with-probability",
-            "--input-path",
-            monthly_path,
-            "--bootstrapping-number",
-            100,
-            "--output-path",
-            output_path,
-            "--window-length",
-            window_length,
-        ],
-    )
-    assert result.exit_code == 0
-    gtt.assert_exist(output_path)
-    obtained = pd.read_csv(output_path)
-    assert obtained.shape[1] == 4
-    gtt.if_exist_remove(output_path)
 
 
 def test_write_effort_and_capture_with_slopes():

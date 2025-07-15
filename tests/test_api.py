@@ -96,7 +96,6 @@ def tests_api_write_population_status():
 def tests_api_write_effort_and_captures_with_probability():
     input_path = "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     bootstrapping_number = 10
-    output_path = "tests/data/api_effort_captures_probability.csv"
     window_length = 6
 
     with open(input_path, "rb") as f:

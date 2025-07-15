@@ -1,14 +1,11 @@
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_slopes_to_effort_capture_data,
-    add_probs_to_effort_capture_data,
 )
-from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_season,
     calculate_cpue_and_cumulative_by_flight,
     plot_cumulative_series_cpue,
 )
-from eradication_data_requirements.set_data import select_december_of_every_year
 
 import pandas as pd
 import typer

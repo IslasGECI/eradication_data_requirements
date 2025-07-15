@@ -1,10 +1,7 @@
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
-from eradication_data_requirements.cli import (
-    add_probs_to_effort_capture_data,
-    plot_cumulative_series_cpue_by_flight,
-)
+from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_flight
 from eradication_data_requirements.data_requirements_plot import (
     traps_data_requirements_plot,
     plot_comparative_catch_curves,
@@ -17,6 +14,8 @@ from eradication_data_requirements.set_data import (
     filter_data_by_method,
     select_december_of_every_year,
 )
+from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
+
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import (
     JSONResponse,

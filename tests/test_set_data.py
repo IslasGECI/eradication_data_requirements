@@ -3,6 +3,7 @@ import pandas as pd
 from eradication_data_requirements.set_data import (
     filter_data_by_method,
     select_december_of_every_year,
+    select_month_by_window_length,
 )
 
 
@@ -21,23 +22,33 @@ def test_filter_data_by_method():
     assert "Acumulado" in obtained.columns
 
 
+data = pd.DataFrame(
+    {
+        "Fecha": [
+            "2014-05-01",
+            "2014-06-01",
+            "2014-09-01",
+            "2014-12-01",
+            "2015-03-01",
+            "2015-05-01",
+            "2015-07-01",
+            "2015-12-01",
+            "2016-01-01",
+        ],
+        "prob": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    }
+)
+
+
+def tests_select_month_by_window_length():
+    window_length = 12
+    obtained = select_month_by_window_length(data, window_length)
+    expected_number_of_rows = 3
+    obtained_number_of_rows = len(obtained)
+    assert obtained_number_of_rows == expected_number_of_rows
+
+
 def test_select_dec_of_every_year():
-    data = pd.DataFrame(
-        {
-            "Fecha": [
-                "2014-05-01",
-                "2014-06-01",
-                "2014-09-01",
-                "2014-12-01",
-                "2015-03-01",
-                "2015-05-01",
-                "2015-07-01",
-                "2015-12-01",
-                "2016-01-01",
-            ],
-            "prob": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-        }
-    )
     obtained = select_december_of_every_year(data)
     expected_number_of_rows = 3
     obtained_number_of_rows = len(obtained)

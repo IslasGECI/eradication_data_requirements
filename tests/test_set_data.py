@@ -41,9 +41,30 @@ data = pd.DataFrame(
 
 
 def tests_select_month_by_window_length():
+    data = pd.DataFrame(
+        {
+            "Fecha": [
+                "2014-01-01",
+                "2014-02-01",
+                "2014-03-01",
+                "2014-04-01",
+                "2014-05-01",
+                "2014-06-01",
+                "2014-07-01",
+                "2014-08-01",
+                "2014-09-01",
+                "2014-10-01",
+                "2014-11-01",
+                "2014-12-01",
+                "2015-01-01",
+                "2015-02-01",
+            ],
+            "prob": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        }
+    )
     window_length = 12
     obtained = select_month_by_window_length(data, window_length)
-    expected_number_of_rows = 3
+    expected_number_of_rows = 2
     obtained_number_of_rows = len(obtained)
     assert obtained_number_of_rows == expected_number_of_rows
 

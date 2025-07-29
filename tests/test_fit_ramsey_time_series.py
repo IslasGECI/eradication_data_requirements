@@ -274,10 +274,12 @@ def test_calculate_six_months_slope():
 def test_calculate_resampled_probability_by_window():
     bootstrapping_number = 10
     window_length = 6
+    data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
+    data["CPUE"] = data["Capturas"] / data["Esfuerzo"]
     obtained_probability_by_window = calculate_resampled_probability_by_window(
         data, bootstrapping_number, window_length
     )
-    expected_probability_by_window = 1
+    expected_probability_by_window = 3
     obtained_number_of_probabilities = len(obtained_probability_by_window)
     assert obtained_number_of_probabilities == expected_probability_by_window
 
@@ -286,7 +288,15 @@ def test_calculate_resampled_probability_by_window():
             "Esfuerzo": [1, 2, 3, 4, 5, 6, 7],
             "CPUE": [1, 2, 3, 4, 5, 6, 7],
             "Capturas": [1, 1, 1, 1, 1, 1, 1],
-            "Fecha": [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+            "Fecha": [
+                "2018-01-01",
+                "2018-02-01",
+                "2018-03-01",
+                "2018-04-01",
+                "2018-05-01",
+                "2018-06-01",
+                "2018-07-01",
+            ],
         }
     )
     obtained_probability_by_window = calculate_resampled_probability_by_window(

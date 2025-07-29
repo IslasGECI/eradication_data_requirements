@@ -73,6 +73,7 @@ def tests_select_month_by_window_length():
     expected_number_of_rows = 3
     obtained_number_of_rows = len(obtained)
     assert obtained_number_of_rows == expected_number_of_rows
+    assert all(obtained == [5, 11, 13])
 
 
 def test_select_dec_of_every_year():

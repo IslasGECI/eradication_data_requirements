@@ -11,3 +11,9 @@ def select_december_of_every_year(data):
     month_to_plot = "-12-"
     cutted_months = data[data.Fecha.str.contains(month_to_plot)]
     return pd.concat([cutted_months, data.iloc[-1:]])
+
+
+def select_month_by_window_length(data, window_length):
+    month_to_plot = "-12-"
+    cutted_months = data[data.Fecha.str.contains(month_to_plot)]
+    return pd.concat([cutted_months, data.iloc[-1:]])

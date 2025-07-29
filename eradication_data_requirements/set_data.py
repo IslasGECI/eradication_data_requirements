@@ -1,4 +1,5 @@
 import pandas as pd
+from functools import reduce
 
 
 def filter_data_by_method(raw_data, method):
@@ -14,6 +15,13 @@ def select_december_of_every_year(data):
 
 
 def select_month_by_window_length(data, window_length):
-    month_to_plot = "-12-"
-    cutted_months = data[data.Fecha.str.contains(month_to_plot)]
+
+    month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % window_length == 0]
+    print(month_to_plot)
+    mask = reduce(
+        lambda x, y: x | y,
+        [data["Fecha"].str.contains(pattern, case=False) for pattern in month_to_plot],
+    )
+    cutted_months = data[mask]
+    print(cutted_months)
     return pd.concat([cutted_months, data.iloc[-1:]])

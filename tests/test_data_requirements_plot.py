@@ -2,6 +2,7 @@ import os
 import hashlib
 import pandas as pd
 import numpy as np
+import pytest
 
 import eradication_data_requirements as dt
 from eradication_data_requirements.data_requirements_plot import plot_catch_curve
@@ -36,13 +37,16 @@ def test_data_requirements_plot():
 
 def tests_plot_catch_curve():
     data = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
+        {"CPUE": [500, 19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7]}
     )
     _, ax = dt.geci_plot()
     label = "Isla"
     obtained_ax = plot_catch_curve(data, ax, label)
     obtained_label = obtained_ax.get_children()[1].get_label()
     assert obtained_label == label
+    obtained_ydata = obtained_ax.get_children()[0].get_ydata()[0]
+    expected_ydata = 242.85714
+    assert pytest.approx(obtained_ydata, abs=0.001) == expected_ydata
 
 
 def test_goat_data_requirement_plot():

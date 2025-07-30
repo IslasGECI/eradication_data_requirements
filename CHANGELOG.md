@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [4.0.1] - 2025-07-30
+### Fixed
+- The function `calculate_resampled_probability_by_window()` now uses the `window_length` argument to calculate only the months of interest, instead of the entire year.
+
 ## [4.0.0] - 2025-07-15
 ### Changed
 - The entrypoints `/write_effort_and_captures_with_probability` and `/write_probability_figure` no longer reads or writes to disk; it now receives a POST request with a CSV file and returns a JSON response.

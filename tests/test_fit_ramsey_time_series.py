@@ -3,8 +3,8 @@ import numpy as np
 
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
-    xxadd_probs_to_effort_capture_data,
-    xxcalculate_resampled_probability_by_window,
+    add_probs_to_effort_capture_data,
+    calculate_resampled_probability_by_window,
     calculate_six_months_slope,
     complete_missing_months_in_year,
     extract_prob,
@@ -46,7 +46,7 @@ def test_add_probability_to_effort_capture_data():
 
     bootstrapping_number = 10
     window_length = 6
-    obtained = xxadd_probs_to_effort_capture_data(data_, bootstrapping_number, window_length)
+    obtained = add_probs_to_effort_capture_data(data_, bootstrapping_number, window_length)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
@@ -56,7 +56,7 @@ def test_add_probability_to_effort_capture_data():
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = xxadd_probs_to_effort_capture_data(
+    obtained = add_probs_to_effort_capture_data(
         effort_and_capture_data, bootstrapping_number, window_length
     )
     obtained_probs = obtained.prob
@@ -84,7 +84,7 @@ def test_add_probability_to_effort_capture_data():
             ],
         }
     )
-    obtained = xxadd_probs_to_effort_capture_data(
+    obtained = add_probs_to_effort_capture_data(
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
     are_all_efforts_not_zero = (obtained.Esfuerzo != 0).all()
@@ -275,7 +275,7 @@ def test_calculate_resampled_probability_by_window():
     window_length = 6
     data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
     data["CPUE"] = data["Capturas"] / data["Esfuerzo"]
-    obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
         data, bootstrapping_number, window_length
     )
     expected_probability_by_window = 3
@@ -298,7 +298,7 @@ def test_calculate_resampled_probability_by_window():
             ],
         }
     )
-    obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
         data_for_two_probabilities, bootstrapping_number, window_length
     )
     expected_probability_by_window = 2

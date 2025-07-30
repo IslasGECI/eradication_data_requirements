@@ -4,7 +4,6 @@ import pytest
 
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
-    add_probs_to_effort_capture_data,
     xxadd_probs_to_effort_capture_data,
     xxcalculate_resampled_probability_by_window,
     calculate_six_months_slope,
@@ -53,20 +52,20 @@ def test_add_probability_to_effort_capture_data():
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns
     assert contains_date_column
-    assert obtained.Fecha[0] == data_.Fecha[0]
+    assert obtained.Fecha[12] == data_.Fecha[5]
 
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = add_probs_to_effort_capture_data(
+    obtained = xxadd_probs_to_effort_capture_data(
         effort_and_capture_data, bootstrapping_number, window_length
     )
-    obtained_probs = obtained.prob.iloc[6:]
+    obtained_probs = obtained.prob
     is_positive = obtained_probs >= 0
     assert is_positive.all()
 
     obtained_length = obtained.shape[0]
-    expected_length = 13
+    expected_length = 3
     assert obtained_length == expected_length
 
     data_with_zero_effort_row = pd.DataFrame(
@@ -86,7 +85,7 @@ def test_add_probability_to_effort_capture_data():
             ],
         }
     )
-    obtained = add_probs_to_effort_capture_data(
+    obtained = xxadd_probs_to_effort_capture_data(
         data_with_zero_effort_row, bootstrapping_number, window_length
     )
     are_all_efforts_not_zero = (obtained.Esfuerzo != 0).all()

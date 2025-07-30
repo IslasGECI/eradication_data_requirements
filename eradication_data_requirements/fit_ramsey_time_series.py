@@ -37,9 +37,8 @@ def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_l
     probs_status = xxcalculate_resampled_probability_by_window(
         data_with_cpue, bootstrapping_number, window_length
     )
-    print("probs_status", probs_status)
-    print("data_with_cpue", data_with_cpue)
     data_with_cpue = xxpaste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
+    data_with_cpue.dropna(subset=["prob"], inplace=True)
     return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 

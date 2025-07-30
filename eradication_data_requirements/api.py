@@ -10,11 +10,8 @@ from eradication_data_requirements.data_requirements_plot import (
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
-from eradication_data_requirements.set_data import (
-    filter_data_by_method,
-    select_december_of_every_year,
-)
-from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
+from eradication_data_requirements.set_data import filter_data_by_method
+from eradication_data_requirements.fit_ramsey_time_series import xxadd_probs_to_effort_capture_data
 
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import (
@@ -98,11 +95,10 @@ async def api_write_effort_and_captures_with_probability(
     window_length: int = Form(...),
 ):
     effort_capture_data = pd.read_csv(file.file)
-    effort_captures_with_slopes = add_probs_to_effort_capture_data(
+    effort_captures_with_slopes = xxadd_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length
     )
-    yearly_results = select_december_of_every_year(effort_captures_with_slopes)
-    yearly_json = yearly_results.to_dict(orient="records")
+    yearly_json = effort_captures_with_slopes.to_dict(orient="records")
     return JSONResponse(content=yearly_json)
 
 

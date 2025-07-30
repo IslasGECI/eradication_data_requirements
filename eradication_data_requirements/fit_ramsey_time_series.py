@@ -26,7 +26,7 @@ def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_l
     probs_status = xxcalculate_resampled_probability_by_window(
         data_with_cpue, bootstrapping_number, window_length
     )
-    data_with_cpue = xxpaste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
+    data_with_cpue = paste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
     data_with_cpue.dropna(subset=["prob"], inplace=True)
     return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
@@ -56,20 +56,10 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
     return data_copy.reset_index()
 
 
-def xxpaste_status_by_window(data_copy, probs_status, column_name, window_length):
+def paste_status_by_window(data_copy, probs_status, column_name, window_length):
     df = add_empty_column(data_copy, column_name)
     indexes_with_probability = select_month_by_window_length(data_copy, window_length)
     df.loc[indexes_with_probability.unique(), column_name] = probs_status
-    return df
-
-
-def paste_status_by_window(data_copy, probs_status, column_name, window_length):
-    df = add_empty_column(data_copy, column_name)
-    number_of_empty_rows = window_length - 1
-    assert len(df.loc[number_of_empty_rows:, column_name]) == len(
-        probs_status
-    ), "Different dimensions"
-    df.loc[number_of_empty_rows:, column_name] = probs_status
     return df
 
 

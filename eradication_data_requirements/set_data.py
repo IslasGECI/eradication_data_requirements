@@ -8,14 +8,7 @@ def filter_data_by_method(raw_data, method):
     return filtered_by_method
 
 
-def select_december_of_every_year(data):
-    month_to_plot = "-12-"
-    cutted_months = data[data.Fecha.str.contains(month_to_plot)]
-    return pd.concat([cutted_months, data.iloc[-1:]])
-
-
 def select_month_by_window_length(data, window_length):
-
     month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % window_length == 0]
     mask = reduce(
         lambda x, y: x | y,

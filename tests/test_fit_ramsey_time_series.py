@@ -5,7 +5,7 @@ import pytest
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
     add_probs_to_effort_capture_data,
-    calculate_resampled_probability_by_window,
+    xxadd_probs_to_effort_capture_data,
     xxcalculate_resampled_probability_by_window,
     calculate_six_months_slope,
     complete_missing_months_in_year,
@@ -48,7 +48,7 @@ def test_add_probability_to_effort_capture_data():
 
     bootstrapping_number = 10
     window_length = 6
-    obtained = add_probs_to_effort_capture_data(data_, bootstrapping_number, window_length)
+    obtained = xxadd_probs_to_effort_capture_data(data_, bootstrapping_number, window_length)
     contains_slope_column = "prob" in obtained.columns
     assert contains_slope_column
     contains_date_column = "Fecha" in obtained.columns

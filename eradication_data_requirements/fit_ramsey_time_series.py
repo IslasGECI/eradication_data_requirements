@@ -30,6 +30,19 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
     return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
 
 
+def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
+    resized_data = data_copy[data_copy.Esfuerzo != 0]
+    complete_months_data = fill_missing_months_with_effort_one_and_captures_zero(resized_data)
+    data_with_cpue = add_cpue(complete_months_data)
+    probs_status = xxcalculate_resampled_probability_by_window(
+        data_with_cpue, bootstrapping_number, window_length
+    )
+    print("probs_status", probs_status)
+    print("data_with_cpue", data_with_cpue)
+    data_with_cpue = xxpaste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
+    return data_with_cpue[["Fecha", "Esfuerzo", "Capturas", "prob"]]
+
+
 def fill_missing_months_with_effort_one_and_captures_zero(effort_and_capture_data):
     data_copy = effort_and_capture_data.copy()
     data_with_all_months = complete_missing_months_in_year(data_copy)
@@ -58,6 +71,14 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
 def paste_status(data_copy, probs_status, column_name):
     window_length = 6
     df = paste_status_by_window(data_copy, probs_status, column_name, window_length)
+    return df
+
+
+def xxpaste_status_by_window(data_copy, probs_status, column_name, window_length):
+    df = add_empty_column(data_copy, column_name)
+    number_of_empty_rows = window_length - 1
+    indexes_with_probability = select_month_by_window_length(data_copy, window_length)
+    df.loc[indexes_with_probability, column_name] = probs_status
     return df
 
 

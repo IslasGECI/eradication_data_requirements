@@ -60,7 +60,7 @@ def set_cumulative_captures_column(data, config):
 
 
 def plot_catch_curve(data, ax, label=None):
-    theta = fit_ramsey_plot(data.drop([0]))
+    theta = fit_ramsey_plot(data)
     y_line = theta[1] + theta[0] * data["Cumulative_captures"]
     ax.plot(data["Cumulative_captures"], y_line, "r")
     ax.scatter(data["Cumulative_captures"], data["CPUE"], marker="o", label=label)

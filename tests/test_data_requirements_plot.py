@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 
 import eradication_data_requirements as dt
+from eradication_data_requirements.data_requirements_plot import plot_catch_curve
 
 import matplotlib as mpl
 
@@ -16,7 +17,7 @@ def test_plot_comparative_catch_curves():
     dt.plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "cbbe85a241bb21910a44e3404620dd03"
+    expected_hash = "21779a148ae92510f76747be17d76272"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 
@@ -28,9 +29,20 @@ def test_data_requirements_plot():
     dt.traps_data_requirements_plot(input_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "d20af07ba63a25eda2abfec4431ced30"
+    expected_hash = "605d9633501d1790bd2f19eb01ab3c3c"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
+
+
+def tests_plot_catch_curve():
+    data = pd.DataFrame(
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
+    )
+    _, ax = dt.geci_plot()
+    label = "Isla"
+    obtained_ax = plot_catch_curve(data, ax, label)
+    obtained_label = obtained_ax.get_children()[1].get_label()
+    assert obtained_label == label
 
 
 def test_goat_data_requirement_plot():

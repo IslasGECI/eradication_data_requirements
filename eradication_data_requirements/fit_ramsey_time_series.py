@@ -9,6 +9,7 @@ from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
     resample_valid_cumulative_data,
 )
+from eradication_data_requirements.set_data import select_month_by_window_length
 
 
 def fit_resampled_captures(datos, bootstrapping_number):
@@ -98,6 +99,17 @@ def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_numbe
             ramsey_series.iloc[(i - window_length) : i], bootstrapping_number, seed
         )
         for i in range(window_length, len(ramsey_series) + 1)
+    ]
+
+
+def xxcalculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
+    seed = 42
+    indexes_to_resample = select_month_by_window_length(ramsey_series, window_length)
+    return [
+        get_progress_probability(
+            ramsey_series.loc[(i - window_length) : i], bootstrapping_number, seed
+        )
+        for i in indexes_to_resample
     ]
 
 

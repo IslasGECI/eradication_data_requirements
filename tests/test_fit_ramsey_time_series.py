@@ -11,7 +11,7 @@ from eradication_data_requirements.fit_ramsey_time_series import (
     extract_prob,
     extract_slopes,
     fit_resampled_cumulative,
-    paste_status,
+    xxpaste_status_by_window,
     fit_resampled_captures,
     fill_missing_months_with_effort_one_and_captures_zero,
     set_up_ramsey_time_series,
@@ -314,10 +314,47 @@ def test_extract_slopes():
     assert obtained_slopes == expected_slopes
 
 
-def test_paste_status():
-    length_one_dataframe = pd.DataFrame({"slope": [1 / 2]})
-    with pytest.raises(AssertionError, match=r"^Different dimensions$"):
-        paste_status(ramsey_time_series, length_one_dataframe, column_name="slope")
+def test_paste_status_by_window():
+    data_with_cpue = pd.DataFrame(
+        {
+            "CPUE": [
+                1,
+                1 / 2,
+                1 / 3,
+                1 / 4,
+                1 / 5,
+                1 / 6,
+                1 / 2,
+                2 / 2,
+                1 / 2,
+                1 / 2,
+                2 / 2,
+                1 / 2,
+            ],
+            "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14],
+            "Fecha": [
+                "2018-01-01",
+                "2018-02-01",
+                "2018-03-01",
+                "2018-04-01",
+                "2018-05-01",
+                "2018-06-01",
+                "2018-07-01",
+                "2018-08-01",
+                "2018-09-01",
+                "2018-10-01",
+                "2018-11-01",
+                "2018-12-01",
+            ],
+        }
+    )
+    calculated_slope = [1 / 2]
+    window_length = 12
+    column_name = "slope"
+    obtained = xxpaste_status_by_window(
+        data_with_cpue, calculated_slope, column_name, window_length
+    )
+    assert obtained.loc[11, "slope"] == calculated_slope[0]
 
 
 def test_add_empty_column():

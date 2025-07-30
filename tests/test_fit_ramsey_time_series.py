@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import pytest
 
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,

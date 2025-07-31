@@ -3,7 +3,7 @@ from eradication_data_requirements.calculate_eradication_progress import Progres
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_flight
 from eradication_data_requirements.data_requirements_plot import (
-    plot_traps_data_requirements,
+    xxplot_traps_data_requirements,
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
 )
@@ -120,7 +120,9 @@ async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str
 
 @api.get("/plot_cpue_vs_cum_captures")
 async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
-    plot_traps_data_requirements(input_path, output_path)
+    data = pd.read_csv(input_path)
+    xxplot_traps_data_requirements(data)
+    plt.savefig(output_path, dpi=300, transparent=True)
 
 
 @api.get("/plot_cumulative_series_cpue_by_flight")

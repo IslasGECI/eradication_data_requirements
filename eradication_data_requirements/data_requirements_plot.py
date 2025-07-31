@@ -47,12 +47,17 @@ def plot_data_requirements_from_config_file(input_path, output_path, config_path
 
 
 def data_requirements_plot(data, output_path, config_plot):
+    ax = xxdata_requirements_plot(data, config_plot)
+    plt.savefig(output_path, dpi=300, transparent=True)
+    return ax
+
+
+def xxdata_requirements_plot(data, config_plot):
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()
     ax = plot_catch_curve(configured_data, ax)
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel(config_plot["ylabel"], size=15)
-    plt.savefig(output_path, dpi=300, transparent=True)
     return ax
 
 

@@ -189,18 +189,19 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
     with open(config_path, "rb") as f:
         config_like = io.BytesIO(f.read())
 
+    format = "png"
     request = {
         "url": "/plot_custom_cpue_vs_cum_captures",
         "files": {
             "file": ("data.csv", file_like, "text/csv"),
             "config": ("config.json", config_like, "application/json"),
+            "data": {"format": format},
         },
     }
 
     response = client.post(**request)
     assert response.status_code == 200
-    assert response.headers["content-type"] == "image/png"
-    # sanity check: images should not be tiny
+    assert response.headers["content-type"] == f"image/{format}"
     assert len(response.content) > 10
 
 

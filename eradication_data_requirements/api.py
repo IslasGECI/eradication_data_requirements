@@ -5,7 +5,7 @@ from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_fli
 from eradication_data_requirements.data_requirements_plot import (
     plot_traps_data_requirements,
     plot_comparative_catch_curves,
-    plot_data_requirements_from_config_file,
+    xxplot_data_requirements_from_config_file,
 )
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_progress_probability import plot_progress_probability
@@ -115,7 +115,11 @@ async def api_write_probability_figure(file: UploadFile = File(...)):
 
 @api.get("/plot_custom_cpue_vs_cum_captures")
 async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str, output_path: str):
-    plot_data_requirements_from_config_file(input_path, output_path, config_path)
+    with open(config_path, encoding="utf8") as config_file:
+        config_plot = json.load(config_file)
+    data = pd.read_csv(input_path)
+    xxplot_data_requirements_from_config_file(data, output_path, config_plot)
+    plt.savefig(output_path, dpi=300, transparent=True)
 
 
 @api.post("/plot_cpue_vs_cum_captures")

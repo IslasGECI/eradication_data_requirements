@@ -113,13 +113,18 @@ async def api_write_probability_figure(file: UploadFile = File(...)):
     return StreamingResponse(buffer, media_type="image/png")
 
 
-@api.get("/plot_custom_cpue_vs_cum_captures")
-async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str, output_path: str):
-    with open(config_path, encoding="utf8") as config_file:
-        config_plot = json.load(config_file)
-    data = pd.read_csv(input_path)
+@api.post("/plot_custom_cpue_vs_cum_captures")
+async def api_plot_custom_cpue_vs_cum_captures(
+    file: UploadFile = File(...), config: UploadFile = File(...)
+):
+    config_plot = json.load(config.file)
+    data = pd.read_csv(file.file)
     data_requirements_plot(data, config_plot)
-    plt.savefig(output_path, dpi=300, transparent=True)
+    buffer = io.BytesIO()
+    plt.savefig(buffer, dpi=300, transparent=True)
+    buffer.seek(0)
+    plt.close()
+    return StreamingResponse(buffer, media_type="image/png")
 
 
 @api.post("/plot_cpue_vs_cum_captures")

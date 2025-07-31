@@ -203,11 +203,6 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
     assert response.headers["content-type"] == f"image/{format}"
     assert len(response.content) > 10
 
-    output_path = "tests/data/cpue_vs_cumulative_from_config.eps"
-    import matplotlib.pyplot as plt
-
-    plt.savefig(output_path, dpi=300, transparent=True)
-
 
 def tests_plot_comparative_catch_curves():
     socorro_path = "tests/data/cumulative_effort_and_captures_for_year.csv"

@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import json
 import warnings
 
 from geci_plots import geci_plot

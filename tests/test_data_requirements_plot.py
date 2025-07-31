@@ -36,7 +36,7 @@ def test_data_requirements_plot():
     output_path = "/workdir/tests/data/yearly_ramsey_plot.png"
     remove_file_if_exists(output_path)
     data = pd.read_csv(input_path)
-    ax = plot_traps_data_requirements(data)
+    plot_traps_data_requirements(data)
     mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()

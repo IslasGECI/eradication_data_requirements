@@ -47,8 +47,7 @@ def test_data_requirements_plot():
 
 def tests_plot_catch_curve():
     data = pd.DataFrame(
-        {"CPUE": [500, 19.5, 19, 18.5, 18, 17.5, 17],
-            "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7]}
+        {"CPUE": [500, 19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7]}
     )
     _, ax = geci_plot()
     label = "Isla"
@@ -85,24 +84,20 @@ def remove_file_if_exists(output_path):
 
 def test_fit_ramsey_plot():
     data = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
-            "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
     )
     obtained_parameters = fit_ramsey_plot(data)
     expected_parameters = np.array([-0.5, 20.0])
-    np.testing.assert_array_almost_equal(
-        obtained_parameters, expected_parameters)
+    np.testing.assert_array_almost_equal(obtained_parameters, expected_parameters)
 
     data_error = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
-            "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
     )
     obtained_empty_slope_and_intercept = fit_ramsey_plot(data_error)
     assert all(np.isnan(obtained_empty_slope_and_intercept))
 
     data_without_error = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
-            "Cumulative_captures": [1, 1, 1, 1, 1, 2]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 2]}
     )
     assert isinstance(fit_ramsey_plot(data_without_error), type(np.array(0)))
 

@@ -46,11 +46,6 @@ def plot_data_requirements_from_config_file(input_path, output_path, config_path
     return xxdata_requirements_plot(data, output_path, config_plot)
 
 
-def data_requirements_plot(input_path, output_path, config_plot):
-    data = pd.read_csv(input_path)
-    return xxdata_requirements_plot(data, output_path, config_plot)
-
-
 def xxdata_requirements_plot(data, output_path, config_plot):
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()

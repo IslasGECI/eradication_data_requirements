@@ -6,11 +6,11 @@ import pytest
 
 from geci_plots import geci_plot
 from eradication_data_requirements.data_requirements_plot import (
-    plot_comparative_catch_curves,
-    plot_traps_data_requirements,
-    plot_catch_curve,
     fit_ramsey_plot,
+    plot_catch_curve,
+    plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
+    plot_traps_data_requirements,
     set_cumulative_captures_column,
 )
 

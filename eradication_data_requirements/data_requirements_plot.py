@@ -50,12 +50,6 @@ def plot_data_requirements_from_config_file(input_path, output_path, config_path
     return ax
 
 
-def data_requirements_plot(data, output_path, config_plot):
-    ax = xxdata_requirements_plot(data, config_plot)
-    plt.savefig(output_path, dpi=300, transparent=True)
-    return ax
-
-
 def xxdata_requirements_plot(data, config_plot):
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()

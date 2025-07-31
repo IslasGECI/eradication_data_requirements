@@ -68,6 +68,7 @@ def test_goat_data_requirement_plot():
         config_plot = json.load(config_file)
     data = pd.read_csv(input_path)
     obtained_plot = xxplot_data_requirements_from_config_file(data, output_path, config_plot)
+    mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     assert os.path.exists(output_path)
     assert isinstance(obtained_plot, mpl.axes._axes.Axes)
 

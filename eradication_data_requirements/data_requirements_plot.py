@@ -36,14 +36,18 @@ def plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path):
 def plot_traps_data_requirements(input_path, output_path):
     config_plot = {"ylabel": "CPUE (captures/night traps)", "cumulative": "Cumulative_captures"}
     data = pd.read_csv(input_path)
-    return data_requirements_plot(data, output_path, config_plot)
+    ax = xxdata_requirements_plot(data, config_plot)
+    plt.savefig(output_path, dpi=300, transparent=True)
+    return ax
 
 
 def plot_data_requirements_from_config_file(input_path, output_path, config_path):
     with open(config_path, encoding="utf8") as config_file:
         config_plot = json.load(config_file)
     data = pd.read_csv(input_path)
-    return data_requirements_plot(data, output_path, config_plot)
+    ax = xxdata_requirements_plot(data, config_plot)
+    plt.savefig(output_path, dpi=300, transparent=True)
+    return ax
 
 
 def data_requirements_plot(data, output_path, config_plot):

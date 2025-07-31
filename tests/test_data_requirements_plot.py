@@ -27,7 +27,7 @@ def test_data_requirements_plot():
     input_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
     output_path = "/workdir/tests/data/yearly_ramsey_plot.png"
     remove_file_if_exists(output_path)
-    dt.traps_data_requirements_plot(input_path, output_path)
+    dt.plot_traps_data_requirements(input_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
     expected_hash = "605d9633501d1790bd2f19eb01ab3c3c"

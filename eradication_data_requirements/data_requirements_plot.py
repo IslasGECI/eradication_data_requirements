@@ -38,16 +38,7 @@ def plot_traps_data_requirements(data):
     return data_requirements_plot(data, config_plot)
 
 
-def plot_data_requirements_from_config_file(input_path, output_path, config_path):
-    with open(config_path, encoding="utf8") as config_file:
-        config_plot = json.load(config_file)
-    data = pd.read_csv(input_path)
-    ax = xxplot_data_requirements_from_config_file(data, output_path, config_plot)
-    plt.savefig(output_path, dpi=300, transparent=True)
-    return ax
-
-
-def xxplot_data_requirements_from_config_file(effort_and_captures_data, output_path, config_plot):
+def plot_data_requirements_from_config_file(effort_and_captures_data, output_path, config_plot):
     return data_requirements_plot(effort_and_captures_data, config_plot)
 
 

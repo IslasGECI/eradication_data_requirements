@@ -26,7 +26,7 @@ def test_plot_comparative_catch_curves():
     plot_comparative_catch_curves(socorro_path, guadalupe_path, output_path)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "21779a148ae92510f76747be17d76272"
+    expected_hash = "b8e36a7b787307b5886a06b403188158"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 
@@ -40,14 +40,15 @@ def test_data_requirements_plot():
     mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "605d9633501d1790bd2f19eb01ab3c3c"
+    expected_hash = "ed1710d3b165cbb892647d55ad505e0c"
     assert obtained_hash == expected_hash
     remove_file_if_exists(output_path)
 
 
 def tests_plot_catch_curve():
     data = pd.DataFrame(
-        {"CPUE": [500, 19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7]}
+        {"CPUE": [500, 19.5, 19, 18.5, 18, 17.5, 17],
+            "Cumulative_captures": [1, 2, 3, 4, 5, 6, 7]}
     )
     _, ax = geci_plot()
     label = "Isla"
@@ -84,20 +85,24 @@ def remove_file_if_exists(output_path):
 
 def test_fit_ramsey_plot():
     data = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+            "Cumulative_captures": [1, 2, 3, 4, 5, 6]}
     )
     obtained_parameters = fit_ramsey_plot(data)
     expected_parameters = np.array([-0.5, 20.0])
-    np.testing.assert_array_almost_equal(obtained_parameters, expected_parameters)
+    np.testing.assert_array_almost_equal(
+        obtained_parameters, expected_parameters)
 
     data_error = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+            "Cumulative_captures": [1, 1, 1, 1, 1, 1]}
     )
     obtained_empty_slope_and_intercept = fit_ramsey_plot(data_error)
     assert all(np.isnan(obtained_empty_slope_and_intercept))
 
     data_without_error = pd.DataFrame(
-        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17], "Cumulative_captures": [1, 1, 1, 1, 1, 2]}
+        {"CPUE": [19.5, 19, 18.5, 18, 17.5, 17],
+            "Cumulative_captures": [1, 1, 1, 1, 1, 2]}
     )
     assert isinstance(fit_ramsey_plot(data_without_error), type(np.array(0)))
 

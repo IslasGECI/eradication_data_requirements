@@ -67,7 +67,7 @@ linter:
 	$(call lint, tests)
 
 mutants: setup
-	mutmut run --paths-to-mutate ${module} || \
+	mutmut run --paths-to-mutate ${module} || true
 	mutmut html
 
 setup: clean install

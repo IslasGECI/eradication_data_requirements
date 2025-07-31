@@ -166,6 +166,17 @@ def tests_api_plot_cpue_vs_cum_captures():
     assert response.headers["content-type"] == "image/png"
     assert len(response.content) > 10  # sanity check: PNGs should not be tiny
 
+    format = "eps"
+    request = {
+        "url": "/plot_cpue_vs_cum_captures",
+        "files": {"file": ("data.csv", file_like, "text/csv")},
+        "data": {"format": format},
+    }
+    response = client.post(**request)
+    assert response.status_code == 200
+    assert response.headers["content-type"] == f"image/{format}"
+    assert len(response.content) > 10  # sanity check: images should not be tiny
+
 
 def tests_api_plot_custom_cpue_vs_cum_captures():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"

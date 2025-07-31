@@ -175,7 +175,8 @@ def tests_api_plot_cpue_vs_cum_captures():
     response = client.post(**request)
     assert response.status_code == 200
     assert response.headers["content-type"] == f"image/{format}"
-    assert len(response.content) > 10  # sanity check: images should not be tiny
+    # sanity check: images should not be tiny
+    assert len(response.content) > 10
 
 
 def tests_api_plot_custom_cpue_vs_cum_captures():
@@ -183,11 +184,24 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
     config_path = "tests/data/hunt_config.json"
     output_path = "tests/data/cpue_vs_cumulative_from_config.png"
 
-    gtt.if_exist_remove(output_path)
+    with open(input_path, "rb") as f:
+        file_like = io.BytesIO(f.read())
+    with open(config_path, "rb") as f:
+        config_like = io.BytesIO(f.read())
 
-    request = f"/plot_custom_cpue_vs_cum_captures/?input_path={input_path}&config_path={config_path}&output_path={output_path}"
-    response = client.get(request)
+    request = {
+        "url": "/plot_custom_cpue_vs_cum_captures",
+        "files": {
+            "file": ("data.csv", file_like, "text/csv"),
+            "config": ("config.json", config_like, "application/json"),
+        },
+    }
+
+    response = client.post(**request)
     assert response.status_code == 200
+    assert response.headers["content-type"] == "image/png"
+    # sanity check: images should not be tiny
+    assert len(response.content) > 10
 
     gtt.assert_exist(output_path)
     gtt.if_exist_remove(output_path)

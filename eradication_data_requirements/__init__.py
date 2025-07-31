@@ -1,6 +1,6 @@
 """A template Python module"""
 
-__version__ = "4.0.1"
+__version__ = "5.0.0"
 from .api import *  # noqa
 from .calculate_eradication_progress import *  # noqa
 from .calculate_intersect import *  # noqa

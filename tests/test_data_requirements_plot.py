@@ -3,13 +3,14 @@ import hashlib
 import pandas as pd
 import numpy as np
 import pytest
+import json
 
 from geci_plots import geci_plot
 from eradication_data_requirements.data_requirements_plot import (
     fit_ramsey_plot,
     plot_catch_curve,
     plot_comparative_catch_curves,
-    plot_data_requirements_from_config_file,
+    xxplot_data_requirements_from_config_file,
     plot_traps_data_requirements,
     set_cumulative_captures_column,
 )
@@ -63,7 +64,10 @@ def test_goat_data_requirement_plot():
     output_path = "/workdir/tests/data/goat_ramsey_plot.png"
     config_path = "/workdir/tests/data/hunt_config.json"
     remove_file_if_exists(output_path)
-    obtained_plot = plot_data_requirements_from_config_file(input_path, output_path, config_path)
+    with open(config_path, encoding="utf8") as config_file:
+        config_plot = json.load(config_file)
+    data = pd.read_csv(input_path)
+    obtained_plot = xxplot_data_requirements_from_config_file(data, output_path, config_plot)
     assert os.path.exists(output_path)
     assert isinstance(obtained_plot, mpl.axes._axes.Axes)
 

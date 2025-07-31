@@ -10,7 +10,7 @@ from eradication_data_requirements.data_requirements_plot import (
     fit_ramsey_plot,
     plot_catch_curve,
     plot_comparative_catch_curves,
-    plot_data_requirements_from_config_file,
+    data_requirements_plot,
     plot_traps_data_requirements,
     set_cumulative_captures_column,
 )
@@ -67,7 +67,7 @@ def test_goat_data_requirement_plot():
     with open(config_path, encoding="utf8") as config_file:
         config_plot = json.load(config_file)
     data = pd.read_csv(input_path)
-    obtained_plot = plot_data_requirements_from_config_file(data, output_path, config_plot)
+    obtained_plot = data_requirements_plot(data, config_plot)
     mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     assert os.path.exists(output_path)
     assert isinstance(obtained_plot, mpl.axes._axes.Axes)

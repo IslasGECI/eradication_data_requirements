@@ -38,10 +38,6 @@ def plot_traps_data_requirements(data):
     return data_requirements_plot(data, config_plot)
 
 
-def plot_data_requirements_from_config_file(effort_and_captures_data, output_path, config_plot):
-    return data_requirements_plot(effort_and_captures_data, config_plot)
-
-
 def data_requirements_plot(data, config_plot):
     configured_data = set_cumulative_captures_column(data, config_plot)
     _, ax = geci_plot()

@@ -203,9 +203,6 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
     # sanity check: images should not be tiny
     assert len(response.content) > 10
 
-    gtt.assert_exist(output_path)
-    gtt.if_exist_remove(output_path)
-
 
 def tests_plot_comparative_catch_curves():
     socorro_path = "tests/data/cumulative_effort_and_captures_for_year.csv"

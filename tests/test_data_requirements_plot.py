@@ -10,7 +10,7 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_catch_curve,
     plot_comparative_catch_curves,
     plot_data_requirements_from_config_file,
-    xxplot_traps_data_requirements,
+    plot_traps_data_requirements,
     set_cumulative_captures_column,
 )
 
@@ -35,7 +35,7 @@ def test_data_requirements_plot():
     output_path = "/workdir/tests/data/yearly_ramsey_plot.png"
     remove_file_if_exists(output_path)
     data = pd.read_csv(input_path)
-    ax = xxplot_traps_data_requirements(data)
+    ax = plot_traps_data_requirements(data)
     mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()

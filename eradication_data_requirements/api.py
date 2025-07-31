@@ -118,11 +118,15 @@ async def api_plot_custom_cpue_vs_cum_captures(input_path: str, config_path: str
     plot_data_requirements_from_config_file(input_path, output_path, config_path)
 
 
-@api.get("/plot_cpue_vs_cum_captures")
-async def api_plot_cpue_vs_cum_captures(input_path: str, output_path: str):
-    data = pd.read_csv(input_path)
-    plot_traps_data_requirements(data)
-    plt.savefig(output_path, dpi=300, transparent=True)
+@api.post("/plot_cpue_vs_cum_captures")
+async def api_plot_cpue_vs_cum_captures(file: UploadFile = File(...), format: str = Form("png")):
+    cumulative_effort_and_captures_data = pd.read_csv(file.file)
+    plot_traps_data_requirements(cumulative_effort_and_captures_data)
+    buffer = io.BytesIO()
+    plt.savefig(buffer, dpi=300, transparent=True, format=format)
+    buffer.seek(0)
+    plt.close()
+    return StreamingResponse(buffer, media_type=f"image/{format}")
 
 
 @api.get("/plot_cumulative_series_cpue_by_flight")

@@ -182,27 +182,31 @@ def tests_api_plot_cpue_vs_cum_captures():
 def tests_api_plot_custom_cpue_vs_cum_captures():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     config_path = "tests/data/hunt_config.json"
-    output_path = "tests/data/cpue_vs_cumulative_from_config.png"
 
     with open(input_path, "rb") as f:
         file_like = io.BytesIO(f.read())
     with open(config_path, "rb") as f:
         config_like = io.BytesIO(f.read())
 
-    format = "png"
+    format = "eps"
     request = {
         "url": "/plot_custom_cpue_vs_cum_captures",
         "files": {
             "file": ("data.csv", file_like, "text/csv"),
             "config": ("config.json", config_like, "application/json"),
-            "data": {"format": format},
         },
+        "data": {"format": format},
     }
 
     response = client.post(**request)
     assert response.status_code == 200
     assert response.headers["content-type"] == f"image/{format}"
     assert len(response.content) > 10
+
+    output_path = "tests/data/cpue_vs_cumulative_from_config.eps"
+    import matplotlib.pyplot as plt
+
+    plt.savefig(output_path, dpi=300, transparent=True)
 
 
 def tests_plot_comparative_catch_curves():

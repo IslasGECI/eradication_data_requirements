@@ -207,7 +207,6 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
 def tests_plot_comparative_catch_curves():
     socorro_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
     guadalupe_path = "tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"
-    output_path = "tests/data/comparative_catch_curves.png"
 
     with open(socorro_path, "rb") as f:
         socorro_file_like = io.BytesIO(f.read())

@@ -10,6 +10,7 @@ from eradication_data_requirements.fit_ramsey_time_series import (
     extract_prob,
     extract_slopes,
     fit_resampled_cumulative,
+    get_ramsey_series_window,
     paste_status_by_window,
     fit_resampled_captures,
     fill_missing_months_with_effort_one_and_captures_zero,
@@ -304,6 +305,15 @@ def test_calculate_resampled_probability_by_window():
     expected_probability_by_window = 2
     obtained_number_of_probabilities = len(obtained_probability_by_window)
     assert obtained_number_of_probabilities == expected_probability_by_window
+
+
+def test_get_ramsey_series_window():
+    bootstrapping_number = 10
+    window_length = 6
+    data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
+    indexes_to_resample = [5, 11, 12]
+    obtained_windows = get_ramsey_series_window(data, window_length, indexes_to_resample)
+    assert obtained_windows[1].index.tolist() == [6, 7, 8, 9, 10, 11]
 
 
 def test_extract_slopes():

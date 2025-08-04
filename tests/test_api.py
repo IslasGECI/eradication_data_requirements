@@ -209,10 +209,21 @@ def tests_plot_comparative_catch_curves():
     guadalupe_path = "tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"
     output_path = "tests/data/comparative_catch_curves.png"
 
-    gtt.if_exist_remove(output_path)
+    with open(socorro_path, "rb") as f:
+        socorro_file_like = io.BytesIO(f.read())
+    with open(guadalupe_path, "rb") as f:
+        guadalupe_file_like = io.BytesIO(f.read())
 
-    request = f"/plot_comparative_catch_curves/?socorro_path={socorro_path}&guadalupe_path={guadalupe_path}&output_path={output_path}"
-    response = client.get(request)
+    format = "png"
+    request = {
+        "url": "/plot_comparative_catch_curves",
+        "files": {
+            "socorro_file": ("data_socorro.csv", socorro_file_like, "text/csv"),
+            "guadalupe_file": ("data_guadalupe.csv", guadalupe_file_like, "text/csv"),
+        },
+    }
+
+    response = client.post(**request)
     assert response.status_code == 200
-    gtt.assert_exist(output_path)
-    gtt.if_exist_remove(output_path)
+    assert response.headers["content-type"] == f"image/{format}"
+    assert len(response.content) > 10

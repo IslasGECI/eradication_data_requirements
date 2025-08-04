@@ -308,7 +308,6 @@ def test_calculate_resampled_probability_by_window():
 
 
 def test_get_ramsey_series_window():
-    bootstrapping_number = 10
     window_length = 6
     data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
     indexes_to_resample = [5, 11, 12]

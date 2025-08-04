@@ -227,3 +227,16 @@ def tests_plot_comparative_catch_curves():
     assert response.status_code == 200
     assert response.headers["content-type"] == f"image/{format}"
     assert len(response.content) > 10
+    format = "eps"
+    request = {
+        "url": "/plot_comparative_catch_curves",
+        "files": {
+            "socorro_file": ("data_socorro.csv", socorro_file_like, "text/csv"),
+            "guadalupe_file": ("data_guadalupe.csv", guadalupe_file_like, "text/csv"),
+        },
+        "data": {"format": format},
+    }
+
+    response = client.post(**request)
+    assert response.status_code == 200
+    assert response.headers["content-type"] == f"image/{format}"

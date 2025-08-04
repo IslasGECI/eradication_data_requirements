@@ -85,22 +85,19 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
 
 
 def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
-    indexes_to_resample = select_month_by_window_length(ramsey_series, window_length)
-    return calculate_progress_probability_by_window(
-        ramsey_series, bootstrapping_number, window_length, indexes_to_resample
-    )
-
-
-def calculate_progress_probability_by_window(
-    ramsey_series, bootstrapping_number, window_length, indexes_to_resample
-):
     seed = 42
+    indexes_to_resample = select_month_by_window_length(ramsey_series, window_length)
+    ramsey_series_windows = get_ramsey_series_window(
+        ramsey_series, window_length, indexes_to_resample
+    )
     return [
-        get_progress_probability(
-            ramsey_series.loc[(i - window_length) : i], bootstrapping_number, seed
-        )
-        for i in indexes_to_resample
+        get_progress_probability(window_sample, bootstrapping_number, seed)
+        for window_sample in ramsey_series_windows
     ]
+
+
+def get_ramsey_series_window(ramsey_series, window_length, indexes_to_resample):
+    return [ramsey_series.loc[(i - window_length) : i] for i in indexes_to_resample]
 
 
 def calculate_six_months_slope(data):

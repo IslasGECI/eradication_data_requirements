@@ -85,8 +85,16 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
 
 
 def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
-    seed = 42
     indexes_to_resample = select_month_by_window_length(ramsey_series, window_length)
+    return calculate_progress_probability_by_window(
+        ramsey_series, bootstrapping_number, window_length, indexes_to_resample
+    )
+
+
+def calculate_progress_probability_by_window(
+    ramsey_series, bootstrapping_number, window_length, indexes_to_resample
+):
+    seed = 42
     return [
         get_progress_probability(
             ramsey_series.loc[(i - window_length) : i], bootstrapping_number, seed

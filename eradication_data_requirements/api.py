@@ -148,12 +148,13 @@ async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path
 async def api_plot_comparative_catch_curves(
     socorro_file: UploadFile = File(...),
     guadalupe_file: UploadFile = File(...),
+    format: str = Form("png"),
 ):
     socorro_data = pd.read_csv(socorro_file.file)
     guadalupe_data = pd.read_csv(guadalupe_file.file)
     plot_comparative_catch_curves(socorro_data, guadalupe_data)
     buffer = io.BytesIO()
-    plt.savefig(buffer, dpi=300, transparent=True)
+    plt.savefig(buffer, dpi=300, transparent=True, format=format)
     buffer.seek(0)
     plt.close()
-    return StreamingResponse(buffer, media_type=f"image/png")
+    return StreamingResponse(buffer, media_type=f"image/{format}")

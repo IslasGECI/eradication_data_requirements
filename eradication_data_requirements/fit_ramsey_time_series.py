@@ -97,7 +97,7 @@ def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_numbe
 
 
 def get_ramsey_series_window(ramsey_series, window_length, indexes_to_resample):
-    return [ramsey_series.loc[(i - window_length) : i] for i in indexes_to_resample]
+    return [ramsey_series.loc[(i - window_length) + 1 : i] for i in indexes_to_resample]
 
 
 def calculate_six_months_slope(data):

@@ -120,22 +120,14 @@ async def api_plot_custom_cpue_vs_cum_captures(
     config_plot = json.load(config.file)
     data = pd.read_csv(file.file)
     data_requirements_plot(data, config_plot)
-    buffer = io.BytesIO()
-    plt.savefig(buffer, dpi=300, transparent=True, format=format)
-    buffer.seek(0)
-    plt.close()
-    return StreamingResponse(buffer, media_type=f"image/{format}")
+    return save_figure_as_buffer(format)
 
 
 @api.post("/plot_cpue_vs_cum_captures")
 async def api_plot_cpue_vs_cum_captures(file: UploadFile = File(...), format: str = Form("png")):
     cumulative_effort_and_captures_data = pd.read_csv(file.file)
     plot_traps_data_requirements(cumulative_effort_and_captures_data)
-    buffer = io.BytesIO()
-    plt.savefig(buffer, dpi=300, transparent=True, format=format)
-    buffer.seek(0)
-    plt.close()
-    return StreamingResponse(buffer, media_type=f"image/{format}")
+    return save_figure_as_buffer(format)
 
 
 @api.get("/plot_cumulative_series_cpue_by_flight")
@@ -153,6 +145,10 @@ async def api_plot_comparative_catch_curves(
     socorro_data = pd.read_csv(socorro_file.file)
     guadalupe_data = pd.read_csv(guadalupe_file.file)
     plot_comparative_catch_curves(socorro_data, guadalupe_data)
+    return save_figure_as_buffer(format)
+
+
+def save_figure_as_buffer(format):
     buffer = io.BytesIO()
     plt.savefig(buffer, dpi=300, transparent=True, format=format)
     buffer.seek(0)

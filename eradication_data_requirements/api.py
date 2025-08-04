@@ -56,17 +56,6 @@ async def api_filter_by_method(input_path: str, method: str, output_path: str):
     filtered_data.to_csv(output_path, index=False)
 
 
-@api.post("/write_population_status")
-async def api_write_population_status(
-    file: UploadFile = File(...),
-    bootstrapping_number: int = Form(...),
-):
-    raw_data = pd.read_csv(file.file)
-    seed = 42
-    json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
-    return JSONResponse(content=json_content)
-
-
 @api.get("/write_population_status_from_mixed_methods")
 async def api_write_population_status_from_mixed_methods(
     first_method_status: str, second_method_status: str, output_path: str
@@ -77,15 +66,21 @@ async def api_write_population_status_from_mixed_methods(
     write_json(output_path, json_content)
 
 
-def read_json(json_path):
-    with open(json_path) as json_file:
-        data = json.load(json_file)
-    return data
+@api.get("/plot_cumulative_series_cpue_by_flight")
+async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path: str):
+    font_size = 27
+    plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
 
 
-def write_json(output_path, json_content):
-    with open(output_path, "w") as jsonfile:
-        json.dump(json_content, jsonfile)
+@api.post("/write_population_status")
+async def api_write_population_status(
+    file: UploadFile = File(...),
+    bootstrapping_number: int = Form(...),
+):
+    raw_data = pd.read_csv(file.file)
+    seed = 42
+    json_content = get_population_status_dict(raw_data, bootstrapping_number, seed)
+    return JSONResponse(content=json_content)
 
 
 @api.post("/write_effort_and_captures_with_probability")
@@ -130,12 +125,6 @@ async def api_plot_cpue_vs_cum_captures(file: UploadFile = File(...), format: st
     return save_figure_as_buffer(format)
 
 
-@api.get("/plot_cumulative_series_cpue_by_flight")
-async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path: str):
-    font_size = 27
-    plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
-
-
 @api.post("/plot_comparative_catch_curves")
 async def api_plot_comparative_catch_curves(
     socorro_file: UploadFile = File(...),
@@ -146,6 +135,17 @@ async def api_plot_comparative_catch_curves(
     guadalupe_data = pd.read_csv(guadalupe_file.file)
     plot_comparative_catch_curves(socorro_data, guadalupe_data)
     return save_figure_as_buffer(format)
+
+
+def read_json(json_path):
+    with open(json_path) as json_file:
+        data = json.load(json_file)
+    return data
+
+
+def write_json(output_path, json_content):
+    with open(output_path, "w") as jsonfile:
+        json.dump(json_content, jsonfile)
 
 
 def save_figure_as_buffer(format):

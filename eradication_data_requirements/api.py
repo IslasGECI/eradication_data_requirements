@@ -4,7 +4,7 @@ from eradication_data_requirements.calculate_intersect import get_population_sta
 from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_flight
 from eradication_data_requirements.data_requirements_plot import (
     plot_traps_data_requirements,
-    xxplot_comparative_catch_curves,
+    plot_comparative_catch_curves,
     data_requirements_plot,
 )
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
@@ -150,5 +150,5 @@ async def api_plot_comparative_catch_curves(
 ):
     socorro_data = pd.read_csv(socorro_path)
     guadalupe_data = pd.read_csv(guadalupe_path)
-    xxplot_comparative_catch_curves(socorro_data, guadalupe_data)
+    plot_comparative_catch_curves(socorro_data, guadalupe_data)
     plt.savefig(output_path, dpi=300, transparent=True)

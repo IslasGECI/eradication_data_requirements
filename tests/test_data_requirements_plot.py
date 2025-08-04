@@ -9,7 +9,7 @@ from geci_plots import geci_plot
 from eradication_data_requirements.data_requirements_plot import (
     fit_ramsey_plot,
     plot_catch_curve,
-    xxplot_comparative_catch_curves,
+    plot_comparative_catch_curves,
     data_requirements_plot,
     plot_traps_data_requirements,
     set_cumulative_captures_column,
@@ -25,7 +25,7 @@ def test_plot_comparative_catch_curves():
     remove_file_if_exists(output_path)
     socorro_data = pd.read_csv(socorro_path)
     guadalupe_data = pd.read_csv(guadalupe_path)
-    xxplot_comparative_catch_curves(socorro_data, guadalupe_data)
+    plot_comparative_catch_curves(socorro_data, guadalupe_data)
     mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
     file_content = open(output_path, "rb").read()
     obtained_hash = hashlib.md5(file_content).hexdigest()

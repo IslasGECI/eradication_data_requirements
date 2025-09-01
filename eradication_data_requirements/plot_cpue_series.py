@@ -8,7 +8,7 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
     _, ax = plt.subplots(1, 2, figsize=(23, 10), tight_layout=True)
 
-    plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
+    plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax[0])
 
     ax[1].plot(seasons, cpue_df["cumulative_cpue"], "-o", linewidth=2)
     ax[1].set_xticks(ticks_positions)
@@ -24,18 +24,27 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
     return ax
 
 
+def plot_yearly_cpue(fontsize, cpue_df):
+    seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
+
+    _, ax = plt.subplots(tight_layout=True)
+
+    return plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
+
+
 def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax):
-    ax[0].plot(seasons, cpue_df["cpue"], "-o", linewidth=2)
-    ax[0].set_xticks(ticks_positions)
-    ax[0].set_xticklabels(seasons_labels, size=fontsize)
-    ax[0].tick_params(axis="both", labelsize=fontsize)
-    ax[0].spines["right"].set_visible(False)
-    ax[0].spines["top"].set_visible(False)
+    ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2)
+    ax.set_xticks(ticks_positions)
+    ax.set_xticklabels(seasons_labels, size=fontsize)
+    ax.tick_params(axis="both", labelsize=fontsize)
+    ax.spines["right"].set_visible(False)
+    ax.spines["top"].set_visible(False)
     max_cpue = max(cpue_df["cpue"])
     cpue_limit = roundup(max_cpue, 10 ** order_magnitude(max_cpue))
-    ax[0].set_ylim(0, cpue_limit)
-    ax[0].set_ylabel("Catch Per Unit Effort (CPUE)", fontsize=fontsize)
-    ax[0].set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
+    ax.set_ylim(0, cpue_limit)
+    ax.set_ylabel("Catch Per Unit Effort (CPUE)", fontsize=fontsize)
+    ax.set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
+    return ax
 
 
 def get_ticks_info(cpue_df):

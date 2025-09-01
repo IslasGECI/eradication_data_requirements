@@ -7,3 +7,5 @@ def test_adapt_effort_and_captures():
     obtained = adapt_effort_and_catpures(data)
     expected_colummn = "Season"
     assert expected_colummn in obtained.columns
+    assert obtained.loc[0, "Season"] == "2023"
+    assert obtained.loc[-1, "Season"] == "2024"

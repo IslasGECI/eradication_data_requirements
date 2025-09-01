@@ -1,6 +1,7 @@
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_flight,
     plot_cumulative_series_cpue,
+    plot_yearly_cpue,
 )
 
 import pandas as pd
@@ -26,3 +27,15 @@ def test_plot_cumulative_series_cpue():
     obtained_cum_cpue_ylim = obtained[1].get_ylim()
     assert pytest.approx(obtained_cpue_ylim, abs=1e-4) == (0, 0.0006)
     assert pytest.approx(obtained_cum_cpue_ylim, abs=1e-4) == (0, 0.0008)
+
+
+def test_plot_yearly_cpue():
+    cpue_data_path = "tests/data/processed_yearly_cpue_for_plot.csv"
+    cpue_df = pd.read_csv(cpue_data_path)
+    fontsize = 20
+    obtained_ax = plot_yearly_cpue(fontsize, cpue_df)
+    assert isinstance(obtained_ax, mpl.axes._axes.Axes)
+    obtained_cpue_ylim = obtained_ax.get_ylim()
+    assert pytest.approx(obtained_cpue_ylim, abs=1e-4) == (0, 0.0006)
+    obtained_cpue_ylabel = obtained_ax.get_ylabel()
+    assert obtained_cpue_ylabel == "Catch Per Unit Effort (CPUE)"

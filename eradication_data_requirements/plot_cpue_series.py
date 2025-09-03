@@ -10,12 +10,8 @@ def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
     config_yearly_cpue_plot(fontsize, socorro_data_with_index, seasons_labels, ticks_positions, ax)
-    ax = plot_cpue_series(
-        fontsize, socorro_data, seasons, seasons_labels, ticks_positions, ax, label="Socorro"
-    )
-    ax = plot_cpue_series(
-        fontsize, guadalupe_data, seasons, seasons_labels, ticks_positions, ax, label="Guadalupe"
-    )
+    ax = plot_cpue_series(socorro_data, seasons, ax, label="Socorro")
+    ax = plot_cpue_series(guadalupe_data, seasons, ax, label="Guadalupe")
     plt.legend(fontsize="xx-large")
     return ax
 
@@ -25,7 +21,7 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
     _, ax = plt.subplots(1, 2, figsize=(23, 10), tight_layout=True)
     config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax[0])
-    plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax[0])
+    plot_cpue_series(cpue_df, seasons, ax[0])
 
     ax[1].plot(seasons, cpue_df["cumulative_cpue"], "-o", linewidth=2)
     ax[1].set_xticks(ticks_positions)
@@ -42,14 +38,15 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
 
 def plot_yearly_cpue(fontsize, cpue_df):
+    cpue_df.set_index("Season")
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
 
     _, ax = plt.subplots(tight_layout=True)
     config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
-    return plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
+    return plot_cpue_series(cpue_df, seasons, ax)
 
 
-def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax, label=None):
+def plot_cpue_series(cpue_df, seasons, ax, label=None):
     ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2, label=label)
     return ax
 

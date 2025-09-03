@@ -24,8 +24,8 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
 
     _, ax = plt.subplots(1, 2, figsize=(23, 10), tight_layout=True)
-
-    plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax[0])
+    config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax[0])
+    xxplot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax[0])
 
     ax[1].plot(seasons, cpue_df["cumulative_cpue"], "-o", linewidth=2)
     ax[1].set_xticks(ticks_positions)

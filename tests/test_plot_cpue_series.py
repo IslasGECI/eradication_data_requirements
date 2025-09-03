@@ -50,7 +50,7 @@ def test_plot_comparative_yearly_cpue():
     obtained_ax = plot_comparative_yearly_cpue(cpue_yearly_socorro, cpue_yearly_guadalupe)
     assert isinstance(obtained_ax, mpl.axes._axes.Axes)
 
-    assert obtained_ax.get_ylim() > max(cpue_yearly_guadalupe.cpue)
+    assert obtained_ax.get_ylim()[1] > max(cpue_yearly_guadalupe.cpue)
     expected_lines = 2
     assert len(obtained_ax.get_lines()) == expected_lines
 

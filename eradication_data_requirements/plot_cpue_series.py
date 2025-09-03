@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 
 
 def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
-    # socorro_data.set_index("Season", inplace=True)
     seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data.Season.values)
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
-    config_yearly_cpue_plot(fontsize, socorro_data, seasons_labels, ticks_positions, ax)
+    max_cpue = max(socorro_data["cpue"].max(), guadalupe_data["cpue"].max())
+    config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax)
     ax = plot_cpue_series(socorro_data, seasons, ax, label="Socorro")
     ax = plot_cpue_series(guadalupe_data, seasons, ax, label="Guadalupe")
     plt.legend(fontsize="xx-large")
@@ -21,7 +21,8 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
     seasons, seasons_labels, ticks_positions = get_ticks_info(seasons_index)
 
     _, ax = plt.subplots(1, 2, figsize=(23, 10), tight_layout=True)
-    config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax[0])
+    max_cpue = max(cpue_df["cpue"])
+    config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax[0])
     plot_cpue_series(cpue_df, seasons, ax[0])
 
     ax[1].plot(seasons, cpue_df["cumulative_cpue"], "-o", linewidth=2)
@@ -42,7 +43,8 @@ def plot_yearly_cpue(fontsize, cpue_df):
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df.Season.values)
 
     _, ax = plt.subplots(tight_layout=True)
-    config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
+    max_cpue = max(cpue_df["cpue"])
+    config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax)
     return plot_cpue_series(cpue_df, seasons, ax)
 
 
@@ -51,13 +53,12 @@ def plot_cpue_series(cpue_df, seasons, ax, label=None):
     return ax
 
 
-def config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax):
+def config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax):
     ax.set_xticks(ticks_positions)
     ax.set_xticklabels(seasons_labels, size=fontsize)
     ax.tick_params(axis="both", labelsize=fontsize)
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)
-    max_cpue = max(cpue_df["cpue"])
     cpue_limit = roundup(max_cpue, 10 ** order_magnitude(max_cpue))
     ax.set_ylim(0, cpue_limit)
     ax.set_ylabel("Catch Per Unit Effort (CPUE)", fontsize=fontsize)

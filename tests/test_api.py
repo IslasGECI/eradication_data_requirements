@@ -239,3 +239,24 @@ def tests_plot_comparative_catch_curves():
     response = client.post(**request)
     assert response.status_code == 200
     assert response.headers["content-type"] == f"image/{format}"
+
+
+def tests_plot_comparative_yearly_cpue():
+    socorro_path = "tests/data/processed_yearly_cpue_for_plot.csv"
+    guadalupe_path = "tests/data/processed_yearly_cpue_for_plot.csv"
+
+    with open(socorro_path, "rb") as f:
+        socorro_file_like = io.BytesIO(f.read())
+    with open(guadalupe_path, "rb") as f:
+        guadalupe_file_like = io.BytesIO(f.read())
+
+    request = {
+        "url": "/plot_comparative_yearly_cpue",
+        "files": {
+            "socorro_file": ("data_socorro.csv", socorro_file_like, "text/csv"),
+            "guadalupe_file": ("data_guadalupe.csv", guadalupe_file_like, "text/csv"),
+        },
+    }
+
+    response = client.post(**request)
+    assert response.status_code == 200

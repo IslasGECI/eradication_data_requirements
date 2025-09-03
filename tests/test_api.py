@@ -263,3 +263,5 @@ def tests_plot_comparative_yearly_cpue():
     response = client.post(**request)
     assert response.status_code == 200
     assert response.headers["content-type"] == f"image/{img_format}"
+    minimum_empty_eps = 630
+    assert len(response.content) > minimum_empty_eps

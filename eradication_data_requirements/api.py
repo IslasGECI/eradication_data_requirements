@@ -1,7 +1,6 @@
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
-from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_flight
 from eradication_data_requirements.data_requirements_plot import (
     plot_traps_data_requirements,
     plot_comparative_catch_curves,

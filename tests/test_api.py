@@ -250,13 +250,16 @@ def tests_plot_comparative_yearly_cpue():
     with open(guadalupe_path, "rb") as f:
         guadalupe_file_like = io.BytesIO(f.read())
 
+    img_format = "png"
     request = {
         "url": "/plot_comparative_yearly_cpue",
         "files": {
             "socorro_file": ("data_socorro.csv", socorro_file_like, "text/csv"),
             "guadalupe_file": ("data_guadalupe.csv", guadalupe_file_like, "text/csv"),
         },
+        "data": {"format": img_format},
     }
 
     response = client.post(**request)
     assert response.status_code == 200
+    assert response.headers["content-type"] == f"image/{img_format}"

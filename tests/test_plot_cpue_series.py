@@ -1,5 +1,6 @@
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_flight,
+    calculate_cpue_and_cumulative_by_season,
     plot_comparative_yearly_cpue,
     plot_cumulative_series_cpue,
     plot_yearly_cpue,
@@ -56,3 +57,9 @@ def test_plot_comparative_yearly_cpue():
 
     assert obtained_ax.get_legend().get_texts()[0].get_text() == "Socorro"
     assert obtained_ax.get_legend().get_texts()[1].get_text() == "Guadalupe"
+
+def test_calculate_cpue_and_cumulative_by_season():
+    data = pd.read_csv("tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv")
+    obtained = calculate_cpue_and_cumulative_by_season(data)
+    assert obtained.index[0] == 2023
+    assert obtained.index[1] == 2024

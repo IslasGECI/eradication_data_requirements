@@ -26,6 +26,7 @@ def plot_comparative_catch_curves(socorro_data, guadalupe_data):
     plt.xlabel("Cumulative captures", size=15, labelpad=15)
     plt.ylabel("CPUE (captures/night traps)", size=15)
     plt.legend(fontsize="xx-large")
+    return ax
 
 
 def plot_traps_data_requirements(data):

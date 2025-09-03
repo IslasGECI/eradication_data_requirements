@@ -21,31 +21,47 @@ import matplotlib as mpl
 def test_plot_comparative_catch_curves():
     socorro_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
     guadalupe_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year_guadalupe.csv"
-    output_path = "/workdir/tests/data/plot_comparative_catch_curves.png"
-    remove_file_if_exists(output_path)
+
     socorro_data = pd.read_csv(socorro_path)
     guadalupe_data = pd.read_csv(guadalupe_path)
-    plot_comparative_catch_curves(socorro_data, guadalupe_data)
-    mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
-    file_content = open(output_path, "rb").read()
-    obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "b8e36a7b787307b5886a06b403188158"
-    assert obtained_hash == expected_hash
-    remove_file_if_exists(output_path)
+    obtained_ax = plot_comparative_catch_curves(socorro_data, guadalupe_data)
+
+    expected_lines = 2
+    assert len(obtained_ax.get_lines()) == expected_lines
+
+    expected_collections = 2
+    assert len(obtained_ax.collections) == expected_collections
+
+    expected_ylabel = "Cumulative captures"
+    assert obtained_ax.get_xlabel() == expected_ylabel
+
+    expected_ylabel = "CPUE (captures/night traps)"
+    assert obtained_ax.get_ylabel() == expected_ylabel
+
+    expected_legend_fontsize = 17.28
+    assert obtained_ax.get_legend().get_texts()[0].get_fontsize() == expected_legend_fontsize
+
+    expected_axis_fontsize = 15
+    assert obtained_ax.get_xaxis().label.get_fontsize() == expected_axis_fontsize
+    assert obtained_ax.get_yaxis().label.get_fontsize() == expected_axis_fontsize
 
 
 def test_data_requirements_plot():
     input_path = "/workdir/tests/data/cumulative_effort_and_captures_for_year.csv"
-    output_path = "/workdir/tests/data/yearly_ramsey_plot.png"
-    remove_file_if_exists(output_path)
     data = pd.read_csv(input_path)
-    plot_traps_data_requirements(data)
-    mpl.pyplot.savefig(output_path, dpi=300, transparent=True)
-    file_content = open(output_path, "rb").read()
-    obtained_hash = hashlib.md5(file_content).hexdigest()
-    expected_hash = "ed1710d3b165cbb892647d55ad505e0c"
-    assert obtained_hash == expected_hash
-    remove_file_if_exists(output_path)
+    obtained_ax = plot_traps_data_requirements(data)
+
+    expected_lines = 1
+    assert len(obtained_ax.get_lines()) == expected_lines
+
+    expected_collections = 1
+    assert len(obtained_ax.collections) == expected_collections
+
+    expected_ylabel = "Cumulative captures"
+    assert obtained_ax.get_xlabel() == expected_ylabel
+
+    expected_ylabel = "CPUE (captures/night traps)"
+    assert obtained_ax.get_ylabel() == expected_ylabel
 
 
 def tests_plot_catch_curve():

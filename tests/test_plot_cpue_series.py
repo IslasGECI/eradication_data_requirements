@@ -53,5 +53,6 @@ def test_plot_comparative_yearly_cpue():
     expected_lines = 2
     assert len(obtained_ax.get_lines()) == expected_lines
 
+    mpl.pyplot.savefig("salida.png")
     assert obtained_ax.get_legend().get_texts()[0].get_text() == "Socorro"
     assert obtained_ax.get_legend().get_texts()[1].get_text() == "Guadalupe"

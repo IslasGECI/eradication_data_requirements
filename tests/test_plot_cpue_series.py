@@ -43,7 +43,8 @@ def test_plot_yearly_cpue():
 
 
 def test_plot_comparative_yearly_cpue():
-    socorro_data = "tests/data/processed_yearly_cpue_for_plot.csv"
-    guadalupe_data = socorro_data
-    obtained_ax = plot_comparative_yearly_cpue(socorro_data, guadalupe_data)
+    cpue_yearly_data_path = "tests/data/processed_yearly_cpue_for_plot.csv"
+    cpue_yearly_socorro = pd.read_csv(cpue_yearly_data_path)
+    cpue_yearly_guadalupe = cpue_yearly_socorro
+    obtained_ax = plot_comparative_yearly_cpue(cpue_yearly_socorro, cpue_yearly_guadalupe)
     assert isinstance(obtained_ax, mpl.axes._axes.Axes)

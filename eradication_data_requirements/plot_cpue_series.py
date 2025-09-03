@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 
 def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
     seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data.index.values)
+    seasons_guadalupe, _, _ = get_ticks_info(guadalupe_data.index.values)
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
     max_cpue = max(socorro_data["cpue"].max(), guadalupe_data["cpue"].max())
     config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax)
     ax = plot_cpue_series(socorro_data, seasons, ax, label="Socorro")
-    ax = plot_cpue_series(guadalupe_data, seasons, ax, label="Guadalupe")
+    ax = plot_cpue_series(guadalupe_data, seasons_guadalupe, ax, label="Guadalupe")
     plt.legend(fontsize="xx-large")
     return ax
 

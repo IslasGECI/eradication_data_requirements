@@ -48,6 +48,7 @@ def test_plot_comparative_yearly_cpue():
     cpue_yearly_socorro = pd.read_csv(cpue_yearly_data_path)
     cpue_yearly_guadalupe = cpue_yearly_socorro.copy()
     cpue_yearly_guadalupe.cpue = cpue_yearly_guadalupe.cpue * 2
+    cpue_yearly_guadalupe.drop(index=0, inplace=True)
     obtained_ax = plot_comparative_yearly_cpue(cpue_yearly_socorro, cpue_yearly_guadalupe)
     assert isinstance(obtained_ax, mpl.axes._axes.Axes)
 
@@ -57,6 +58,7 @@ def test_plot_comparative_yearly_cpue():
 
     assert obtained_ax.get_legend().get_texts()[0].get_text() == "Socorro"
     assert obtained_ax.get_legend().get_texts()[1].get_text() == "Guadalupe"
+
 
 def test_calculate_cpue_and_cumulative_by_season():
     data = pd.read_csv("tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv")

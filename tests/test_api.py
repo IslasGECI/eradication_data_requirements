@@ -242,8 +242,8 @@ def tests_plot_comparative_catch_curves():
 
 
 def tests_plot_comparative_yearly_cpue():
-    socorro_path = "tests/data/processed_yearly_cpue_for_plot.csv"
-    guadalupe_path = "tests/data/processed_yearly_cpue_for_plot.csv"
+    socorro_path = "tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv"
+    guadalupe_path = "tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv"
 
     with open(socorro_path, "rb") as f:
         socorro_file_like = io.BytesIO(f.read())

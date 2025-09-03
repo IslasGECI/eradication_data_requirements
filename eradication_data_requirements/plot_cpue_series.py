@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
     # socorro_data.set_index("Season", inplace=True)
-    seasons, seasons_labels, ticks_positions = xxget_ticks_info(socorro_data.Season.values)
+    seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data.Season.values)
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
@@ -18,7 +18,7 @@ def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
 
 def plot_cumulative_series_cpue(fontsize, cpue_df):
     seasons_index = cpue_df.index.values
-    seasons, seasons_labels, ticks_positions = xxget_ticks_info(seasons_index)
+    seasons, seasons_labels, ticks_positions = get_ticks_info(seasons_index)
 
     _, ax = plt.subplots(1, 2, figsize=(23, 10), tight_layout=True)
     config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax[0])
@@ -39,7 +39,7 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
 
 def plot_yearly_cpue(fontsize, cpue_df):
-    seasons, seasons_labels, ticks_positions = xxget_ticks_info(cpue_df.Season.values)
+    seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df.Season.values)
 
     _, ax = plt.subplots(tight_layout=True)
     config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
@@ -64,15 +64,7 @@ def config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, 
     ax.set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
 
 
-def xxget_ticks_info(seasons):
-    seasons_labels = [*seasons, ""]
-    ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
-    ticks_positions[-1] = ticks_positions[-1] + 0.25
-    return seasons, seasons_labels, ticks_positions
-
-
-def get_ticks_info(cpue_df):
-    seasons = cpue_df.index.values
+def get_ticks_info(seasons):
     seasons_labels = [*seasons, ""]
     ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
     ticks_positions[-1] = ticks_positions[-1] + 0.25

@@ -157,6 +157,28 @@ def tests_plot_cumulative_series_cpue_by_flight():
     assert len(response.content) > minimum_empty_eps
 
 
+def tests_plot_cumulative_series_cpue_by_season():
+    input_path = "tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv"
+
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
+
+    img_format = "eps"
+    request = {
+        "url": "/plot_cumulative_series_cpue_by_season",
+        "files": {
+            "file": ("file.csv", input_file_like, "text/csv"),
+        },
+        "data": {"format": img_format},
+    }
+
+    response = client.post(**request)
+    assert response.status_code == 200
+    assert response.headers["content-type"] == f"image/{img_format}"
+    minimum_empty_eps = 630
+    assert len(response.content) > minimum_empty_eps
+
+
 def tests_api_plot_cpue_vs_cum_captures():
     input_path = "tests/data/cumulative_effort_and_captures_for_year.csv"
 

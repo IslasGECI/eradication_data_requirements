@@ -3,6 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
+    seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data)
+    fontsize = 20
+
+    _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
+    ax = plot_cpue_series(fontsize, socorro_data, seasons, seasons_labels, ticks_positions, ax)
+    ax = plot_cpue_series(fontsize, guadalupe_data, seasons, seasons_labels, ticks_positions, ax)
+    return ax
+
+
 def plot_cumulative_series_cpue(fontsize, cpue_df):
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
 

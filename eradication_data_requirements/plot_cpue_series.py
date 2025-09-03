@@ -38,7 +38,8 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
 
 def plot_yearly_cpue(fontsize, cpue_df):
-    cpue_df.set_index("Season")
+    cpue_df.set_index("Season", inplace=True)
+    print(cpue_df)
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
 
     _, ax = plt.subplots(tight_layout=True)

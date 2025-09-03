@@ -137,18 +137,24 @@ def tests_api_write_progress_probability_figure():
 
 def tests_plot_cumulative_series_cpue_by_flight():
     input_path = "tests/data/feral_goat_capture_effort.csv"
-    output_path = "tests/data/flight_cpue_series.png"
 
-    gtt.if_exist_remove(output_path)
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
 
-    request = (
-        f"/plot_cumulative_series_cpue_by_flight/?input_path={input_path}&output_path={output_path}"
-    )
-    response = client.get(request)
+    img_format = "eps"
+    request = {
+        "url": "/plot_cumulative_series_cpue_by_flight",
+        "files": {
+            "file": ("file.csv", input_file_like, "text/csv"),
+        },
+        "data": {"format": img_format},
+    }
+
+    response = client.post(**request)
     assert response.status_code == 200
-
-    gtt.assert_exist(output_path)
-    gtt.if_exist_remove(output_path)
+    assert response.headers["content-type"] == f"image/{img_format}"
+    minimum_empty_eps = 630
+    assert len(response.content) > minimum_empty_eps
 
 
 def tests_api_plot_cpue_vs_cum_captures():

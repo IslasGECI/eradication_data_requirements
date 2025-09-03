@@ -11,7 +11,9 @@ from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_ef
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_season,
+    calculate_cpue_and_cumulative_by_flight,
     plot_comparative_yearly_cpue,
+    plot_cumulative_series_cpue,
 )
 from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
@@ -70,10 +72,16 @@ async def api_write_population_status_from_mixed_methods(
     write_json(output_path, json_content)
 
 
-@api.get("/plot_cumulative_series_cpue_by_flight")
-async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path: str):
-    font_size = 27
-    plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
+@api.post("/plot_cumulative_series_cpue_by_flight")
+async def api_plot_cumulative_series_cpue_by_flight(
+    file: UploadFile = File(...),
+    format: str = Form(...),
+):
+    fontsize = 27
+    effort_capture_df = pd.read_csv(file.file)
+    data_year = calculate_cpue_and_cumulative_by_flight(effort_capture_df)
+    plot_cumulative_series_cpue(fontsize, data_year)
+    return save_figure_as_buffer(format)
 
 
 @api.post("/plot_comparative_yearly_cpue")

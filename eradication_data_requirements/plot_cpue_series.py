@@ -9,10 +9,11 @@ def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
-    ax = plot_cpue_series(
+    config_yearly_cpue_plot(fontsize, socorro_data_with_index, seasons_labels, ticks_positions, ax)
+    ax = xxplot_cpue_series(
         fontsize, socorro_data, seasons, seasons_labels, ticks_positions, ax, label="Socorro"
     )
-    ax = plot_cpue_series(
+    ax = xxplot_cpue_series(
         fontsize, guadalupe_data, seasons, seasons_labels, ticks_positions, ax, label="Guadalupe"
     )
     plt.legend(fontsize="xx-large")

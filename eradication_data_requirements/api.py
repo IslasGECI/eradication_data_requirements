@@ -12,6 +12,7 @@ from eradication_data_requirements.plot_progress_probability import plot_progres
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
 from eradication_data_requirements.set_data import filter_data_by_method
 from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
+from eradication_data_requirements.plot_cpue_series import plot_comparative_yearly_cpue
 
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import (
@@ -80,6 +81,7 @@ async def api_plot_comparative_yearly_cpue(
 ):
     socorro_data = pd.read_csv(socorro_file.file)
     guadalupe_data = pd.read_csv(guadalupe_file.file)
+    plot_comparative_yearly_cpue(socorro_data, guadalupe_data)
     return save_figure_as_buffer(format)
 
 

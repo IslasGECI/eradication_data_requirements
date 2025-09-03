@@ -72,6 +72,15 @@ async def api_plot_cumulative_series_cpue_by_flight(input_path: str, output_path
     plot_cumulative_series_cpue_by_flight(input_path, output_path, font_size)
 
 
+@api.post("/plot_comparative_yearly_cpue")
+async def api_plot_comparative_yearly_cpue(
+    socorro_file: UploadFile = File(...),
+    guadalupe_file: UploadFile = File(...),
+):
+    socorro_data = pd.read_csv(socorro_file.file)
+    guadalupe_data = pd.read_csv(guadalupe_file.file)
+
+
 @api.post("/write_population_status")
 async def api_write_population_status(
     file: UploadFile = File(...),

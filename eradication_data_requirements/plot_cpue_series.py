@@ -44,13 +44,18 @@ def plot_yearly_cpue(fontsize, cpue_df):
     seasons, seasons_labels, ticks_positions = get_ticks_info(cpue_df)
 
     _, ax = plt.subplots(tight_layout=True)
-
-    return plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
+    config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
+    return xxplot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
 
 
 def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax, label=None):
     ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2, label=label)
     config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
+    return ax
+
+
+def xxplot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax, label=None):
+    ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2, label=label)
     return ax
 
 

@@ -50,6 +50,11 @@ def plot_yearly_cpue(fontsize, cpue_df):
 
 def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax, label=None):
     ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2, label=label)
+    config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax)
+    return ax
+
+
+def config_yearly_cpue_plot(fontsize, cpue_df, seasons_labels, ticks_positions, ax):
     ax.set_xticks(ticks_positions)
     ax.set_xticklabels(seasons_labels, size=fontsize)
     ax.tick_params(axis="both", labelsize=fontsize)
@@ -60,7 +65,6 @@ def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions
     ax.set_ylim(0, cpue_limit)
     ax.set_ylabel("Catch Per Unit Effort (CPUE)", fontsize=fontsize)
     ax.set_xlim(ticks_positions[0] - 1, ticks_positions[-1])
-    return ax
 
 
 def get_ticks_info(cpue_df):

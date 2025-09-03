@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [7.0.0] - 2025-09-03
+### Added
+- The entrypoint `/plot_cumulative_series_cpue_by_season`. We calculate the yearly CPUE and cumulative CPUE for effort and capture datasets.
+- The entrypoint `/plot_comparative_yearly_cpue`. With this entrypoint we can combine the yearly CPUE for effort and capture datasets.
+
+### Changed
+- The entrypoint `/plot_cumulative_series_cpue_by_flight` no longer reads or writes to disk; it now receives a POST request with a CSV file and returns a JSON response.
+
+
 ## [6.0.1] - 2025-08-04
 ### Fixed
 - The entrypoint `/write_effort_and_captures_with_probability` now correctly handles the `window_length` argument, ensuring it only processes the specified months of interest. See function `get_ramsey_series_window()`.

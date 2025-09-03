@@ -1,5 +1,4 @@
 import os
-import hashlib
 import pandas as pd
 import numpy as np
 import pytest

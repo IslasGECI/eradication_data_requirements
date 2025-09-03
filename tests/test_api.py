@@ -250,7 +250,7 @@ def tests_plot_comparative_yearly_cpue():
     with open(guadalupe_path, "rb") as f:
         guadalupe_file_like = io.BytesIO(f.read())
 
-    img_format = "png"
+    img_format = "eps"
     request = {
         "url": "/plot_comparative_yearly_cpue",
         "files": {

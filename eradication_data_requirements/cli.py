@@ -25,3 +25,4 @@ def plot_cumulative_series_cpue_by_flight(
     data_year = calculate_cpue_and_cumulative_by_flight(effort_capture_df)
     plot_cumulative_series_cpue(fontsize, data_year)
     plt.savefig(output_png, dpi=300, transparent=True)
+    plt.close()

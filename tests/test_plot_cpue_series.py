@@ -45,5 +45,5 @@ def test_plot_yearly_cpue():
 def test_plot_comparative_yearly_cpue():
     socorro_data = "tests/data/processed_yearly_cpue_for_plot.csv"
     guadalupe_data = socorro_data
-    obtained = plot_comparative_yearly_cpue(socorro_data, guadalupe_data)
+    obtained_ax = plot_comparative_yearly_cpue(socorro_data, guadalupe_data)
     assert isinstance(obtained_ax, mpl.axes._axes.Axes)

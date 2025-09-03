@@ -1,4 +1,5 @@
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
+from eradication_data_requirements.adapters import adapt_effort_and_catpures
 from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
 from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.cli import plot_cumulative_series_cpue_by_flight
@@ -7,12 +8,15 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     data_requirements_plot,
 )
+from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
+from eradication_data_requirements.plot_cpue_series import (
+    calculate_cpue_and_cumulative_by_season,
+    plot_comparative_yearly_cpue,
+)
 from eradication_data_requirements.plot_progress_probability import plot_progress_probability
 from eradication_data_requirements.resample_aerial_monitoring import get_monitoring_dict
 from eradication_data_requirements.set_data import filter_data_by_method
-from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
-from eradication_data_requirements.plot_cpue_series import plot_comparative_yearly_cpue
 
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import (
@@ -81,7 +85,9 @@ async def api_plot_comparative_yearly_cpue(
 ):
     socorro_data = pd.read_csv(socorro_file.file)
     guadalupe_data = pd.read_csv(guadalupe_file.file)
-    plot_comparative_yearly_cpue(socorro_data, guadalupe_data)
+    adapted_socorro = calculate_cpue_and_cumulative_by_season(socorro_data)
+    adapted_guadalupe = calculate_cpue_and_cumulative_by_season(guadalupe_data)
+    plot_comparative_yearly_cpue(adapted_socorro, adapted_guadalupe)
     return save_figure_as_buffer(format)
 
 

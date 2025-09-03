@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
-    seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data.Season.values)
+    seasons, seasons_labels, ticks_positions = get_ticks_info(socorro_data.index.values)
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)

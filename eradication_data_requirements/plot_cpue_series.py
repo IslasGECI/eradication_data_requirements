@@ -8,8 +8,13 @@ def plot_comparative_yearly_cpue(socorro_data, guadalupe_data):
     fontsize = 20
 
     _, ax = plt.subplots(figsize=(23, 10), tight_layout=True)
-    ax = plot_cpue_series(fontsize, socorro_data, seasons, seasons_labels, ticks_positions, ax)
-    ax = plot_cpue_series(fontsize, guadalupe_data, seasons, seasons_labels, ticks_positions, ax)
+    ax = plot_cpue_series(
+        fontsize, socorro_data, seasons, seasons_labels, ticks_positions, ax, label="Socorro"
+    )
+    ax = plot_cpue_series(
+        fontsize, guadalupe_data, seasons, seasons_labels, ticks_positions, ax, label="Guadalupe"
+    )
+    plt.legend(fontsize="xx-large")
     return ax
 
 
@@ -42,8 +47,8 @@ def plot_yearly_cpue(fontsize, cpue_df):
     return plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax)
 
 
-def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax):
-    ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2)
+def plot_cpue_series(fontsize, cpue_df, seasons, seasons_labels, ticks_positions, ax, label=None):
+    ax.plot(seasons, cpue_df["cpue"], "-o", linewidth=2, label=label)
     ax.set_xticks(ticks_positions)
     ax.set_xticklabels(seasons_labels, size=fontsize)
     ax.tick_params(axis="both", labelsize=fontsize)

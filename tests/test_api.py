@@ -110,7 +110,6 @@ def tests_api_write_effort_and_captures_with_probability():
     assert response.status_code == 200
 
     content = response.json()
-    print(content)
     assert isinstance(content, list)
     assert len(content) > 0
     assert "Esfuerzo" in content[0]

@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [7.0.1] - 2025-12-09
+### Fixed
+- The function `select_month_by_window_length()` now give us unique indices. Now the functions `paste_status_by_window()` and `calculate_resampled_by_window()` dataframes with the same length.
+
 ## [7.0.0] - 2025-09-03
 ### Added
 - The entrypoint `/plot_cumulative_series_cpue_by_season`. We calculate the yearly CPUE and cumulative CPUE for effort and capture datasets.

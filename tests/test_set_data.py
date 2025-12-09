@@ -62,6 +62,11 @@ def tests_select_month_by_window_length():
         }
     )
     window_length = 12
+    obtained = select_month_by_window_length(data.iloc[0:12], window_length)
+    expected_number_of_rows = 1
+    obtained_number_of_rows = len(obtained)
+
+    assert obtained_number_of_rows == expected_number_of_rows
     obtained = select_month_by_window_length(data, window_length)
     expected_number_of_rows = 2
     obtained_number_of_rows = len(obtained)

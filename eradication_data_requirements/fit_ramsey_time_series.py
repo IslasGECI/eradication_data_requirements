@@ -59,7 +59,7 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
 def paste_status_by_window(data_copy, probs_status, column_name, window_length):
     df = add_empty_column(data_copy, column_name)
     indexes_with_probability = select_month_by_window_length(data_copy, window_length)
-    df.loc[indexes_with_probability.unique(), column_name] = probs_status
+    df.loc[indexes_with_probability, column_name] = probs_status
     return df
 
 

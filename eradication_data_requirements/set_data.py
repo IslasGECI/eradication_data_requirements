@@ -15,4 +15,4 @@ def select_month_by_window_length(data, window_length):
         [data["Fecha"].str.contains(pattern, case=False) for pattern in month_to_plot],
     )
     cutted_months = data[mask]
-    return pd.concat([cutted_months, data.iloc[-1:]]).index
+    return pd.concat([cutted_months, data.iloc[-1:]]).index.unique()

@@ -85,8 +85,17 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
 
 
 def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
+    resolution = window_length
+    return xxcalculate_resampled_probability_by_window(
+        ramsey_series, bootstrapping_number, window_length, resolution
+    )
+
+
+def xxcalculate_resampled_probability_by_window(
+    ramsey_series, bootstrapping_number, window_length, resolution
+):
     seed = 42
-    indexes_to_resample = select_month_by_resolution(ramsey_series, window_length)
+    indexes_to_resample = select_month_by_resolution(ramsey_series, resolution)
     ramsey_series_windows = get_ramsey_series_window(
         ramsey_series, window_length, indexes_to_resample
     )

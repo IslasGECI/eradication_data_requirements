@@ -6,7 +6,10 @@ from eradication_data_requirements.data_requirements_plot import (
     plot_comparative_catch_curves,
     data_requirements_plot,
 )
-from eradication_data_requirements.fit_ramsey_time_series import add_probs_to_effort_capture_data
+from eradication_data_requirements.fit_ramsey_time_series import (
+    add_probs_to_effort_capture_data,
+    xxadd_probs_to_effort_capture_data,
+)
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_season,
@@ -120,18 +123,30 @@ async def api_write_population_status(
     return JSONResponse(content=json_content)
 
 
+def xxapi_write_effort_and_captures_with_probability(
+    file: UploadFile = File(...),
+    bootstrapping_number: int = Form(...),
+    window_length: int = Form(...),
+    resolution: int | None = Form(None),
+):
+    effort_capture_data = pd.read_csv(file.file)
+    effort_captures_with_slopes = xxadd_probs_to_effort_capture_data(
+        effort_capture_data, bootstrapping_number, window_length, resolution
+    )
+    yearly_json = effort_captures_with_slopes.to_dict(orient="records")
+    return JSONResponse(content=yearly_json)
+
+
 @api.post("/write_effort_and_captures_with_probability")
 async def api_write_effort_and_captures_with_probability(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),
     window_length: int = Form(...),
 ):
-    effort_capture_data = pd.read_csv(file.file)
-    effort_captures_with_slopes = add_probs_to_effort_capture_data(
-        effort_capture_data, bootstrapping_number, window_length
+    resolution = window_length
+    return xxapi_write_effort_and_captures_with_probability(
+        file, bootstrapping_number, window_length, resolution
     )
-    yearly_json = effort_captures_with_slopes.to_dict(orient="records")
-    return JSONResponse(content=yearly_json)
 
 
 @api.post("/write_probability_figure")

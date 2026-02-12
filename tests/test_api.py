@@ -117,6 +117,19 @@ def tests_api_write_effort_and_captures_with_probability():
     assert "Fecha" in content[0]
     assert "prob" in content[0]
 
+    resolution = 7
+    request = {
+        "url": "/write_effort_and_captures_with_probability",
+        "files": {"file": ("data.csv", file_like, "text/csv")},
+        "data": {
+            "bootstrapping_number": bootstrapping_number,
+            "window_length": window_length,
+            "resolution": resolution,
+        },
+    }
+    response = client.post(**request)
+    assert response.status_code == 200
+
 
 def tests_api_write_progress_probability_figure():
     input_path = "tests/data/progress_probability_tests.csv"

@@ -12,7 +12,7 @@ module = "eradication_data_requirements"
 requires = [
     "bootstrapping-tools==3.*",
     "fastapi",
-    "geci-plots==0.4.*",
+    "geci-plots==0.9.*",
     "httpx",
     "numpy",
     "pandas",

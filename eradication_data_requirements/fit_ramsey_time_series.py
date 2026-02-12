@@ -23,8 +23,9 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     complete_months_data = fill_missing_months_with_effort_one_and_captures_zero(resized_data)
     data_with_cpue = add_cpue(complete_months_data)
-    probs_status = calculate_resampled_probability_by_window(
-        data_with_cpue, bootstrapping_number, window_length
+    resolution = window_length
+    probs_status = xxcalculate_resampled_probability_by_window(
+        data_with_cpue, bootstrapping_number, window_length, resolution
     )
     data_with_cpue = paste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
     data_with_cpue.dropna(subset=["prob"], inplace=True)
@@ -56,9 +57,9 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
     return data_copy.reset_index()
 
 
-def paste_status_by_window(data_copy, probs_status, column_name, window_length):
+def paste_status_by_window(data_copy, probs_status, column_name, resolution):
     df = add_empty_column(data_copy, column_name)
-    indexes_with_probability = select_month_by_resolution(data_copy, window_length)
+    indexes_with_probability = select_month_by_resolution(data_copy, resolution)
     df.loc[indexes_with_probability, column_name] = probs_status
     return df
 

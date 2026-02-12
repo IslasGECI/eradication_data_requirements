@@ -4,7 +4,6 @@ import numpy as np
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
     add_probs_to_effort_capture_data,
-    calculate_resampled_probability_by_window,
     xxcalculate_resampled_probability_by_window,
     calculate_six_months_slope,
     complete_missing_months_in_year,

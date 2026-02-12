@@ -68,7 +68,7 @@ def tests_select_month_by_window_length():
     obtained_number_of_rows = len(obtained)
 
     assert obtained_number_of_rows == expected_number_of_rows
-    obtained = select_month_by_resolution(data, window_length)
+    obtained = xxselect_month_by_resolution(data, window_length, resolution=window_length)
     expected_number_of_rows = 2
     obtained_number_of_rows = len(obtained)
     assert obtained_number_of_rows == expected_number_of_rows
@@ -76,7 +76,4 @@ def tests_select_month_by_window_length():
     window_length = 6
     resolution = 3
     obtained = xxselect_month_by_resolution(data, window_length, resolution)
-    expected_number_of_rows = 4
-    obtained_number_of_rows = len(obtained)
-    assert obtained_number_of_rows == expected_number_of_rows
     assert all(obtained == [5, 8, 11, 13])

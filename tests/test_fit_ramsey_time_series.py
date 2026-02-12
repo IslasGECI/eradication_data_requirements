@@ -4,7 +4,7 @@ import numpy as np
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_empty_column,
     add_probs_to_effort_capture_data,
-    xxcalculate_resampled_probability_by_window,
+    calculate_resampled_probability_by_window,
     calculate_six_months_slope,
     complete_missing_months_in_year,
     extract_prob,
@@ -277,7 +277,7 @@ def test_calculate_resampled_probability_by_window():
     data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
     data["CPUE"] = data["Capturas"] / data["Esfuerzo"]
     resolution = window_length
-    obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
         data, bootstrapping_number, window_length, resolution
     )
     expected_probability_by_window = 3
@@ -301,7 +301,7 @@ def test_calculate_resampled_probability_by_window():
         }
     )
     resolution = 3
-    obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
+    obtained_probability_by_window = calculate_resampled_probability_by_window(
         data_for_two_probabilities, bootstrapping_number, window_length, resolution
     )
     expected_probability_by_window = 3

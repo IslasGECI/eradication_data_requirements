@@ -24,7 +24,7 @@ def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_len
     complete_months_data = fill_missing_months_with_effort_one_and_captures_zero(resized_data)
     data_with_cpue = add_cpue(complete_months_data)
     resolution = window_length
-    probs_status = xxcalculate_resampled_probability_by_window(
+    probs_status = calculate_resampled_probability_by_window(
         data_with_cpue, bootstrapping_number, window_length, resolution
     )
     data_with_cpue = paste_status_by_window(data_with_cpue, probs_status, "prob", window_length)
@@ -85,14 +85,7 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
     return fits
 
 
-def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
-    resolution = window_length
-    return xxcalculate_resampled_probability_by_window(
-        ramsey_series, bootstrapping_number, window_length, resolution
-    )
-
-
-def xxcalculate_resampled_probability_by_window(
+def calculate_resampled_probability_by_window(
     ramsey_series, bootstrapping_number, window_length, resolution
 ):
     seed = 42

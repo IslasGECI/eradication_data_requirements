@@ -10,7 +10,6 @@ from eradication_data_requirements.resample_raw_data import (
     resample_valid_cumulative_data,
 )
 from eradication_data_requirements.set_data import (
-    select_month_by_resolution,
     xxselect_month_by_resolution,
 )
 
@@ -100,8 +99,7 @@ def calculate_resampled_probability_by_window(
     ramsey_series, bootstrapping_number, window_length, resolution
 ):
     seed = 42
-    indexes_to_resample = select_month_by_resolution(ramsey_series, resolution)
-    print(indexes_to_resample)
+    indexes_to_resample = xxselect_month_by_resolution(ramsey_series, window_length, resolution)
     ramsey_series_windows = get_ramsey_series_window(
         ramsey_series, window_length, indexes_to_resample
     )

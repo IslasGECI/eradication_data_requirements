@@ -96,6 +96,7 @@ def xxcalculate_resampled_probability_by_window(
 ):
     seed = 42
     indexes_to_resample = select_month_by_resolution(ramsey_series, resolution)
+    print(indexes_to_resample)
     ramsey_series_windows = get_ramsey_series_window(
         ramsey_series, window_length, indexes_to_resample
     )

@@ -277,8 +277,9 @@ def test_calculate_resampled_probability_by_window():
     window_length = 6
     data = pd.read_csv("tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv")
     data["CPUE"] = data["Capturas"] / data["Esfuerzo"]
-    obtained_probability_by_window = calculate_resampled_probability_by_window(
-        data, bootstrapping_number, window_length
+    resolution = window_length
+    obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
+        data, bootstrapping_number, window_length, resolution
     )
     expected_probability_by_window = 3
     obtained_number_of_probabilities = len(obtained_probability_by_window)
@@ -300,11 +301,11 @@ def test_calculate_resampled_probability_by_window():
             ],
         }
     )
-    resolution = window_length
+    resolution = 3
     obtained_probability_by_window = xxcalculate_resampled_probability_by_window(
         data_for_two_probabilities, bootstrapping_number, window_length, resolution
     )
-    expected_probability_by_window = 2
+    expected_probability_by_window = 3
     obtained_number_of_probabilities = len(obtained_probability_by_window)
     assert obtained_number_of_probabilities == expected_probability_by_window
 

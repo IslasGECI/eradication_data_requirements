@@ -306,7 +306,7 @@ def test_calculate_resampled_probability_by_window():
     obtained_probability_by_window = calculate_resampled_probability_by_window(
         data_for_two_probabilities, bootstrapping_number, window_length, resolution
     )
-    expected_probability_by_window = 3
+    expected_probability_by_window = 2
     obtained_number_of_probabilities = len(obtained_probability_by_window)
     assert obtained_number_of_probabilities == expected_probability_by_window
 

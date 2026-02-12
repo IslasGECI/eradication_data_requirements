@@ -60,8 +60,8 @@ def test_add_probability_to_effort_capture_data():
     effort_and_capture_data = pd.read_csv(
         "tests/data/esfuerzo_capturas_mensuales_gatos_socorro.csv"
     )
-    obtained = add_probs_to_effort_capture_data(
-        effort_and_capture_data, bootstrapping_number, window_length
+    obtained = xxadd_probs_to_effort_capture_data(
+        effort_and_capture_data, bootstrapping_number, window_length, resolution=window_length
     )
     obtained_probs = obtained.prob
     is_positive = obtained_probs >= 0
@@ -88,8 +88,8 @@ def test_add_probability_to_effort_capture_data():
             ],
         }
     )
-    obtained = add_probs_to_effort_capture_data(
-        data_with_zero_effort_row, bootstrapping_number, window_length
+    obtained = xxadd_probs_to_effort_capture_data(
+        data_with_zero_effort_row, bootstrapping_number, window_length, resolution=window_length
     )
     are_all_efforts_not_zero = (obtained.Esfuerzo != 0).all()
     assert are_all_efforts_not_zero

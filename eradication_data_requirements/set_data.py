@@ -9,6 +9,11 @@ def filter_data_by_method(raw_data, method):
 
 
 def select_month_by_resolution(data, resolution):
+    window_length = resolution
+    return xxselect_month_by_resolution(data, window_length, resolution)
+
+
+def xxselect_month_by_resolution(data, window_length, resolution):
     month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % resolution == 0]
     mask = reduce(
         lambda x, y: x | y,

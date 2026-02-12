@@ -4,7 +4,6 @@ from eradication_data_requirements.mix_distributions import (
 )
 import numpy as np
 
-
 rng = np.random.default_rng(seed=42)
 distribution_a = rng.normal(316, 5, 20)
 pop_status_a = {"distribution": list(distribution_a), "capturas": 20}

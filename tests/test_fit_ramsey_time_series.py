@@ -17,7 +17,6 @@ from eradication_data_requirements.fit_ramsey_time_series import (
     set_up_ramsey_time_series,
 )
 
-
 data = pd.DataFrame(
     {
         "Esfuerzo": [1, 2, 3, 4, 5, 6],

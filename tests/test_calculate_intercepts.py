@@ -3,7 +3,6 @@ import numpy as np
 
 import eradication_data_requirements as edr
 
-
 raw_data = pd.DataFrame(
     {
         "Esfuerzo": [1 / 19.5, 2 / 19, 3 / 18.5, 4 / 18, 5 / 17.5, 6 / 17],

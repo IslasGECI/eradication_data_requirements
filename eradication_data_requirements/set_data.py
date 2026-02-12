@@ -8,8 +8,8 @@ def filter_data_by_method(raw_data, method):
     return filtered_by_method
 
 
-def select_month_by_window_length(data, window_length):
-    month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % window_length == 0]
+def select_month_by_window_length(data, resolution):
+    month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % resolution == 0]
     mask = reduce(
         lambda x, y: x | y,
         [data["Fecha"].str.contains(pattern, case=False) for pattern in month_to_plot],

@@ -2,7 +2,6 @@ import pandas as pd
 
 from eradication_data_requirements.set_data import (
     filter_data_by_method,
-    select_month_by_resolution,
     xxselect_month_by_resolution,
 )
 

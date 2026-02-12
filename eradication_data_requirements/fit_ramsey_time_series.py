@@ -9,7 +9,10 @@ from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
     resample_valid_cumulative_data,
 )
-from eradication_data_requirements.set_data import select_month_by_resolution
+from eradication_data_requirements.set_data import (
+    select_month_by_resolution,
+    xxselect_month_by_resolution,
+)
 
 
 def fit_resampled_captures(datos, bootstrapping_number):
@@ -64,8 +67,13 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
 
 
 def paste_status_by_window(data_copy, probs_status, column_name, resolution):
+    window_length = resolution
+    return xxpaste_status_by_window(data_copy, probs_status, column_name, window_length, resolution)
+
+
+def xxpaste_status_by_window(data_copy, probs_status, column_name, window_length, resolution):
     df = add_empty_column(data_copy, column_name)
-    indexes_with_probability = select_month_by_resolution(data_copy, resolution)
+    indexes_with_probability = xxselect_month_by_resolution(data_copy, window_length, resolution)
     df.loc[indexes_with_probability, column_name] = probs_status
     return df
 

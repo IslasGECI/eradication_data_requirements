@@ -63,7 +63,7 @@ def tests_select_month_by_window_length():
         }
     )
     window_length = 12
-    obtained = select_month_by_resolution(data.iloc[0:12], window_length)
+    obtained = xxselect_month_by_resolution(data[0:12], window_length, resolution=window_length)
     expected_number_of_rows = 1
     obtained_number_of_rows = len(obtained)
 

@@ -15,6 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [7.1.0] - 2026-02-12
+### Added
+- The entrypoint `/write_effort_and_captures_with_probability` now accepts a temporal resolution parameter. If not provided, the resolution defaults to the window length.
+
+### Changed
+- Upgrade `geci-plots==0.9.*` dependency.
+
 ## [7.0.1] - 2025-12-09
 ### Fixed
 - The function `select_month_by_window_length()` now give us unique indices. Now the functions `paste_status_by_window()` and `calculate_resampled_by_window()` dataframes with the same length.

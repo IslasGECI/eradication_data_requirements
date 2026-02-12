@@ -124,7 +124,7 @@ async def api_write_population_status(
 
 
 @api.post("/write_effort_and_captures_with_probability")
-def xxapi_write_effort_and_captures_with_probability(
+def api_write_effort_and_captures_with_probability(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),
     window_length: int = Form(...),
@@ -139,17 +139,6 @@ def xxapi_write_effort_and_captures_with_probability(
     )
     yearly_json = effort_captures_with_slopes.to_dict(orient="records")
     return JSONResponse(content=yearly_json)
-
-
-async def api_write_effort_and_captures_with_probability(
-    file: UploadFile = File(...),
-    bootstrapping_number: int = Form(...),
-    window_length: int = Form(...),
-):
-    resolution = window_length
-    return xxapi_write_effort_and_captures_with_probability(
-        file, bootstrapping_number, window_length, resolution
-    )
 
 
 @api.post("/write_probability_figure")

@@ -123,12 +123,16 @@ async def api_write_population_status(
     return JSONResponse(content=json_content)
 
 
+@api.post("/write_effort_and_captures_with_probability")
 def xxapi_write_effort_and_captures_with_probability(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),
     window_length: int = Form(...),
     resolution: int | None = Form(None),
 ):
+    if resolution is None:
+        resolution = window_length
+
     effort_capture_data = pd.read_csv(file.file)
     effort_captures_with_slopes = xxadd_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length, resolution
@@ -137,7 +141,6 @@ def xxapi_write_effort_and_captures_with_probability(
     return JSONResponse(content=yearly_json)
 
 
-@api.post("/write_effort_and_captures_with_probability")
 async def api_write_effort_and_captures_with_probability(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),

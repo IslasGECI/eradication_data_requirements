@@ -8,7 +8,6 @@ from eradication_data_requirements.data_requirements_plot import (
 )
 from eradication_data_requirements.fit_ramsey_time_series import (
     add_probs_to_effort_capture_data,
-    xxadd_probs_to_effort_capture_data,
 )
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_cpue_series import (
@@ -134,7 +133,7 @@ def api_write_effort_and_captures_with_probability(
         resolution = window_length
 
     effort_capture_data = pd.read_csv(file.file)
-    effort_captures_with_slopes = xxadd_probs_to_effort_capture_data(
+    effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length, resolution
     )
     yearly_json = effort_captures_with_slopes.to_dict(orient="records")

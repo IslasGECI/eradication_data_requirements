@@ -21,14 +21,7 @@ def fit_resampled_captures(datos, bootstrapping_number):
     return fits
 
 
-def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length):
-    resolution = window_length
-    return xxadd_probs_to_effort_capture_data(
-        data_copy, bootstrapping_number, window_length, resolution
-    )
-
-
-def xxadd_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length, resolution):
+def add_probs_to_effort_capture_data(data_copy, bootstrapping_number, window_length, resolution):
     resized_data = data_copy[data_copy.Esfuerzo != 0]
     complete_months_data = fill_missing_months_with_effort_one_and_captures_zero(resized_data)
     data_with_cpue = add_cpue(complete_months_data)

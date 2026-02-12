@@ -11,7 +11,7 @@ from eradication_data_requirements.fit_ramsey_time_series import (
     extract_slopes,
     fit_resampled_cumulative,
     get_ramsey_series_window,
-    xxpaste_status_by_window,
+    paste_status_by_window,
     fit_resampled_captures,
     fill_missing_months_with_effort_one_and_captures_zero,
     set_up_ramsey_time_series,
@@ -363,7 +363,7 @@ def test_paste_status_by_window():
     calculated_slope = [1 / 2]
     window_length = 12
     column_name = "slope"
-    obtained = xxpaste_status_by_window(
+    obtained = paste_status_by_window(
         data_with_cpue, calculated_slope, column_name, window_length, resolution=window_length
     )
     assert obtained.loc[11, "slope"] == calculated_slope[0]

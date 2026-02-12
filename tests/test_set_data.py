@@ -3,6 +3,7 @@ import pandas as pd
 from eradication_data_requirements.set_data import (
     filter_data_by_method,
     select_month_by_resolution,
+    xxselect_month_by_resolution,
 )
 
 
@@ -73,8 +74,9 @@ def tests_select_month_by_window_length():
     assert obtained_number_of_rows == expected_number_of_rows
 
     window_length = 6
-    obtained = select_month_by_resolution(data, window_length)
+    resolution = 3
+    obtained = xxselect_month_by_resolution(data, window_length, resolution)
     expected_number_of_rows = 3
     obtained_number_of_rows = len(obtained)
     assert obtained_number_of_rows == expected_number_of_rows
-    assert all(obtained == [5, 11, 13])
+    assert all(obtained == [5, 8, 11, 13])

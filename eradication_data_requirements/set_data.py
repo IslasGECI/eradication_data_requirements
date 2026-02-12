@@ -20,4 +20,6 @@ def xxselect_month_by_resolution(data, window_length, resolution):
         [data["Fecha"].str.contains(pattern, case=False) for pattern in month_to_plot],
     )
     cutted_months = data[mask]
-    return pd.concat([cutted_months, data.iloc[-1:]]).index.unique()
+    selected_indexes = pd.concat([cutted_months, data.iloc[-1:]]).index.unique()
+    is_index_valid = selected_indexes >= (window_length - 1)
+    return selected_indexes[is_index_valid]

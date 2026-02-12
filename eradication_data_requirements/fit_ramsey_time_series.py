@@ -10,7 +10,7 @@ from eradication_data_requirements.resample_raw_data import (
     resample_valid_cumulative_data,
 )
 from eradication_data_requirements.set_data import (
-    xxselect_month_by_resolution,
+    select_month_by_resolution,
 )
 
 
@@ -69,7 +69,7 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
 
 def paste_status_by_window(data_copy, probs_status, column_name, window_length, resolution):
     df = add_empty_column(data_copy, column_name)
-    indexes_with_probability = xxselect_month_by_resolution(data_copy, window_length, resolution)
+    indexes_with_probability = select_month_by_resolution(data_copy, window_length, resolution)
     df.loc[indexes_with_probability, column_name] = probs_status
     return df
 
@@ -99,7 +99,7 @@ def calculate_resampled_probability_by_window(
     ramsey_series, bootstrapping_number, window_length, resolution
 ):
     seed = 42
-    indexes_to_resample = xxselect_month_by_resolution(ramsey_series, window_length, resolution)
+    indexes_to_resample = select_month_by_resolution(ramsey_series, window_length, resolution)
     ramsey_series_windows = get_ramsey_series_window(
         ramsey_series, window_length, indexes_to_resample
     )

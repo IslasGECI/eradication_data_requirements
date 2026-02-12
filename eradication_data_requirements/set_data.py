@@ -8,7 +8,7 @@ def filter_data_by_method(raw_data, method):
     return filtered_by_method
 
 
-def select_month_by_window_length(data, resolution):
+def select_month_by_resolution(data, resolution):
     month_to_plot = [f"-{factor:02d}-" for factor in range(1, 13) if factor % resolution == 0]
     mask = reduce(
         lambda x, y: x | y,

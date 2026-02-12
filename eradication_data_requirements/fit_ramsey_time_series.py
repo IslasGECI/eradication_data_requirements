@@ -9,7 +9,7 @@ from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
     resample_valid_cumulative_data,
 )
-from eradication_data_requirements.set_data import select_month_by_window_length
+from eradication_data_requirements.set_data import select_month_by_resolution
 
 
 def fit_resampled_captures(datos, bootstrapping_number):
@@ -58,7 +58,7 @@ def fill_empty_months_with_effort_one_and_captures_zero(data_copy):
 
 def paste_status_by_window(data_copy, probs_status, column_name, window_length):
     df = add_empty_column(data_copy, column_name)
-    indexes_with_probability = select_month_by_window_length(data_copy, window_length)
+    indexes_with_probability = select_month_by_resolution(data_copy, window_length)
     df.loc[indexes_with_probability, column_name] = probs_status
     return df
 
@@ -86,7 +86,7 @@ def fit_resampled_cumulative(datos, bootstrapping_number):
 
 def calculate_resampled_probability_by_window(ramsey_series, bootstrapping_number, window_length):
     seed = 42
-    indexes_to_resample = select_month_by_window_length(ramsey_series, window_length)
+    indexes_to_resample = select_month_by_resolution(ramsey_series, window_length)
     ramsey_series_windows = get_ramsey_series_window(
         ramsey_series, window_length, indexes_to_resample
     )

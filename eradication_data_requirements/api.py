@@ -184,17 +184,6 @@ async def api_plot_comparative_catch_curves(
     return save_figure_as_buffer(format)
 
 
-def read_json(json_path):
-    with open(json_path) as json_file:
-        data = json.load(json_file)
-    return data
-
-
-def write_json(output_path, json_content):
-    with open(output_path, "w") as jsonfile:
-        json.dump(json_content, jsonfile)
-
-
 def save_figure_as_buffer(format):
     buffer = io.BytesIO()
     plt.savefig(buffer, dpi=300, transparent=True, format=format)

@@ -34,16 +34,11 @@ def test_ProgressBootstrapper():
     obtained_rows = len(obtained)
     assert obtained_rows == bootstrap_number
 
-    output_path = "tests/data/progress_intervals.json"
-    bootstrapper.save_intervals(output_path)
-    with open(output_path) as json_file:
-        obtained_json = json.load(json_file)
-    obtained_fields = list(obtained_json.keys())
+    obtained_dict = bootstrapper.build_dictionary()
     expected_fields = [
         "intervals",
         "slopes_latex_interval",
         "p-values",
         "bootstrap_intermediate_distribution",
     ]
-    assert set(obtained_fields) == set(expected_fields)
-    if_exist_remove(output_path)
+    assert set(obtained_dict.keys()) == set(expected_fields)

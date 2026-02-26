@@ -140,8 +140,23 @@ async def api_write_effort_and_captures_with_probability(
     effort_captures_with_slopes = add_probs_to_effort_capture_data(
         effort_capture_data, bootstrapping_number, window_length, resolution
     )
-    yearly_json = effort_captures_with_slopes.to_dict(orient="records")
-    return JSONResponse(content=yearly_json)
+    json_with_slopes = effort_captures_with_slopes.to_dict(orient="records")
+
+    return StreamingResponse(
+        generate_chunks(json_with_slopes),
+        media_type="application/json",
+    )
+
+
+async def generate_chunks(large_json):
+    yield "["
+    first = True
+    for obj in large_json:
+        if not first:
+            yield ","
+        yield json.dumps(obj)
+        first = False
+    yield "]"
 
 
 @api.post("/write_probability_figure")

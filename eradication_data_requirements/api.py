@@ -123,7 +123,7 @@ async def api_write_population_status(
 
 
 @api.post("/write_effort_and_captures_with_probability")
-def api_write_effort_and_captures_with_probability(
+async def api_write_effort_and_captures_with_probability(
     file: UploadFile = File(...),
     bootstrapping_number: int = Form(...),
     window_length: int = Form(...),

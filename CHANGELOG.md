@@ -6,7 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
 ### Added
 
 ### Fixed
@@ -14,6 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 ### Removed
+
+## [8.0.0] - 2026-02-25
+
+### Fixed
+- Add `async` to `/write_effort_and_captures_with_probability` in order to wait for longer proccesed time.
+
+### Changed
+- The following entrypoints changed from `GET` to `POST`:
+  - `/write_population_status_from_mixed_methods`
+  - `/filter_by_method`
+  - `/write_bootstrap_progress_intervals_json`
+  - `/write_aerial_monitoring`
 
 ## [7.1.0] - 2026-02-12
 ### Added
@@ -185,7 +196,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Change hash for `data_requirements_plot` because matplotlib upgrade version 3.7.2.
 
-[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.8.0...HEAD
+[8.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.3.0...v8.0.0
+[7.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v6.0.0...v7.0.0
+[6.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v5.0.0...v6.0.0
+[5.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v4.0.0...v5.0.0
+[4.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v3.0.0...v4.0.0
+[3.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v1.0.0...v2.0.0
+[1.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.3.0...v1.0.0
 [0.3.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.3.0...v0.2.0
 [0.2.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.2.0...v0.1.1
 [0.1.1]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.1.0...v0.1.1

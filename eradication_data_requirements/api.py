@@ -56,11 +56,11 @@ async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int
     write_json(output_path, json_content)
 
 
-@api.get("/filter_by_method")
-async def api_filter_by_method(input_path: str, method: str, output_path: str):
-    raw_data = pd.read_csv(input_path)
-    filtered_data = filter_data_by_method(raw_data, method)
-    filtered_data.to_csv(output_path, index=False)
+@api.post("/filter_by_method")
+async def api_filter_by_method(input_path: UploadFile = File(...), method: str = Form(...)):
+    raw_data = pd.read_csv(input_path.file)
+    filtered_data = filter_data_by_method(raw_data, method).to_dict(orient="records")
+    return JSONResponse(content=filtered_data)
 
 
 @api.post("/write_population_status_from_mixed_methods")

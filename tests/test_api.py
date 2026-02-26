@@ -11,18 +11,21 @@ client = TestClient(api)
 def tests_api_write_bootstrap_progress_intervals_json():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     bootstrapping_number = 10
-    output_path = "tests/data/progress_intervals_api.json"
 
-    gtt.if_exist_remove(output_path)
-
-    request = f"/write_bootstrap_progress_intervals_json/?input_path={input_path}&bootstrapping_number={bootstrapping_number}&output_path={output_path}"
-    response = client.get(request)
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
+    request = {
+        "url": "/write_bootstrap_progress_intervals_json",
+        "files": {
+            "input_path": (input_path, input_file_like, "text/csv"),
+        },
+        "data": {"bootstrapping_number": bootstrapping_number},
+    }
+    response = client.post(**request)
     assert response.status_code == 200
 
-    gtt.assert_exist(output_path)
-    with open(output_path) as json_file:
-        data = json.load(json_file)
-    assert "intervals" in data.keys()
+    content = response.json()
+    assert "intervals" in content
 
 
 def tests_api_write_aerial_monitoring():
@@ -44,10 +47,7 @@ def tests_api_write_aerial_monitoring():
 
 def tests_api_filter_by_method():
     input_path = "tests/data/terrestrial_hunting.csv"
-    output_path = "tests/data/filtered_by_tecnique.csv"
     method = "Cacería terrestre"
-
-    gtt.if_exist_remove(output_path)
 
     with open(input_path, "rb") as f:
         input_file_like = io.BytesIO(f.read())

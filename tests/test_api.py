@@ -64,13 +64,30 @@ def tests_api_filter_by_method():
 def tests_api_write_population_status_from_mixed_methods():
     first_method_path = "tests/data/population_status_terrestrial_hunting.json"
     second_method_path = "tests/data/population_status_aerial_hunting.json"
-    output_path = "tests/data/mixed_population_status.json"
 
-    gtt.if_exist_remove(output_path)
+    with open(first_method_path, "rb") as f:
+        file_like_first_method = io.BytesIO(f.read())
+    with open(second_method_path, "rb") as f:
+        file_like_second_method = io.BytesIO(f.read())
 
-    request = f"/write_population_status_from_mixed_methods/?first_method_status={first_method_path}&second_method_status={second_method_path}&output_path={output_path}"
-    response = client.get(request)
+    request = {
+        "url": "/write_population_status_from_mixed_methods",
+        "files": {
+            "first_method_status": (first_method_path, file_like_first_method, "application/json"),
+            "second_method_status": (
+                second_method_path,
+                file_like_second_method,
+                "application/json",
+            ),
+        },
+    }
+
+    response = client.post(**request)
     assert response.status_code == 200
+    content = response.json()
+    assert "remanentes" in content
+    assert "capturas" in content
+    assert "remanentes_distribution" in content
 
 
 def tests_api_write_population_status():

@@ -33,10 +33,8 @@ class ProgressBootstrapper(AbstractSeriesBootstrapper):
             distribution_size = len(distribution)
         return distribution
 
-    def save_intervals(self, output_path):
-        json_dict = self.build_dictionary()
-        with open(output_path, "w") as file:
-            json.dump(json_dict, file)
+    def save_intervals(self):
+        pass
 
     def build_dictionary(self):
         json_dict = self.get_parameters_dictionary()

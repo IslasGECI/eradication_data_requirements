@@ -33,9 +33,10 @@ import pandas as pd
 api = FastAPI()
 
 
-@api.get("/write_bootstrap_progress_intervals_json")
+@api.post("/write_bootstrap_progress_intervals_json")
 async def write_bootstrap_progress_intervals_json(
-    input_path: str, bootstrapping_number: int, output_path: str
+    input_path: UploadFile = File(...),
+    bootstrapping_number: int = Form(...),
 ):
     parametrizer = Bootstrap_from_time_series_parametrizer(
         blocks_length=1,
@@ -43,10 +44,11 @@ async def write_bootstrap_progress_intervals_json(
         N=bootstrapping_number,
         independent_variable="Capturas",
     )
-    data = pd.read_csv(input_path)
+    data = pd.read_csv(input_path.file)
     parametrizer.set_data(data)
     bootstrapper = ProgressBootstrapper(parametrizer)
-    bootstrapper.save_intervals(output_path)
+    results_dict = bootstrapper.build_dictionary()
+    return JSONResponse(content=results_dict)
 
 
 @api.get("/write_aerial_monitoring")

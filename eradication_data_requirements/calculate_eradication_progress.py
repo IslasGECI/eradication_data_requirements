@@ -34,7 +34,11 @@ class ProgressBootstrapper(AbstractSeriesBootstrapper):
         return distribution
 
     def save_intervals(self, output_path):
-        json_dict = self.get_parameters_dictionary()
-        json_dict["slopes_latex_interval"] = json_dict.pop("main_parameter_latex_interval")
+        json_dict = self.build_dictionary()
         with open(output_path, "w") as file:
             json.dump(json_dict, file)
+
+    def build_dictionary(self):
+        json_dict = self.get_parameters_dictionary()
+        json_dict["slopes_latex_interval"] = json_dict.pop("main_parameter_latex_interval")
+        return json_dict

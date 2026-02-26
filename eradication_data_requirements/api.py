@@ -51,11 +51,13 @@ async def write_bootstrap_progress_intervals_json(
     return JSONResponse(content=results_dict)
 
 
-@api.get("/write_aerial_monitoring")
-async def api_write_aerial_monitoring(input_path: str, bootstrapping_number: int, output_path: str):
-    raw_data = pd.read_csv(input_path)
+@api.post("/write_aerial_monitoring")
+async def api_write_aerial_monitoring(
+    input_path: UploadFile = File(...), bootstrapping_number: int = Form(...)
+):
+    raw_data = pd.read_csv(input_path.file)
     json_content = get_monitoring_dict(raw_data, bootstrapping_number)
-    write_json(output_path, json_content)
+    return JSONResponse(content=json_content)
 
 
 @api.post("/filter_by_method")

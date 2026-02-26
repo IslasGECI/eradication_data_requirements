@@ -63,14 +63,14 @@ async def api_filter_by_method(input_path: str, method: str, output_path: str):
     filtered_data.to_csv(output_path, index=False)
 
 
-@api.get("/write_population_status_from_mixed_methods")
+@api.post("/write_population_status_from_mixed_methods")
 async def api_write_population_status_from_mixed_methods(
-    first_method_status: str, second_method_status: str, output_path: str
+    first_method_status: UploadFile = File(...), second_method_status: UploadFile = File(...)
 ):
-    first_status_dict = read_json(first_method_status)
-    second_status_dict = read_json(second_method_status)
+    first_status_dict = json.load(first_method_status.file)
+    second_status_dict = json.load(second_method_status.file)
     json_content = combine_distributions_from_dict(first_status_dict, second_status_dict)
-    write_json(output_path, json_content)
+    return JSONResponse(content=json_content)
 
 
 @api.post("/plot_cumulative_series_cpue_by_flight")

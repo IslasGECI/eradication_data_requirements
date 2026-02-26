@@ -49,16 +49,21 @@ def tests_api_filter_by_method():
 
     gtt.if_exist_remove(output_path)
 
-    request = (
-        f"/filter_by_method/?input_path={input_path}&method={method}&output_path={output_path}"
-    )
-    response = client.get(request)
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
+    request = {
+        "url": "/filter_by_method",
+        "files": {
+            "input_path": (input_path, input_file_like, "text/csv"),
+        },
+        "data": {"method": method},
+    }
+    response = client.post(**request)
     assert response.status_code == 200
 
-    gtt.assert_exist(output_path)
-    obtained = pd.read_csv(output_path)
+    content = response.json()
+    obtained = pd.DataFrame(content)
     assert obtained.shape[1] == 9
-    gtt.if_exist_remove(output_path)
 
 
 def tests_api_write_population_status_from_mixed_methods():

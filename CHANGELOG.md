@@ -201,8 +201,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Change hash for `data_requirements_plot` because matplotlib upgrade version 3.7.2.
 
-[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.8.0...HEAD
-[8.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v0.3.0...v8.0.0
+[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.0.1...HEAD
+[8.0.1]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.0.0...v8.0.1
+[8.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v7.0.0...v8.0.0
 [7.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v6.0.0...v7.0.0
 [6.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v4.0.0...v5.0.0

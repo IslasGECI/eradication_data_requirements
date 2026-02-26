@@ -1,8 +1,6 @@
 from eradication_data_requirements import api
 from fastapi.testclient import TestClient
-import geci_test_tools as gtt
 import io
-import json
 import pandas as pd
 
 client = TestClient(api)

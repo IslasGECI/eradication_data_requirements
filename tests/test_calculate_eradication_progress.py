@@ -1,9 +1,7 @@
 import pandas as pd
-import json
 
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 from eradication_data_requirements import ProgressBootstrapper
-from geci_test_tools import if_exist_remove
 
 raw_data = pd.DataFrame(
     {

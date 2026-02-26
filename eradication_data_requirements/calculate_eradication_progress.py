@@ -3,7 +3,6 @@ from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
 from eradication_data_requirements.resample_raw_data import resample_eradication_data
 
 import numpy as np
-import json
 
 
 class ProgressBootstrapper(AbstractSeriesBootstrapper):

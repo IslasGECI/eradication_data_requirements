@@ -78,7 +78,7 @@ def tests_plot_catch_curve():
 
 
 def test_goat_data_requirement_plot():
-    input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas.csv"
+    input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas_without_cpue.csv"
     output_path = "/workdir/tests/data/goat_ramsey_plot.png"
     config_path = "/workdir/tests/data/hunt_config.json"
     remove_file_if_exists(output_path)

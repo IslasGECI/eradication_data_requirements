@@ -74,11 +74,16 @@ def add_empty_column(data_copy, column_name):
 
 
 def set_up_ramsey_time_series(data):
-    cumulative_captures = pd.DataFrame()
+    cumulative_captures = add_cpue_and_cumulative_captures(data)
     cumulative_captures["Fecha"] = data.Fecha
-    cumulative_captures["Cumulative_captures"] = data["Capturas"].cumsum()
-    cumulative_captures["CPUE"] = data["Capturas"] / data["Esfuerzo"]
     return cumulative_captures[["Fecha", "CPUE", "Cumulative_captures"]]
+
+
+def add_cpue_and_cumulative_captures(data):
+    cumulative_and_cpue = pd.DataFrame()
+    cumulative_and_cpue["Cumulative_captures"] = data["Capturas"].cumsum()
+    cumulative_and_cpue["CPUE"] = data["Capturas"] / data["Esfuerzo"]
+    return cumulative_and_cpue
 
 
 def fit_resampled_cumulative(datos, bootstrapping_number):

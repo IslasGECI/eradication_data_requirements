@@ -4,7 +4,7 @@ import pandas as pd
 
 from eradication_data_requirements.progress_probability import get_progress_probability
 from eradication_data_requirements.calculate_intersect import add_cpue
-from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
+from eradication_data_requirements.fit_ramsey_plot import fit_ramsey_plot
 from eradication_data_requirements.resample_raw_data import (
     resample_valid_data,
     resample_valid_cumulative_data,

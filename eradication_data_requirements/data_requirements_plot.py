@@ -1,22 +1,8 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import warnings
+from eradication_data_requirements.calculate_intersect import add_cpue
+from eradication_data_requirements.fit_ramsey_plot import fit_ramsey_plot
 
 from geci_plots import geci_plot
-
-
-def fit_ramsey_plot(data):
-    try:
-        fit = np.polynomial.polynomial.Polynomial.fit(
-            data["Cumulative_captures"], data["CPUE"], deg=1
-        )
-        intercept_and_slope = fit.convert().coef
-        idx = [1, 0]
-        slope_and_intercept = intercept_and_slope[idx]
-    except (AssertionError, IndexError):
-        warnings.warn("Error")
-        slope_and_intercept = [np.nan, np.nan]
-    return slope_and_intercept
 
 
 def plot_comparative_catch_curves(socorro_data, guadalupe_data):

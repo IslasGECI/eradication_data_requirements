@@ -6,13 +6,13 @@ import json
 
 from geci_plots import geci_plot
 from eradication_data_requirements.data_requirements_plot import (
-    fit_ramsey_plot,
     plot_catch_curve,
     plot_comparative_catch_curves,
     data_requirements_plot,
     plot_traps_data_requirements,
     set_cumulative_captures_column,
 )
+from eradication_data_requirements.fit_ramsey_plot import fit_ramsey_plot
 
 import matplotlib as mpl
 
@@ -78,7 +78,7 @@ def tests_plot_catch_curve():
 
 
 def test_goat_data_requirement_plot():
-    input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas_without_cpue.csv"
+    input_path = "/workdir/tests/data/erradicacion_cabras_maria_cleofas.csv"
     output_path = "/workdir/tests/data/goat_ramsey_plot.png"
     config_path = "/workdir/tests/data/hunt_config.json"
     remove_file_if_exists(output_path)

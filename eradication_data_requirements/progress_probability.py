@@ -1,7 +1,7 @@
 import numpy as np
 import warnings
 
-from eradication_data_requirements.data_requirements_plot import fit_ramsey_plot
+from eradication_data_requirements.fit_ramsey_plot import fit_ramsey_plot
 from eradication_data_requirements.resample_raw_data import resample_eradication_data
 
 

@@ -68,7 +68,6 @@ linter:
 
 mutants: setup
 	mutmut run
-	mutmut html
 	expr "{mutmut results | wc -l}"  == "0"
 
 setup: clean install

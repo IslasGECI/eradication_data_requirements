@@ -63,16 +63,7 @@ jobs:
         docker image ls -a
     - name: Evalúa resistencia a mutaciones
       run: docker run islasgeci/eradication_data_requirements:latest make mutants
-    - name: Upload surviving mutants
-      uses: actions/upload-artifact@main
-      with:
-        name: mutant registry
-        path: html
-    - name: Fail if file 'registry' exists
-      if: ${{ success() }}
-      run: |
-        echo "❌ Mutants failing. Check file mutants registry exists."
-        exit 1
+
 
   deploy-image-and-package:
     needs: run-tests

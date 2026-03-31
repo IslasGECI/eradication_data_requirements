@@ -5,7 +5,7 @@ RUN pip install --upgrade pip && pip install \
     black \
     flake8 \
     geci-test-tools \
-    mutmut==2.* \
+    mutmut \
     mypy \
     pylint \
     pytest \

@@ -7,6 +7,7 @@ from eradication_data_requirements.data_requirements_plot import (
     data_requirements_plot,
 )
 from eradication_data_requirements.fit_ramsey_time_series import (
+    add_cpue_and_cumulative_captures,
     add_probs_to_effort_capture_data,
 )
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
@@ -178,6 +179,17 @@ async def api_plot_custom_cpue_vs_cum_captures(
     data = pd.read_csv(file.file)
     data_with_cpue = add_cpue(data)
     data_requirements_plot(data_with_cpue, config_plot)
+    return save_figure_as_buffer(format)
+
+
+@api.post("/xxplot_custom_cpue_vs_cum_captures")
+async def xxapi_plot_custom_cpue_vs_cum_captures(
+    file: UploadFile = File(...), config: UploadFile = File(...), format: str = Form("png")
+):
+    config_plot = json.load(config.file)
+    data = pd.read_csv(file.file)
+    data_with_cpue_and_cumulative_captures = add_cpue_and_cumulative_captures(data)
+    data_requirements_plot(data_with_cpue_and_cumulative_captures, config_plot)
     return save_figure_as_buffer(format)
 
 

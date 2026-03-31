@@ -244,7 +244,7 @@ def tests_api_plot_cpue_vs_cum_captures():
 
 
 def tests_api_plot_custom_cpue_vs_cum_captures():
-    input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
+    input_path = "tests/data/erradicacion_cabras_maria_cleofas_without_cpue.csv"
     config_path = "tests/data/hunt_config.json"
 
     with open(input_path, "rb") as f:

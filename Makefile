@@ -41,7 +41,7 @@ clean:
 	rm --force --recursive ${module}.egg-info
 	rm --force --recursive ${module}/__pycache__
 	rm --force --recursive tests/__pycache__
-	rm --force .mutmut-cache
+	rm --force --recursive mutants
 	rm --force coverage.xml
 
 coverage: setup
@@ -67,8 +67,9 @@ linter:
 	$(call lint, tests)
 
 mutants: setup
-	mutmut run --paths-to-mutate ${module} || true
+	mutmut run
 	mutmut html
+	expr "{mutmut results | wc -l}"  == "0"
 
 setup: clean install
 
@@ -91,6 +92,6 @@ green: format
 
 refactor: format
 	pytest --verbose tests/*.py \
-	&& (git add $(module)/*.py tests/*.py && git commit -m "♻️  Refactor ${message}") \
+	&& (git add $(module)/*.py tests/*.py && git commit -m "♻️ Refactor ${message}") \
 	|| git restore $(module)/*.py tests/*.py
 	chmod g+w -R .

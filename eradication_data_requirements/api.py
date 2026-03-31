@@ -176,16 +176,6 @@ async def api_plot_custom_cpue_vs_cum_captures(
 ):
     config_plot = json.load(config.file)
     data = pd.read_csv(file.file)
-    data_requirements_plot(data, config_plot)
-    return save_figure_as_buffer(format)
-
-
-@api.post("/xxplot_custom_cpue_vs_cum_captures")
-async def xxapi_plot_custom_cpue_vs_cum_captures(
-    file: UploadFile = File(...), config: UploadFile = File(...), format: str = Form("png")
-):
-    config_plot = json.load(config.file)
-    data = pd.read_csv(file.file)
     data_with_cpue = add_cpue(data)
     data_requirements_plot(data_with_cpue, config_plot)
     return save_figure_as_buffer(format)

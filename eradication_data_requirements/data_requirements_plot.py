@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from eradication_data_requirements.calculate_intersect import add_cpue
 from eradication_data_requirements.fit_ramsey_plot import fit_ramsey_plot
 
 from geci_plots import geci_plot

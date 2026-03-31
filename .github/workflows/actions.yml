@@ -124,7 +124,7 @@ jobs:
   cleanup-artifacts:
     name: Delete temporary artifacts 🧹
     if: always()
-    needs: [update-docker]
+    needs: [deploy-image-and-package]
     runs-on: ubuntu-latest
     steps:
       - name: Delete Docker image artifact

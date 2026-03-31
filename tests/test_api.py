@@ -254,7 +254,7 @@ def tests_api_plot_custom_cpue_vs_cum_captures():
 
     format = "eps"
     request = {
-        "url": "/xxplot_custom_cpue_vs_cum_captures",
+        "url": "/plot_custom_cpue_vs_cum_captures",
         "files": {
             "file": ("data.csv", file_like, "text/csv"),
             "config": ("config.json", config_like, "application/json"),

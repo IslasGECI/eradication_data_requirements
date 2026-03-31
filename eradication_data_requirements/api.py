@@ -1,6 +1,6 @@
 from bootstrapping_tools import Bootstrap_from_time_series_parametrizer
 from eradication_data_requirements.calculate_eradication_progress import ProgressBootstrapper
-from eradication_data_requirements.calculate_intersect import get_population_status_dict, add_cpue
+from eradication_data_requirements.calculate_intersect import get_population_status_dict
 from eradication_data_requirements.data_requirements_plot import (
     plot_traps_data_requirements,
     plot_comparative_catch_curves,
@@ -173,17 +173,6 @@ async def api_write_probability_figure(file: UploadFile = File(...)):
 
 @api.post("/plot_custom_cpue_vs_cum_captures")
 async def api_plot_custom_cpue_vs_cum_captures(
-    file: UploadFile = File(...), config: UploadFile = File(...), format: str = Form("png")
-):
-    config_plot = json.load(config.file)
-    data = pd.read_csv(file.file)
-    data_with_cpue = add_cpue(data)
-    data_requirements_plot(data_with_cpue, config_plot)
-    return save_figure_as_buffer(format)
-
-
-@api.post("/xxplot_custom_cpue_vs_cum_captures")
-async def xxapi_plot_custom_cpue_vs_cum_captures(
     file: UploadFile = File(...), config: UploadFile = File(...), format: str = Form("png")
 ):
     config_plot = json.load(config.file)

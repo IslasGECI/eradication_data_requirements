@@ -129,3 +129,14 @@ jobs:
       with:
         password: ${{ secrets.PYPI_TOKEN }}
         skip-existing: true
+
+  cleanup-artifacts:
+    name: Delete temporary artifacts 🧹
+    if: always()
+    needs: [update-docker]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Docker image artifact
+        uses: geekyeggo/delete-artifact@main
+        with:
+          name: image

@@ -6,6 +6,28 @@ import pandas as pd
 client = TestClient(api)
 
 
+def tests_api_compute_instantaneous_and_cumulative_cpue():
+    input_path = "tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv"
+    resolution = "monthly"
+
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
+    request = {
+        "url": "/compute_instantaneous_and_cumulative_cpue",
+        "files": {
+            "input_path": (input_path, input_file_like, "text/csv"),
+        },
+        "data": {"resolution": resolution},
+    }
+    response = client.post(**request)
+    assert response.status_code == 200
+
+    content = response.json()
+    assert "cpue" in content
+    assert "cumulative_cpue" in content
+    assert "time" in content
+
+
 def tests_api_write_bootstrap_progress_intervals_json():
     input_path = "tests/data/erradicacion_cabras_maria_cleofas.csv"
     bootstrapping_number = 10

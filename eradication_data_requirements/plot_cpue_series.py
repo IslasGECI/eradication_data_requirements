@@ -80,6 +80,12 @@ def calculate_cpue_and_cumulative_by_season(effort_capture_df):
     return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
 
 
+def calculate_cpue_and_cumulative_by_month(effort_capture_df):
+    extract_year_and_month(effort_capture_df)
+    column_name = "Month"
+    return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
+
+
 def calculate_cpue_and_cumulative_by_flight(effort_capture_df):
     column_name = "No_vuelo"
     return calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name)
@@ -93,6 +99,11 @@ def calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name):
     )
     data_grouped_by_column["cumulative_cpue"] = data_grouped_by_column["cpue"].cumsum()
     return data_grouped_by_column
+
+
+def extract_year_and_month(effort_capture_df):
+    effort_capture_df["Month"] = effort_capture_df["Fecha"].str[:7]
+    effort_capture_df["Month"] = np.array([str(Month) for Month in effort_capture_df["Month"]])
 
 
 def extract_year(effort_capture_df):

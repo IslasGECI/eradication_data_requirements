@@ -1,5 +1,6 @@
 from eradication_data_requirements.plot_cpue_series import (
     calculate_cpue_and_cumulative_by_flight,
+    calculate_cpue_and_cumulative_by_month,
     calculate_cpue_and_cumulative_by_season,
     plot_comparative_yearly_cpue,
     plot_cumulative_series_cpue,
@@ -65,3 +66,10 @@ def test_calculate_cpue_and_cumulative_by_season():
     obtained = calculate_cpue_and_cumulative_by_season(data)
     assert obtained.index[0] == 2023
     assert obtained.index[1] == 2024
+
+
+def tests_calculate_cpue_and_cumulative_by_month():
+    data = pd.read_csv("tests/data/esfuerzo_capturas_gatos_guadalupe_ISO_for_tests.csv")
+    obtained = calculate_cpue_and_cumulative_by_month(data)
+    assert obtained.index[0] == "2023-01"
+    assert obtained.index[1] == "2023-12"

@@ -86,7 +86,8 @@ def calculate_cpue_and_cumulative_by_flight(effort_capture_df):
 
 
 def calculate_cpue_and_cumulative_by_column(effort_capture_df, column_name):
-    data_grouped_by_column = effort_capture_df.groupby(by=column_name).sum(numeric_only=False)
+    effort_capture_df.rename(columns={column_name: "time"}, inplace=True)
+    data_grouped_by_column = effort_capture_df.groupby(by="time").sum(numeric_only=False)
     data_grouped_by_column["cpue"] = (
         data_grouped_by_column["Capturas"] / data_grouped_by_column["Esfuerzo"]
     )

@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [8.2.0] - 2026-04-14
+### Added
+- The entrypoint `/plot_cumulative_cpue_time_series` plots cumulative and instantaneous CPUE time series from pre-computed CSV data.
+- The entrypoint `/compute_instantaneous_and_cumulative_cpue` returns JSON with instantaneous and cumulative CPUE, supporting multiple resolutions via dictionary dispatch.
+
 ## [8.1.0] - 2026-03-31
 
 ### Fixed

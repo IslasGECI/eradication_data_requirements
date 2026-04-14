@@ -12,6 +12,7 @@ from eradication_data_requirements.fit_ramsey_time_series import (
 )
 from eradication_data_requirements.mix_distributions import combine_distributions_from_dict
 from eradication_data_requirements.plot_cpue_series import (
+    calculate_cpue_and_cumulative_by_month,
     calculate_cpue_and_cumulative_by_season,
     calculate_cpue_and_cumulative_by_flight,
     plot_comparative_yearly_cpue,
@@ -32,6 +33,25 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 api = FastAPI()
+
+
+@api.post("/compute_instantaneous_and_cumulative_cpue")
+async def compute_instantaneous_and_cumulative_cpue(
+    input_path: UploadFile = File(...),
+    resolution: str = Form(...),
+):
+    data = pd.read_csv(input_path.file)
+    if resolution == "monthly":
+        result = calculate_cpue_and_cumulative_by_month(data)
+    else:
+        result = calculate_cpue_and_cumulative_by_season(data)
+    return JSONResponse(
+        content={
+            "cpue": result["cpue"].tolist(),
+            "cumulative_cpue": result["cumulative_cpue"].tolist(),
+            "time": result.index.tolist(),
+        }
+    )
 
 
 @api.post("/write_bootstrap_progress_intervals_json")

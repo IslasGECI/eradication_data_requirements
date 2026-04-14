@@ -193,6 +193,27 @@ def tests_api_write_progress_probability_figure():
     assert len(response.content) > 10  # sanity check: PNGs should not be tiny
 
 
+def tests_plot_cumulative_cpue_time_series():
+    input_path = "tests/data/cumulative_and_instantaneous_cpue.csv"
+
+    with open(input_path, "rb") as f:
+        input_file_like = io.BytesIO(f.read())
+
+    img_format = "png"
+    request = {
+        "url": "/plot_cumulative_cpue_time_series",
+        "files": {
+            "file": ("file.csv", input_file_like, "text/csv"),
+        },
+        "data": {"format": img_format},
+    }
+
+    response = client.post(**request)
+    assert response.status_code == 200
+    minimum_empty_eps = 630
+    assert len(response.content) > minimum_empty_eps
+
+
 def tests_plot_cumulative_series_cpue_by_flight():
     input_path = "tests/data/feral_goat_capture_effort.csv"
 

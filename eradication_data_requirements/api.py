@@ -43,17 +43,15 @@ async def compute_instantaneous_and_cumulative_cpue(
     data = pd.read_csv(input_path.file)
     calculator = get_resolution_calculator(resolution)
     result = calculator(data)
-    return serialize_cpue_result(result)
+    return JSONResponse(content=format_cpue_response(result))
 
 
-def serialize_cpue_result(result):
-    return JSONResponse(
-        content={
-            "cpue": result["cpue"].tolist(),
-            "cumulative_cpue": result["cumulative_cpue"].tolist(),
-            "time": result.index.tolist(),
-        }
-    )
+def format_cpue_response(result):
+    return {
+        "cpue": result["cpue"].tolist(),
+        "cumulative_cpue": result["cumulative_cpue"].tolist(),
+        "time": result.index.tolist(),
+    }
 
 
 def get_resolution_calculator(resolution: str):

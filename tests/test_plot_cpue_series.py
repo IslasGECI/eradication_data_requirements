@@ -30,6 +30,10 @@ def test_plot_cumulative_series_cpue():
     obtained_cum_cpue_ylim = obtained[1].get_ylim()
     assert pytest.approx(obtained_cpue_ylim, abs=1e-4) == (0, 0.0006)
     assert pytest.approx(obtained_cum_cpue_ylim, abs=1e-4) == (0, 0.0008)
+    obtained_cpue_xtick_labels_rotation = obtained[0].get_xticklabels()[0].get_rotation()
+    assert obtained_cpue_xtick_labels_rotation == 90
+    obtained_cumulative_cpue_xtick_labels_rotation = obtained[1].get_xticklabels()[0].get_rotation()
+    assert obtained_cumulative_cpue_xtick_labels_rotation == 90
 
 
 def test_plot_yearly_cpue():

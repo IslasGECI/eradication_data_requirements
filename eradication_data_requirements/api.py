@@ -34,6 +34,12 @@ import pandas as pd
 
 api = FastAPI()
 
+RESOLUTION_CALCULATOR = {
+    "monthly": calculate_cpue_and_cumulative_by_month,
+    "season": calculate_cpue_and_cumulative_by_season,
+    "flight": calculate_cpue_and_cumulative_by_flight,
+}
+
 
 @api.post("/compute_instantaneous_and_cumulative_cpue")
 async def compute_instantaneous_and_cumulative_cpue(
@@ -41,10 +47,10 @@ async def compute_instantaneous_and_cumulative_cpue(
     resolution: str = Form(...),
 ):
     data = pd.read_csv(input_path.file)
-    if resolution == "monthly":
-        result = calculate_cpue_and_cumulative_by_month(data)
-    else:
-        result = calculate_cpue_and_cumulative_by_season(data)
+    calculator = RESOLUTION_CALCULATOR.get(resolution)
+    if calculator is None:
+        raise ValueError(f"Unknown resolution: {resolution}")
+    result = calculator(data)
     return JSONResponse(
         content={
             "cpue": result["cpue"].tolist(),

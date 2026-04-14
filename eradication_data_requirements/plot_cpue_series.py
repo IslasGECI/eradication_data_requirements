@@ -28,7 +28,7 @@ def plot_cumulative_series_cpue(fontsize, cpue_df):
 
     ax[1].plot(seasons, cpue_df["cumulative_cpue"], "-o", linewidth=2)
     ax[1].set_xticks(ticks_positions)
-    ax[1].set_xticklabels(seasons_labels, size=fontsize)
+    ax[1].set_xticklabels(seasons_labels, size=fontsize, rotation=90)
     ax[1].tick_params(axis="both", labelsize=fontsize)
     ax[1].spines["right"].set_visible(False)
     ax[1].spines["top"].set_visible(False)
@@ -56,7 +56,7 @@ def plot_cpue_series(cpue_df, seasons, ax, label=None):
 
 def config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions, ax):
     ax.set_xticks(ticks_positions)
-    ax.set_xticklabels(seasons_labels, size=fontsize)
+    ax.set_xticklabels(seasons_labels, size=fontsize, rotation=90)
     ax.tick_params(axis="both", labelsize=fontsize)
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)

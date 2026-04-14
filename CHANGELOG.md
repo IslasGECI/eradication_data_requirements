@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [9.0.0] - 2026-04-14
+### Changed
+- The fix of version `8.1.0` broke the contract. It was not a backward compatible change.
+
 ## [8.2.0] - 2026-04-14
 ### Added
 - The entrypoint `/plot_cumulative_cpue_time_series` plots cumulative and instantaneous CPUE time series from pre-computed CSV data.
@@ -23,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - The entrypoint `/plot_custom_cpue_vs_cum_captures` now calculates CPUE and cumulative captures. The entry data now only needs the effort and captures.
-
 
 ## [8.0.1] - 2026-02-25
 
@@ -212,7 +215,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Change hash for `data_requirements_plot` because matplotlib upgrade version 3.7.2.
 
-[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.0.1...HEAD
+[unreleased]: https://github.com/IslasGECI/eradication_data_requirements/compare/v9.0.0...HEAD
+[9.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.2.0...v9.0.0
+[8.2.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.1.0...v8.2.0
+[8.1.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.0.1...v8.1.0
 [8.0.1]: https://github.com/IslasGECI/eradication_data_requirements/compare/v8.0.0...v8.0.1
 [8.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v7.0.0...v8.0.0
 [7.0.0]: https://github.com/IslasGECI/eradication_data_requirements/compare/v6.0.0...v7.0.0

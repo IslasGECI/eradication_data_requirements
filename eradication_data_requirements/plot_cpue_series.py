@@ -68,7 +68,10 @@ def config_yearly_cpue_plot(fontsize, max_cpue, seasons_labels, ticks_positions,
 
 def get_ticks_info(seasons):
     seasons_labels = [*seasons, ""]
-    ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
+    if isinstance(seasons[0], (int, np.integer)):
+        ticks_positions = np.arange(seasons[0], seasons[-1] + 2)
+    else:
+        ticks_positions = np.arange(len(seasons) + 1)
     ticks_positions[-1] = ticks_positions[-1] + 0.25
     return seasons, seasons_labels, ticks_positions
 

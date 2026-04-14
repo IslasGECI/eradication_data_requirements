@@ -133,6 +133,18 @@ async def api_plot_cumulative_series_cpue_by_season(
     return save_figure_as_buffer(format)
 
 
+@api.post("/plot_cumulative_cpue_time_series")
+async def api_plot_cumulative_cpue_time_series(
+    file: UploadFile = File(...),
+    format: str = Form(...),
+):
+    fontsize = 27
+    effort_captures_data = pd.read_csv(file.file)
+    effort_captures_with_cpue_data = effort_captures_data.set_index("time")
+    plot_cumulative_series_cpue(fontsize, effort_captures_with_cpue_data)
+    return save_figure_as_buffer(format)
+
+
 @api.post("/plot_comparative_yearly_cpue")
 async def api_plot_comparative_yearly_cpue(
     socorro_file: UploadFile = File(...),

@@ -85,7 +85,7 @@ red: format
 green: format
 	git restore tests/*.py \
 	&& (pytest --verbose tests/*.py) \
-	&& (git add $(module)/*.py && git commit -m "✅ Pass tests") \
+	&& (git add $(module)/*.py && git commit -m "✅ Pass tests ${m}") \
 	|| git restore $(module)/*.py
 	chmod g+w -R .
 

@@ -35,17 +35,6 @@ import pandas as pd
 api = FastAPI()
 
 
-def get_resolution_calculator(resolution: str):
-    registry = {
-        "monthly": calculate_cpue_and_cumulative_by_month,
-        "season": calculate_cpue_and_cumulative_by_season,
-        "flight": calculate_cpue_and_cumulative_by_flight,
-    }
-    if resolution not in registry:
-        raise ValueError(f"Unknown resolution: {resolution}")
-    return registry[resolution]
-
-
 @api.post("/compute_instantaneous_and_cumulative_cpue")
 async def compute_instantaneous_and_cumulative_cpue(
     input_path: UploadFile = File(...),
@@ -61,6 +50,17 @@ async def compute_instantaneous_and_cumulative_cpue(
             "time": result.index.tolist(),
         }
     )
+
+
+def get_resolution_calculator(resolution: str):
+    registry = {
+        "monthly": calculate_cpue_and_cumulative_by_month,
+        "season": calculate_cpue_and_cumulative_by_season,
+        "flight": calculate_cpue_and_cumulative_by_flight,
+    }
+    if resolution not in registry:
+        raise ValueError(f"Unknown resolution: {resolution}")
+    return registry[resolution]
 
 
 @api.post("/write_bootstrap_progress_intervals_json")
